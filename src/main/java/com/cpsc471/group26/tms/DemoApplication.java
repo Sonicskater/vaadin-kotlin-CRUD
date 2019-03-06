@@ -1,4 +1,4 @@
-package com.cpsc471.group26.demo;
+package com.cpsc471.group26.tms;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

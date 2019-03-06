@@ -1,4 +1,4 @@
-package com.cpsc471.group26.demo;
+package com.cpsc471.group26.tms;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

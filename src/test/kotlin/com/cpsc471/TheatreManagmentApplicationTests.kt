@@ -1,4 +1,4 @@
-package com.cpsc471.demo
+package com.cpsc471
 
 import org.junit.Test
 import org.junit.runner.RunWith

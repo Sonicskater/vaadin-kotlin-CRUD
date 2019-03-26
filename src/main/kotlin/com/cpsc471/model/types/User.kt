@@ -24,6 +24,13 @@ data class User(
                     JoinColumn(name = "Year"),
                     JoinColumn(name = "Number")
                 ])
-        var AvailableDays: ArrayList<DateRecord>
+        var available_days: List<DateRecord>,
+
+
+        @ManyToMany(targetEntity = Project::class, mappedBy = "members")
+        var projects: List<Project>,
+
+        @OneToMany(targetEntity = Project::class, mappedBy = "manager")
+        var manages: List<Project>
 
 )

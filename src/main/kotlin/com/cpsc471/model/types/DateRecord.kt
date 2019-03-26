@@ -10,5 +10,9 @@ data class DateRecord(
         var Projects: List<Project>,
         @Id var Month: Int,
         @Id var Number: Int,
-        @Id var Year: Int
+        @Id var Year: Int,
+
+        @ManyToMany(targetEntity = User::class,mappedBy = "available_days")
+        var AvailablePeople: List<User>
+
 ):Serializable

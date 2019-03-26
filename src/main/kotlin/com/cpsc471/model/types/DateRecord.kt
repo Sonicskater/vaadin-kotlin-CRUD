@@ -6,16 +6,7 @@ import javax.persistence.*
 @Entity
 @Table(name = "date_records")
 data class DateRecord(
-        @ManyToMany(targetEntity = Project::class)
-        @JoinTable(name = "takes_place",
-                inverseJoinColumns = [JoinColumn(name = "Date_key")],
-                joinColumns =
-                [
-                    JoinColumn(name = "Month"),
-                    JoinColumn(name = "Number"),
-                    JoinColumn(name = "Year")
-                ]
-        )
+        @ManyToMany(targetEntity = Project::class,mappedBy = "takes_place")
         var Projects: List<Project>,
         @Id var Month: Int,
         @Id var Number: Int,

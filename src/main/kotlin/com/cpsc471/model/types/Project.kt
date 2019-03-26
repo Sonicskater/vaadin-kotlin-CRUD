@@ -5,7 +5,7 @@ import javax.persistence.*
 
 @Entity
 @Table(name="projects")
-data class Project(
+class Project(
         @Id
         var Date_key: Int,
 
@@ -57,6 +57,8 @@ data class Project(
 
         @ManyToOne(targetEntity = User::class)
         @JoinColumn(name = "Mgr_email")
-        var manager: User
+        var manager: User,
+
+        var theme: String
 
 ) : Serializable

@@ -5,18 +5,10 @@ import javax.persistence.*
 
 @Entity
 @Table(name = "school")
-data class School (
-    @Id var Country:String,
-    @Id var Postal_code:String,
-    @Id var Street_address:String,
-    @Id var City:String,
-    @Id var Province:String,
-    var Website:String,
-    var Type:Int,
-    var Name:String,
+class School (
     var Grade_min:Int,
     var Grade_max:Int,
 
     @OneToMany(targetEntity = Project::class, mappedBy = "school")
     var projects:List<Project>
-) : Serializable
+) : Serializable, Institute()

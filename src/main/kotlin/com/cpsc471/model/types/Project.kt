@@ -15,8 +15,8 @@ data class Project(
                 joinColumns = [JoinColumn(name="Date_key")],
                 inverseJoinColumns =
                     [
-                        JoinColumn(name="Month"),
-                        JoinColumn(name ="Number"),
+                        JoinColumn(name= "Month"),
+                        JoinColumn(name = "Number"),
                         JoinColumn(name = "Year")
                     ]
                 )

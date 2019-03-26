@@ -13,5 +13,17 @@ data class User(
         var City: String,
         var Street_address: String,
         var Postal_code: String,
-        var User_type: String
+        var User_type: String,
+
+        @ManyToMany(targetEntity = DateRecord::class)
+        @JoinTable(name = "is_available",
+                joinColumns = [JoinColumn(name = "Email")],
+                inverseJoinColumns =
+                [
+                    JoinColumn(name = "Month"),
+                    JoinColumn(name = "Year"),
+                    JoinColumn(name = "Number")
+                ])
+        var AvailableDays: ArrayList<DateRecord>
+
 )

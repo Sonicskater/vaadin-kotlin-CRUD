@@ -32,7 +32,7 @@ class WebSecurityConfig : WebSecurityConfigurerAdapter() {
     protected override fun configure(http: HttpSecurity) {
         http
                 .authorizeRequests()
-                .antMatchers("/", "/home").permitAll()
+                .antMatchers("/", "/home","/h2/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
@@ -41,6 +41,9 @@ class WebSecurityConfig : WebSecurityConfigurerAdapter() {
                 .and()
                 .logout()
                 .permitAll()
+
+        http.csrf().disable()
+        http.headers().frameOptions().disable()
     }
 
     @Bean

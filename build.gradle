@@ -26,6 +26,10 @@ ext {
     set('vaadinVersion', '13.0.1')
 }
 
+noArg{
+    annotation("MappedSuperclass")
+}
+
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-cache'
     implementation 'org.springframework.boot:spring-boot-starter-data-rest'

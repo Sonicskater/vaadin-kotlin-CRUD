@@ -28,7 +28,7 @@ class Project(
         var takes_place: List<DateRecord>,
 
         @Id
-        @ManyToOne(fetch = FetchType.LAZY)
+        @ManyToOne(fetch = FetchType.LAZY,targetEntity = School::class)
         @JoinColumns(
             JoinColumn(name="Sch_country", referencedColumnName="Country"),
             JoinColumn(name="Sch_postal_code", referencedColumnName="Postal_code"),
@@ -61,4 +61,8 @@ class Project(
 
         var theme: String
 
-) : Serializable
+) : Serializable, DBAbstract() {
+    override fun getID(): List<Any> {
+        return listOf(Date_key,school)
+    }
+}

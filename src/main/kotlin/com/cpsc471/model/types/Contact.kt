@@ -1,17 +1,25 @@
 package com.cpsc471.model.types
 
 
-import javax.persistence.Entity
-import javax.persistence.Id
-import javax.persistence.Table
+import java.io.Serializable
+import javax.persistence.*
 
 @Entity
 @Table(name = "contact")
 class Contact(
+        @ManyToOne(fetch = FetchType.LAZY, targetEntity = Institute::class)
+        @JoinColumns(
+                JoinColumn(name = "Inst_country"),
+                JoinColumn(name = "Inst_postal_code"),
+                JoinColumn(name = "Inst_street_address"),
+                JoinColumn(name = "Inst_city"),
+                JoinColumn(name = "Inst_Province")
+        )
+        @Id var institute: Institute,
         @Id var Email: String
-        ) : DBAbstract(){
+        ) : DBAbstract(), Serializable{
     override fun getID() : List<Any> {
-        return listOf(Email)
+        return listOf(Email,institute)
     }
 
 }

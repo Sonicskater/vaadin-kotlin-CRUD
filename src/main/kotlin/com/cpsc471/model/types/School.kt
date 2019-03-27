@@ -8,7 +8,6 @@ import javax.persistence.*
 class School (
     var Grade_min:Int,
     var Grade_max:Int,
-
     @OneToMany(targetEntity = Project::class, mappedBy = "school")
     var projects:List<Project>
-) : Serializable, Institute()
+) : Institute()

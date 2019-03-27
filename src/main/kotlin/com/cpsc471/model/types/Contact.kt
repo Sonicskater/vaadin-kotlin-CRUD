@@ -16,7 +16,10 @@ class Contact(
                 JoinColumn(name = "Inst_Province")
         )
         @Id var institute: Institute,
-        @Id var Email: String
+        @Id var Email: String,
+
+        @OneToMany(targetEntity = ContactContactInfo::class, mappedBy = "contact")
+        var manages: List<ContactContactInfo>
         ) : DBAbstract(), Serializable{
     override fun getID() : List<Any> {
         return listOf(Email,institute)

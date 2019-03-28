@@ -8,13 +8,14 @@ import javax.persistence.*
 @Table(name = "contact")
 class Contact(
         @ManyToOne(fetch = FetchType.LAZY, targetEntity = Institute::class)
+        /*
         @JoinColumns(
                 JoinColumn(name = "Inst_country"),
                 JoinColumn(name = "Inst_postal_code"),
                 JoinColumn(name = "Inst_street_address"),
                 JoinColumn(name = "Inst_city"),
                 JoinColumn(name = "Inst_Province")
-        )
+        */
         @Id var institute: Institute,
         @Id var Email: String,
 

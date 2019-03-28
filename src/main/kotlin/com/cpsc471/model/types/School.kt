@@ -1,7 +1,5 @@
 package com.cpsc471.model.types
 
-import org.apache.commons.lang3.mutable.Mutable
-import java.io.Serializable
 import javax.persistence.*
 
 @Entity
@@ -12,8 +10,8 @@ class School (
     @OneToMany(targetEntity = Project::class, mappedBy = "school")
     var projects: MutableList<Project>,
 
-    @OneToMany(targetEntity = GrantApplication::class, mappedBy = "applicant")
-    var applications: MutableList<GrantApplication>
+    @OneToMany(targetEntity = SchoolGrantApplication::class, mappedBy = "applicant")
+    var applicationSchools: MutableList<SchoolGrantApplication>
 
 
 ) : Institute()

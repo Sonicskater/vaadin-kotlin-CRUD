@@ -54,6 +54,7 @@ class Project(
 
         @Id
         @ManyToOne(fetch = FetchType.LAZY,targetEntity = School::class)
+        /**
         @JoinColumns(
             JoinColumn(name="Sch_country", referencedColumnName="Country"),
             JoinColumn(name="Sch_postal_code", referencedColumnName="Postal_code"),
@@ -61,10 +62,11 @@ class Project(
                 JoinColumn(name="Sch_city", referencedColumnName="City"),
                 JoinColumn(name="Sch_province", referencedColumnName="Province")
 
-        )
+        )*/
         var school : School,
 
-        @ManyToMany(fetch = FetchType.LAZY, targetEntity = User::class)
+        @ManyToMany(fetch = FetchType.LAZY, targetEntity = Artist::class)
+        /**
         @JoinTable(name = "part_of",
                 joinColumns = [
                     /*
@@ -87,11 +89,11 @@ class Project(
                     JoinColumn(name = "Art_email")
                 ]
         )
-        var members: List<User>,
+        */
+        var members: List<Artist>,
 
-        @ManyToOne(targetEntity = User::class)
-        @JoinColumn(name = "Mgr_email")
-        var manager: User,
+        @ManyToOne(targetEntity = Manager::class)
+        var manager: Manager,
         var title: String,
         var theme: String,
 

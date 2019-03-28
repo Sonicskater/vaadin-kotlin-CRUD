@@ -1,20 +1,23 @@
 package com.cpsc471.model.types
+import java.io.Serializable
 import java.sql.Date
 import javax.persistence.*
 
 @Entity
 @Table(name = "user")
-data class User(
-        var First_name: String,
-        var Last_name: String,
-        @Id var Email: String,
-        var Type: String,
-        var Country: String,
-        var Province: String,
-        var City: String,
-        var Street_address: String,
-        var Postal_code: String,
-        var User_type: String,
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name="type", discriminatorType = DiscriminatorType.INTEGER)
+@DiscriminatorValue("0")
+open class User(
+        open var First_name: String = "",
+        open var Last_name: String = "",
+        @Id var Email: String = "",
+        open var Country: String = "",
+        open var Province: String = "",
+        open var City: String = "",
+        open var Street_address: String = "",
+        open var Postal_code: String = "",
+        open var User_type: String = "",
         /**
         @ManyToMany(targetEntity = DateRecord::class)
         @JoinTable(name = "is_available",
@@ -27,25 +30,23 @@ data class User(
                 ])
         var available_days: List<DateRecord>,
         */
-        @Basic
-        @ElementCollection
-        var available_days: MutableSet<Date>,
 
 
-        @ManyToMany(targetEntity = Project::class, mappedBy = "members")
-        var projects: List<Project>,
 
-        @OneToMany(targetEntity = Project::class, mappedBy = "manager")
-        var manages: List<Project>,
+
+
+
 
         @OneToMany(targetEntity = UserContactInfo::class, mappedBy = "user")
-        var contact_info: List<UserContactInfo>,
-
-        @Basic
-        @ElementCollection
-        var notes: MutableList<String>
+        open var contact_info: List<UserContactInfo> = mutableListOf()
 
 
 
 
-)
+
+
+) : DBAbstract(), Serializable {
+        override fun getID(): List<Any> {
+                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        }
+}

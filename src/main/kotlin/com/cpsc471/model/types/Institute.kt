@@ -6,14 +6,15 @@ import javax.persistence.*
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="type", discriminatorType = DiscriminatorType.INTEGER)
-abstract class Institute(
-    @Id var Country:String = "",
+@DiscriminatorValue("0")
+open class Institute(
+    open var Country:String = "",
     @Id var Postal_code:String = "",
-    @Id var Street_address:String = "",
-    @Id var City:String = "",
-    @Id var Province:String = "",
+    open var Street_address:String = "",
+    open var City:String = "",
+    open var Province:String = "",
     open var Website:String = "",
-    open var Name:String = "",
+    @Id var Name:String = "",
 
     @OneToMany(mappedBy = "institute",targetEntity = Contact::class)
     open var contacts: List<Contact> = listOf()

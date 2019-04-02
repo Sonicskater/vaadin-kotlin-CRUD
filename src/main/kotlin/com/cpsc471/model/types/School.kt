@@ -5,8 +5,8 @@ import javax.persistence.*
 @Entity
 @DiscriminatorValue("1")
 class School (
-    var Grade_min:Int,
-    var Grade_max:Int,
+    var GradeMin:Int,
+    var GradeMax:Int,
     @OneToMany(targetEntity = Project::class, mappedBy = "school")
     var projects: MutableList<Project>,
 

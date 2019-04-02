@@ -1,20 +1,24 @@
 plugins {
     id 'org.jetbrains.kotlin.plugin.jpa' version '1.3.21'
-    id 'org.springframework.boot' version '2.1.3.RELEASE'
+    id 'org.springframework.boot' version '2.0.2.RELEASE'
     id 'org.jetbrains.kotlin.jvm' version '1.3.21'
     id 'org.jetbrains.kotlin.plugin.spring' version '1.3.21'
-    id 'com.devsoap.vaadin-flow' version '1.0'
+    //id "com.devsoap.vaadin-flow" version "1.1"
     //id 'org.gretty' version '2.3.1'
     id 'java'
     // solves the problem with long classpath using JAR instead of classpath on command line
     id "ua.eshepelyuk.ManifestClasspath" version "1.0.0"
 }
 
-vaadin {
-    version '12.0.0'
-}
+
 
 apply plugin: 'io.spring.dependency-management'
+/*
+vaadin {
+    version '13.0.2'
+    productionMode = true
+}
+*/
 
 group = 'com.cpsc471'
 version = '0.0.1-SNAPSHOT'
@@ -34,52 +38,47 @@ repositories {
     mavenCentral()
     maven { url "https://maven.vaadin.com/vaadin-addons" }
     vaadin.repositories()
-    // Add the pre-release repository
-    vaadin.prereleases()
-    // Add the snapshot repository
-    vaadin.snapshots()
-    // Add the addons repository
-    vaadin.addons()
 }
 
-ext {
-    set('vaadinVersion', '13.0.1')
-}
 
 noArg{
     annotation("MappedSuperclass")
 }
 
+//vaadin.autoconfigure()
+
 dependencies {
     
 
 
-    implementation 'org.springframework.boot:spring-boot-starter-cache'
+    //implementation 'org.springframework.boot:spring-boot-starter-cache'
     implementation 'org.springframework.boot:spring-boot-starter-data-rest'
     implementation 'org.springframework.boot:spring-boot-starter-jdbc'
-    implementation 'org.springframework.boot:spring-boot-starter-mail'
-    implementation 'org.springframework.boot:spring-boot-starter-security'
-    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
-    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    //implementation 'org.springframework.boot:spring-boot-starter-mail'
+    //implementation 'org.springframework.boot:spring-boot-starter-security'
+    //implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    //implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-tomcat'
     implementation "org.springframework.boot:spring-boot-starter-data-jpa"
     implementation 'com.fasterxml.jackson.module:jackson-module-kotlin'
-    implementation 'com.vaadin:vaadin-spring-boot-starter:13.0.2'
-    implementation 'org.jetbrains.kotlin:kotlin-reflect'
-    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
-    implementation 'org.springframework.retry:spring-retry'
-    //implementation 'org.springframework.session:spring-session-jdbc'
-    
-    implementation 'com.h2database:h2'
-
+    //implementation "com.vaadin:vaadin-spring-boot-starter:${vaadin.version}"
+    compile         vaadin.springBoot()
 
     implementation vaadin.bom()
     implementation vaadin.platform()
     implementation vaadin.lumoTheme()
-    compile vaadin.springBoot()
+    implementation vaadin.dependency('button-flow')
+    implementation 'org.jetbrains.kotlin:kotlin-reflect'
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
+    //implementation 'org.springframework.retry:spring-retry'
+    //implementation 'org.springframework.session:spring-session-jdbc'
+    
+    implementation 'com.h2database:h2'
 
-    compileOnly 'org.projectlombok:lombok'
+    //compile "com.vaadin:vaadin:${vaadin.version}"
+
+    //compileOnly 'org.projectlombok:lombok'
 
     runtimeOnly 'org.springframework.boot:spring-boot-devtools'
     runtimeOnly 'org.postgresql:postgresql'
@@ -87,12 +86,12 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'org.springframework.security:spring-security-test'
+    //testImplementation 'org.springframework.security:spring-security-test'
 }
 
 dependencyManagement {
     imports {
-        mavenBom "com.vaadin:vaadin-bom:${vaadinVersion}"
+        mavenBom "com.vaadin:vaadin-bom:${vaadin.version}"
     }
 }
 

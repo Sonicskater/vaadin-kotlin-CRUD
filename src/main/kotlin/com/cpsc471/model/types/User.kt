@@ -9,15 +9,14 @@ import javax.persistence.*
 @DiscriminatorColumn(name="type", discriminatorType = DiscriminatorType.INTEGER)
 @DiscriminatorValue("0")
 open class User(
-        open var First_name: String = "",
-        open var Last_name: String = "",
-        @Id var Email: String = "",
-        open var Country: String = "",
-        open var Province: String = "",
-        open var City: String = "",
-        open var Street_address: String = "",
-        open var Postal_code: String = "",
-        open var User_type: String = "",
+        open var firstName: String = "",
+        open var lastName: String = "",
+        @Id var email: String = "",
+        open var country: String = "",
+        open var province: String = "",
+        open var city: String = "",
+        open var streetAddress: String = "",
+        open var postalCode: String = "",
         /**
         @ManyToMany(targetEntity = DateRecord::class)
         @JoinTable(name = "is_available",
@@ -38,7 +37,7 @@ open class User(
 
 
         @OneToMany(targetEntity = UserContactInfo::class, mappedBy = "user")
-        open var contact_info: List<UserContactInfo> = mutableListOf()
+        open var contactInfo: MutableList<UserContactInfo> = mutableListOf()
 
 
 
@@ -46,7 +45,7 @@ open class User(
 
 
 ) : DBAbstract(), Serializable {
-        override fun getID(): List<Any> {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-        }
+    override fun IDforDb(): List<Any> {
+        return(listOf(email))
+    }
 }

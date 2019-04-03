@@ -1,7 +1,5 @@
 package com.cpsc471.model.types
 
-import org.omg.CORBA.Object
-
 abstract class DBAbstract {
 
     companion object {
@@ -17,13 +15,13 @@ abstract class DBAbstract {
             return false
         }
         else{
-            val vSet = other.getID()
+            val vSet = other.IDforDb()
             if (this::class == other::class){
-                return vSet == this.getID()
+                return vSet == this.IDforDb()
             } else{
                 return false
             }
         }
     }
-    abstract fun getID() : List<Any>
+    abstract fun IDforDb() : List<Any>
 }

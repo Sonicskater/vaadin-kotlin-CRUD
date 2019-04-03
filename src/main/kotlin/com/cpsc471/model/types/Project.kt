@@ -104,7 +104,7 @@ class Project(
         var invoice: Invoice
 
 ) : Serializable, DBAbstract() {
-    override fun getID(): List<Any> {
+    override fun IDforDb(): List<Any> {
         return listOf(start,end,school)
     }
 }

@@ -22,7 +22,7 @@ class Contact(
         @OneToMany(targetEntity = ContactContactInfo::class, mappedBy = "contact")
         var manages: List<ContactContactInfo>
         ) : DBAbstract(), Serializable{
-    override fun getID() : List<Any> {
+    override fun IDforDb() : List<Any> {
         return listOf(Email,institute)
     }
 

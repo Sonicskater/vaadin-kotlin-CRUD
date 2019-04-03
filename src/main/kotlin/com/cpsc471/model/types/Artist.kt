@@ -11,10 +11,10 @@ class Artist(
 
         @Basic
         @ElementCollection
-        var available_days: MutableSet<Date> = mutableSetOf(),
+        var availableDays: MutableSet<Date> = mutableSetOf(),
 
         @Basic
         @ElementCollection
-        var notes: MutableList<String>
+        var notes: MutableList<String> = mutableListOf()
 ) : User() {
 }

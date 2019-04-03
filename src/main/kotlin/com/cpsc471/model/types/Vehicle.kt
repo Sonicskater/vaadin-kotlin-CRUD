@@ -17,7 +17,7 @@ class Vehicle(
     var notes: MutableList<String>
 
 ): DBAbstract(){
-    override fun getID(): List<Any> {
+    override fun IDforDb(): List<Any> {
         return listOf(license_plate)
     }
 

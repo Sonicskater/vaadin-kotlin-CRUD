@@ -14,7 +14,7 @@ class ContactContactInfo(
         @ManyToOne(fetch = FetchType.LAZY,targetEntity = Contact::class)
         var contact: Contact
 ) : DBAbstract(),Serializable{
-    override fun getID(): List<Any> {
+    override fun IDforDb(): List<Any> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 

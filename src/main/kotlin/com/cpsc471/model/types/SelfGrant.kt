@@ -18,7 +18,7 @@ class SelfGrant(
         @ManyToOne(targetEntity = FundingSource::class)
         var source: FundingSource
 ) :DBAbstract(), Serializable {
-    override fun getID(): List<Any> {
+    override fun IDforDb(): List<Any> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 

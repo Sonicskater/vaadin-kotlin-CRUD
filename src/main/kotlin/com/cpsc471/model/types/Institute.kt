@@ -22,7 +22,7 @@ open class Institute(
     open var contacts: List<Contact> = listOf()
 
 ): DBAbstract(), Serializable{
-    override fun getID(): List<Any> {
+    override fun IDforDb(): List<Any> {
         return listOf(Country, Postal_code, Street_address, City, Province)
     }
 }

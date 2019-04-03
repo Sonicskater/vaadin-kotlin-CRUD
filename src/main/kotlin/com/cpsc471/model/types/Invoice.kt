@@ -13,7 +13,7 @@ class Invoice(
         @OneToMany(targetEntity = InvoiceItem::class,mappedBy = "invoice")
         var items: MutableList<InvoiceItem>
 ) : DBAbstract(), Serializable {
-    override fun getID(): List<Any> {
+    override fun IDforDb(): List<Any> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }

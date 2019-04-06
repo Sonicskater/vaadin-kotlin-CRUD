@@ -9,9 +9,9 @@ import com.vaadin.flow.component.grid.Grid
 import com.vaadin.flow.component.orderedlayout.*
 import com.vaadin.flow.router.Route
 import org.springframework.beans.factory.annotation.Autowired
-@Deprecated("testing class")
-@Route("new",layout = BaseAppLayout::class)
-class NewView(@Autowired var repo : SchoolRepository) : VerticalLayout() {
+
+@Route("schools",layout = BaseAppLayout::class)
+class SchoolList(@Autowired var repo : SchoolRepository) : VerticalLayout() {
 
     init {
         add(DataBaseListView(repo, Grid.SelectionMode.SINGLE, null, School::class.java))

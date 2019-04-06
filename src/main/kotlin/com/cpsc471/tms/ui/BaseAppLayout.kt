@@ -55,9 +55,9 @@ class BaseAppLayout : AppLayoutRouterLayout() {
                                 ""
                         ), Section.HEADER)
                         .addToSection(LeftClickableItem("CLICKABLE 1",
-                                VaadinIcon.CALC.create(),
-                                {}
-                        ),Section.HEADER)
+                                VaadinIcon.CALC.create()
+                        ) {},Section.HEADER)
+                        .add(LeftNavigationItem("Schools", VaadinIcon.HOME.create(), SchoolList::class.java))
                         .add(LeftNavigationItem("Home", VaadinIcon.HOME.create(), NewView::class.java))
                         .add(LeftNavigationItem("Grid", VaadinIcon.TABLE.create(), NewView2::class.java))
                         .add(LeftSubMenuBuilder

@@ -1,8 +1,10 @@
 package com.cpsc471.tms.data.types
 
+import com.cpsc471.tms.ui.components.Display
 import java.io.Serializable
 import java.sql.Date
 import javax.persistence.*
+import kotlin.jvm.Transient
 
 @Entity
 @Table(name="project")
@@ -44,13 +46,14 @@ class Project(
                 JoinColumn(name="End_year", referencedColumnName="Year"))
         var end: DateRecord,
         */
-
+        @Display
         @Id
         var start: Date,
-
+        @Display
         @Id
         var end: Date,
 
+        @Display
         @Id
         @ManyToOne(fetch = FetchType.LAZY,targetEntity = School::class)
         /**
@@ -106,4 +109,5 @@ class Project(
     override fun IDforDb(): List<Any> {
         return listOf(start,end,school)
     }
+
 }

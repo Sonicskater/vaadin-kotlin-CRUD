@@ -1,4 +1,5 @@
 package com.cpsc471.tms.data.types
+import com.cpsc471.tms.ui.components.Display
 import java.io.Serializable
 import javax.persistence.*
 
@@ -8,11 +9,16 @@ import javax.persistence.*
 @DiscriminatorColumn(name="type", discriminatorType = DiscriminatorType.INTEGER)
 @DiscriminatorValue("0")
 open class User(
+        @Display
         open var firstName: String = "",
+        @Display
         open var lastName: String = "",
+        @Display
         @Id var email: String = "",
+        @Display
         open var country: String = "",
         open var province: String = "",
+        @Display
         open var city: String = "",
         open var streetAddress: String = "",
         open var postalCode: String = "",
@@ -40,6 +46,7 @@ open class User(
 
 
 ) : DBAbstract(), Serializable {
+
     override fun IDforDb(): List<Any> {
         return(listOf(email))
     }

@@ -7,7 +7,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/security">
 
     <bean id="customUserDetailsService"
-          class="com.cpsc471.tms.CustomUserDetailsService"/>
+          class="com.cpsc471.tms.security.CustomUserDetailsService"/>
 
     <security:authentication-manager>
         <security:authentication-provider

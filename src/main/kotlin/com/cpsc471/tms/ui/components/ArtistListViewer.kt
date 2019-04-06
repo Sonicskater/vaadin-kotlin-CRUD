@@ -5,6 +5,7 @@ import com.cpsc471.tms.data.types.Artist
 import com.vaadin.flow.component.grid.Grid
 import com.vaadin.flow.component.orderedlayout.VerticalLayout
 
+@Deprecated("Use DataBaseListView")
 class ArtistListViewer(private val repo : ArtistRepository,
                        selectionMode: Grid.SelectionMode,
                        private val artistViewer: ArtistViewer? = null) : VerticalLayout() {

@@ -1,8 +1,10 @@
 package com.cpsc471.tms.ui
 
 import com.cpsc471.tms.data.repos.ArtistRepository
+import com.cpsc471.tms.data.types.Artist
 import com.cpsc471.tms.data.types.User
 import com.cpsc471.tms.ui.components.ArtistListViewer
+import com.cpsc471.tms.ui.components.DataBaseListView
 import com.vaadin.flow.component.Text
 import com.vaadin.flow.component.button.Button
 import com.vaadin.flow.component.button.ButtonVariant
@@ -16,6 +18,7 @@ import com.vaadin.flow.router.Route
 import com.vaadin.flow.server.PWA
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.security.core.userdetails.UserDetails
+@Deprecated("testing class")
 @ParentLayout(BaseAppLayout::class)
 @Route("testing")
 @PWA(name = "Project Base for Vaadin Flow with Spring", shortName = "Project Base")
@@ -23,8 +26,8 @@ class TestingView(@Autowired repo: ArtistRepository) : VerticalLayout() {
 
 
     init {
-        val n = ArtistListViewer(repo, Grid.SelectionMode.SINGLE)
-        n.listArtists(repo.findArtistsByFirstNameContainsOrLastNameContains("D", "H"))
+        val n = DataBaseListView(repo, Grid.SelectionMode.SINGLE, null, Artist::class.java)
+        //n.list(repo.findArtistsByFirstNameContainsOrLastNameContains("D", "H"))
         add(n)
 
         val button = Button("Click me")

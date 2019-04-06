@@ -1,5 +1,8 @@
 package com.cpsc471.tms.data.types
 
+import com.cpsc471.tms.data.keys.InstituteKey
+import com.cpsc471.tms.ui.components.Display
+import com.cpsc471.tms.ui.components.DisplayComposite
 import java.io.Serializable
 import javax.persistence.*
 
@@ -9,13 +12,20 @@ import javax.persistence.*
 @DiscriminatorValue("0")
 open class Institute(
 
-        @Id var Name:String = "",
-    open var Country:String = "",
-    @Id var Postal_code:String = "",
-    open var Street_address:String = "",
-    open var City:String = "",
-    open var Province:String = "",
-    open var Website:String = "",
+
+        @EmbeddedId
+        @DisplayComposite
+        open var instituteKey: InstituteKey = InstituteKey(),
+
+        //@Id var Name:String = "",
+        @Display
+    open var country:String = "",
+    //@Id var Postal_code:String = "",
+    open var streetAddress:String = "",
+        @Display
+    open var city:String = "",
+    open var province:String = "",
+    open var website:String = "",
 
 
     @OneToMany(mappedBy = "institute",targetEntity = Contact::class)
@@ -23,6 +33,10 @@ open class Institute(
 
 ): DBAbstract(), Serializable{
     override fun IDforDb(): List<Any> {
-        return listOf(Country, Postal_code, Street_address, City, Province)
+        return listOf(instituteKey.name, instituteKey.postalCode)
+    }
+
+    override fun toString(): String {
+        return instituteKey.name
     }
 }

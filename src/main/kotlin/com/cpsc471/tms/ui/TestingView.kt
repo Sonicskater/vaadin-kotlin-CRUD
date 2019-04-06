@@ -11,12 +11,13 @@ import org.springframework.beans.factory.annotation.Autowired
 
 import com.vaadin.flow.component.orderedlayout.VerticalLayout
 import com.vaadin.flow.component.textfield.TextField
+import com.vaadin.flow.router.ParentLayout
 import com.vaadin.flow.router.Route
 import com.vaadin.flow.server.PWA
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.security.core.userdetails.UserDetails
-
-@Route("")
+@ParentLayout(BaseAppLayout::class)
+@Route("testing")
 @PWA(name = "Project Base for Vaadin Flow with Spring", shortName = "Project Base")
 class TestingView(@Autowired repo: ArtistRepository) : VerticalLayout() {
 

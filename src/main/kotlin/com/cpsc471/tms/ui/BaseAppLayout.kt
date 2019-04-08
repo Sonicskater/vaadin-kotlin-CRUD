@@ -61,7 +61,7 @@ class BaseAppLayout : AppLayoutRouterLayout() {
                                 VaadinIcon.CALC.create()
                         ) {},Section.HEADER)
                         .add(LeftNavigationItem("Schools", VaadinIcon.HOME.create(), SchoolList::class.java))
-                        .add(LeftNavigationItem("Home", VaadinIcon.HOME.create(), NewView::class.java))
+                        .add(LeftNavigationItem("Testing", VaadinIcon.HOME.create(), TestingView::class.java))
                         .add(LeftNavigationItem("Grid", VaadinIcon.TABLE.create(), NewView2::class.java))
                         .add(LeftSubMenuBuilder
                                 .get("My Submenu", VaadinIcon.PLUS.create())

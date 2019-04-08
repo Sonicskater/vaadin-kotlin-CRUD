@@ -117,7 +117,7 @@ class DataBaseObjectView<T : Any, V>(
 
     private fun addReflectedReadOnly(m: Field, prefix: String){
         when {
-            m.getAnnotation(Display::class.java) != null || m.getAnnotation(DisplayDetail::class.java) != null -> {
+            m.getAnnotation(DisplayOld::class.java) != null || m.getAnnotation(DisplayDetail::class.java) != null -> {
                 val field = TextField()
                 field.isReadOnly = true
                 field.valueChangeMode = ValueChangeMode.EAGER

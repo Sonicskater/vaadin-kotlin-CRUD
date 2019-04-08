@@ -2,8 +2,6 @@ package com.cpsc471.tms.ui.components
 
 import com.vaadin.flow.component.grid.Grid
 import com.vaadin.flow.component.orderedlayout.VerticalLayout
-import org.slf4j.LoggerFactory
-import org.springframework.data.repository.CrudRepository
 import java.lang.reflect.Field
 
 class SubDataListView<T : Any>(selectionMode: Grid.SelectionMode,
@@ -24,7 +22,7 @@ class SubDataListView<T : Any>(selectionMode: Grid.SelectionMode,
         grid.selectionModel.addSelectionListener {
             updateViewer()
         }
-
+        minWidth = "300px"
     }
 
     private fun addReflectedColumns(declaredFields: Array<Field>, prefix : String = "") {
@@ -34,7 +32,7 @@ class SubDataListView<T : Any>(selectionMode: Grid.SelectionMode,
                 println(i.annotationClass)
             }
             */
-            if (m.getAnnotation(Display::class.java) != null) {
+            if (m.getAnnotation(DisplayOld::class.java) != null) {
                 grid.addColumn(prefix + m.name)
                 //println(m.name)
             } else if (m.getAnnotation(DisplayComposite::class.java) !=null){

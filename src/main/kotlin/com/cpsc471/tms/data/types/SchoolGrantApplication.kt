@@ -1,7 +1,8 @@
 package com.cpsc471.tms.data.types
 
 import com.cpsc471.tms.data.DBAbstract
-import com.cpsc471.tms.ui.components.Display
+import com.cpsc471.tms.data.annotations.Display
+import com.cpsc471.tms.ui.components.DisplayOld
 import java.io.Serializable
 import java.sql.Date
 import javax.persistence.Entity
@@ -16,7 +17,7 @@ class SchoolGrantApplication(
     @Display
     var status: String,
     @Display
-    var amonut: Int,
+    var amount: Int,
     var website: String,
     var submissionDate: Date,
 

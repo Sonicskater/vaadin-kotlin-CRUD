@@ -1,6 +1,8 @@
 package com.cpsc471.tms.data.types
 
 import com.cpsc471.tms.data.DBAbstract
+import com.cpsc471.tms.data.annotations.Display
+import com.cpsc471.tms.data.annotations.DisplayTypeClasif
 import com.cpsc471.tms.data.keys.InstituteKey
 import com.cpsc471.tms.ui.components.*
 import java.io.Serializable
@@ -14,19 +16,22 @@ open class Institute(
 
 
         @EmbeddedId
+        @Display(clasif = DisplayTypeClasif.COMPOSITE)
         @DisplayComposite
         @EditableComposite
         open var instituteKey: InstituteKey = InstituteKey(),
 
         @DisplayDetail
         @Editable
+        @Display
     open var country:String = "",
 
         @DisplayDetail
         @Editable
+        @Display
     open var streetAddress:String = "",
 
-        @Display
+        @DisplayOld
         @Editable
     open var city:String = "",
 

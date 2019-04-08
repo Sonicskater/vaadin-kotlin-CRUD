@@ -1,6 +1,5 @@
 package com.cpsc471.tms.data
 
-import com.cpsc471.tms.data.keys.DBKey
 
 abstract class DBAbstract {
 

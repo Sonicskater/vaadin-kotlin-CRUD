@@ -2,7 +2,6 @@ package com.cpsc471.tms.ui.components
 
 import com.vaadin.flow.component.grid.Grid
 import com.vaadin.flow.component.orderedlayout.VerticalLayout
-import org.slf4j.LoggerFactory
 import org.springframework.data.repository.CrudRepository
 import java.lang.reflect.Field
 
@@ -37,7 +36,7 @@ class DataBaseListView<T : Any, V>(private val repo: CrudRepository<T, V>,
                 println(i.annotationClass)
             }
             */
-            if (m.getAnnotation(Display::class.java) != null) {
+            if (m.getAnnotation(DisplayOld::class.java) != null) {
                 grid.addColumn(prefix + m.name)
                 //println(m.name)
             } else if (m.getAnnotation(DisplayComposite::class.java) !=null){

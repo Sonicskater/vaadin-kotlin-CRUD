@@ -10,11 +10,11 @@ import javax.persistence.*
 @Entity
 @Table(name = "contact")
 class Contact(
-        @Display
+        @DisplayOld
         @Editable
         var firstName: String,
 
-        @Display
+        @DisplayOld
         @Editable
         var lastName: String,
 

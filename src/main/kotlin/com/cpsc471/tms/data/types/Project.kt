@@ -1,7 +1,8 @@
 package com.cpsc471.tms.data.types
 
 import com.cpsc471.tms.data.DBAbstract
-import com.cpsc471.tms.ui.components.Display
+import com.cpsc471.tms.data.annotations.Display
+import com.cpsc471.tms.ui.components.DisplayOld
 import com.cpsc471.tms.ui.components.DisplayDetail
 import com.cpsc471.tms.ui.components.DisplayList
 import java.io.Serializable

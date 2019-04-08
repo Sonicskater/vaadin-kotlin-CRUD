@@ -1,6 +1,6 @@
 package com.cpsc471.tms.data.types
 import com.cpsc471.tms.data.DBAbstract
-import com.cpsc471.tms.ui.components.Display
+import com.cpsc471.tms.ui.components.DisplayOld
 import java.io.Serializable
 import javax.persistence.*
 
@@ -10,16 +10,16 @@ import javax.persistence.*
 @DiscriminatorColumn(name="type", discriminatorType = DiscriminatorType.INTEGER)
 @DiscriminatorValue("0")
 open class User(
-        @Display
+        @DisplayOld
         open var firstName: String = "",
-        @Display
+        @DisplayOld
         open var lastName: String = "",
-        @Display
+        @DisplayOld
         @Id var email: String = "",
-        @Display
+        @DisplayOld
         open var country: String = "",
         open var province: String = "",
-        @Display
+        @DisplayOld
         open var city: String = "",
         open var streetAddress: String = "",
         open var postalCode: String = "",

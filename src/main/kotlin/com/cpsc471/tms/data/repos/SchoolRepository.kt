@@ -4,6 +4,8 @@ import com.cpsc471.tms.data.keys.InstituteKey
 import com.cpsc471.tms.data.types.School
 import org.springframework.data.repository.CrudRepository
 import org.springframework.stereotype.Repository
+import java.lang.reflect.Type
 
 @Repository
-interface SchoolRepository : CrudRepository<School, InstituteKey>
+interface SchoolRepository : CrudRepository<School, InstituteKey>{
+}

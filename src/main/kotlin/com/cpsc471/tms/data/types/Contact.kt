@@ -1,29 +1,39 @@
 package com.cpsc471.tms.data.types
 
 
+import com.cpsc471.tms.data.DBAbstract
+import com.cpsc471.tms.data.keys.ContactKey
+import com.cpsc471.tms.ui.components.*
 import java.io.Serializable
 import javax.persistence.*
 
 @Entity
 @Table(name = "contact")
 class Contact(
-        @ManyToOne(fetch = FetchType.LAZY, targetEntity = Institute::class)
-        /*
-        @JoinColumns(
-                JoinColumn(name = "Inst_country"),
-                JoinColumn(name = "Inst_postal_code"),
-                JoinColumn(name = "Inst_street_address"),
-                JoinColumn(name = "Inst_city"),
-                JoinColumn(name = "Inst_Province")
-        */
-        @Id var institute: Institute,
-        @Id var Email: String,
+        @Display
+        @Editable
+        var firstName: String,
 
+        @Display
+        @Editable
+        var lastName: String,
+
+        @DisplayDetail
+        @Editable
+        var description: String,
+
+        @EmbeddedId
+        @EditableComposite
+        @DisplayComposite
+        var contactKey: ContactKey,
+
+        @DisplayList(ContactContactInfo::class)
         @OneToMany(targetEntity = ContactContactInfo::class, mappedBy = "contact")
-        var manages: List<ContactContactInfo>
+        var contactInfo: List<ContactContactInfo>
+
         ) : DBAbstract(), Serializable{
     override fun IDforDb() : List<Any> {
-        return listOf(Email,institute)
+        return listOf(contactKey)
     }
 
 }

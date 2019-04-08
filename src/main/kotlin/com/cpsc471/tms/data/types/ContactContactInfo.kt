@@ -1,5 +1,6 @@
 package com.cpsc471.tms.data.types
 
+import com.cpsc471.tms.data.DBAbstract
 import java.io.Serializable
 import javax.persistence.*
 
@@ -8,6 +9,7 @@ import javax.persistence.*
 class ContactContactInfo(
         @Id
         var Phone_number: String,
+
         var Description: String,
 
         @Id

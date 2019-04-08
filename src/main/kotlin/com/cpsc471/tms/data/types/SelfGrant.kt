@@ -1,5 +1,6 @@
 package com.cpsc471.tms.data.types
 
+import com.cpsc471.tms.data.DBAbstract
 import java.io.Serializable
 import java.sql.Date
 import javax.persistence.Entity
@@ -17,7 +18,7 @@ class SelfGrant(
         @Id
         @ManyToOne(targetEntity = FundingSource::class)
         var source: FundingSource
-) :DBAbstract(), Serializable {
+) : DBAbstract(), Serializable {
     override fun IDforDb(): List<Any> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }

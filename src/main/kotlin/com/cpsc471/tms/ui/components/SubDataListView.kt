@@ -6,10 +6,9 @@ import org.slf4j.LoggerFactory
 import org.springframework.data.repository.CrudRepository
 import java.lang.reflect.Field
 
-class DataBaseListView<T : Any, V>(private val repo: CrudRepository<T, V>,
-                                   selectionMode: Grid.SelectionMode,
-                                   private val classT: Class<T>,
-                                   private var selectionListener: (it : T) -> Unit = {}) : VerticalLayout(){
+class SubDataListView<T : Any>(selectionMode: Grid.SelectionMode,
+                                  private val classT: Class<T>,
+                                  private var selectionListener: (it : T) -> Unit = {}) : VerticalLayout(){
 
     private val grid : Grid<T> = Grid(classT,false)
 
@@ -21,8 +20,6 @@ class DataBaseListView<T : Any, V>(private val repo: CrudRepository<T, V>,
         addReflectedColumns(classT.declaredFields)
 
         add(grid)
-
-        list(repo.findAll() as List<T>)
 
         grid.selectionModel.addSelectionListener {
             updateViewer()
@@ -59,8 +56,10 @@ class DataBaseListView<T : Any, V>(private val repo: CrudRepository<T, V>,
         return grid.selectionModel.selectedItems
     }
 
-    fun list(list : List<T>){
-        grid.setItems(list)
+    fun list(list : List<T>, except : Set<T> = setOf()){
+        val list2 = list.toMutableList()
+        list2.removeAll(except)
+        grid.setItems(list2)
     }
 
 

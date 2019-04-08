@@ -14,7 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired
 class NewView(@Autowired var repo : SchoolRepository) : VerticalLayout() {
 
     init {
-        add(DataBaseListView(repo, Grid.SelectionMode.SINGLE, null, School::class.java))
+        add(DataBaseListView(repo, Grid.SelectionMode.SINGLE,  School::class.java))
 
     }
 }

@@ -26,7 +26,7 @@ class TestingView(@Autowired repo: ArtistRepository) : VerticalLayout() {
 
 
     init {
-        val n = DataBaseListView(repo, Grid.SelectionMode.SINGLE, null, Artist::class.java)
+        val n = DataBaseListView(repo, Grid.SelectionMode.SINGLE,  Artist::class.java){}
         //n.list(repo.findArtistsByFirstNameContainsOrLastNameContains("D", "H"))
         add(n)
 

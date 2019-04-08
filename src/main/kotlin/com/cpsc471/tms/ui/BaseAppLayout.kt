@@ -15,6 +15,7 @@ import com.github.appreciated.app.layout.notification.component.AppBarNotificati
 import com.github.appreciated.app.layout.notification.entitiy.DefaultNotification
 import com.github.appreciated.app.layout.router.AppLayoutRouterLayout
 import com.vaadin.annotations.Viewport
+import com.vaadin.flow.component.AttachEvent
 import com.vaadin.flow.component.applayout.AbstractAppRouterLayout
 import com.vaadin.flow.component.applayout.AppLayout
 import com.vaadin.flow.component.applayout.AppLayoutMenu
@@ -23,6 +24,8 @@ import com.vaadin.flow.component.html.H3
 import com.vaadin.flow.component.html.Span
 import com.vaadin.flow.component.icon.VaadinIcon
 import com.vaadin.flow.router.Route
+import com.vaadin.flow.theme.Theme
+import com.vaadin.flow.theme.lumo.Lumo
 import com.vaadin.ui.Component
 import com.vaadin.ui.Notification
 import com.vaadin.ui.VerticalLayout
@@ -90,6 +93,19 @@ class BaseAppLayout : AppLayoutRouterLayout() {
                 .build()
                 ).build())
 
+        element.setAttribute("theme", "dark")
+
+    }
+
+
+    override fun onAttach(attachEvent: AttachEvent) {
+        super.onAttach(attachEvent)
+        /**
+         * Using the @Theme Annotation to set the Dark Theme causes issues with shadows which will appear in
+         * the wrong color making them seemingly invisible. Instead do it the following way as long as the issue is not
+         * solved (https://github.com/vaadin/flow/issues/4765)
+         */
+        ui.get().page.executeJavaScript("document.documentElement.setAttribute(\"theme\",\"dark\")")
     }
 
 }

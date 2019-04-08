@@ -1,9 +1,13 @@
-package com.cpsc471.tms.data.types
+package com.cpsc471.tms.data
+
+import com.cpsc471.tms.data.keys.DBKey
 
 abstract class DBAbstract {
 
     companion object {
         private val serialVersionUID = -5554308939380869754L
+
+
     }
 
     override fun hashCode(): Int {
@@ -23,5 +27,7 @@ abstract class DBAbstract {
             }
         }
     }
-    abstract fun IDforDb() : List<Any>
+    abstract fun IDforDb() : List<*>
+
+
 }

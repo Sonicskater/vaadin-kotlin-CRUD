@@ -1,8 +1,4 @@
 package com.cpsc471.tms.ui.components
 
-import kotlin.reflect.KClass
-
 @Target(AnnotationTarget.FIELD,AnnotationTarget.FIELD)
-annotation class EditableList(    val type: KClass<*>) {
-
-}
+annotation class DisplayDetail

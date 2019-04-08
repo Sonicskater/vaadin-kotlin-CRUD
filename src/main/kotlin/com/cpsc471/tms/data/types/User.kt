@@ -1,4 +1,5 @@
 package com.cpsc471.tms.data.types
+import com.cpsc471.tms.data.DBAbstract
 import com.cpsc471.tms.ui.components.Display
 import java.io.Serializable
 import javax.persistence.*

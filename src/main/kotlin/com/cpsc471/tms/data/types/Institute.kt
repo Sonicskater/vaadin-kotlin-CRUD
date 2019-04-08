@@ -1,8 +1,8 @@
 package com.cpsc471.tms.data.types
 
+import com.cpsc471.tms.data.DBAbstract
 import com.cpsc471.tms.data.keys.InstituteKey
-import com.cpsc471.tms.ui.components.Display
-import com.cpsc471.tms.ui.components.DisplayComposite
+import com.cpsc471.tms.ui.components.*
 import java.io.Serializable
 import javax.persistence.*
 
@@ -15,25 +15,37 @@ open class Institute(
 
         @EmbeddedId
         @DisplayComposite
+        @EditableComposite
         open var instituteKey: InstituteKey = InstituteKey(),
 
-        //@Id var Name:String = "",
-        @Display
+        @DisplayDetail
+        @Editable
     open var country:String = "",
-    //@Id var Postal_code:String = "",
+
+        @DisplayDetail
+        @Editable
     open var streetAddress:String = "",
+
         @Display
+        @Editable
     open var city:String = "",
+
+        @DisplayDetail
+        @Editable
     open var province:String = "",
+
+        @DisplayDetail
+        @Editable
     open var website:String = "",
 
-
-    @OneToMany(mappedBy = "institute",targetEntity = Contact::class)
+        @DisplayList(Contact::class)
+        @EditableList(Contact::class)
+    @OneToMany(mappedBy = "contactKey.institute",targetEntity = Contact::class)
     open var contacts: List<Contact> = listOf()
 
 ): DBAbstract(), Serializable{
     override fun IDforDb(): List<Any> {
-        return listOf(instituteKey.name, instituteKey.postalCode)
+        return listOf(instituteKey)
     }
 
     override fun toString(): String {

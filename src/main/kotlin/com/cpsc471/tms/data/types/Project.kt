@@ -1,10 +1,12 @@
 package com.cpsc471.tms.data.types
 
+import com.cpsc471.tms.data.DBAbstract
 import com.cpsc471.tms.ui.components.Display
+import com.cpsc471.tms.ui.components.DisplayDetail
+import com.cpsc471.tms.ui.components.DisplayList
 import java.io.Serializable
 import java.sql.Date
 import javax.persistence.*
-import kotlin.jvm.Transient
 
 @Entity
 @Table(name="project")
@@ -47,13 +49,15 @@ class Project(
         var end: DateRecord,
         */
         @Display
+        var title: String,
+        @Display
         @Id
         var start: Date,
         @Display
         @Id
         var end: Date,
 
-        @Display
+        @DisplayList(School::class)
         @Id
         @ManyToOne(fetch = FetchType.LAZY,targetEntity = School::class)
         /**
@@ -66,7 +70,7 @@ class Project(
 
         )*/
         var school : School,
-
+        @DisplayList(Artist::class)
         @ManyToMany(fetch = FetchType.LAZY, targetEntity = Artist::class)
         /**
         @JoinTable(name = "part_of",
@@ -94,14 +98,19 @@ class Project(
         */
         var members: List<Artist>,
 
+        @DisplayDetail
         @ManyToOne(targetEntity = Manager::class)
         var manager: Manager,
-        var title: String,
+
+
+        @DisplayDetail
         var theme: String,
 
+        @DisplayDetail
         @ManyToOne(targetEntity = Vehicle::class)
         var vehicle: Vehicle?,
 
+        @DisplayDetail
         @OneToOne
         var invoice: Invoice
 

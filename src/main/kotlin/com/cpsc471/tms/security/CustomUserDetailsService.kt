@@ -18,7 +18,7 @@ class CustomUserDetailsService
         if(p0.isNullOrBlank()){
             throw UsernameNotFoundException(p0)
         }
-        val user = userRepository.findByEmail(p0)
+        val user = userRepository.findByUserKeyEmail(p0)
 
         return CustomUserPrincipal(user)
     }

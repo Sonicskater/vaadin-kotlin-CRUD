@@ -1,14 +1,11 @@
 package com.cpsc471.tms.ui
 
-import com.github.mvysny.karibudsl.v8.navigateToView
 import com.vaadin.flow.component.Tag
-import com.vaadin.flow.component.orderedlayout.VerticalLayout
-import com.vaadin.flow.router.Route
-import com.vaadin.flow.router.PageTitle
-import com.vaadin.flow.component.login.LoginOverlay
 import com.vaadin.flow.component.login.LoginI18n
-
-
+import com.vaadin.flow.component.login.LoginOverlay
+import com.vaadin.flow.component.orderedlayout.VerticalLayout
+import com.vaadin.flow.router.PageTitle
+import com.vaadin.flow.router.Route
 
 
 @Tag("sa-login")

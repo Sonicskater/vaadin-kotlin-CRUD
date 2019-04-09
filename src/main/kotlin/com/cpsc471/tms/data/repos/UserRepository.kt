@@ -9,7 +9,7 @@ interface UserRepository : CrudRepository<User, String>{
 
     fun findByFirstNameStartsWithIgnoreCase(firstName : String) : List<User>
 
-    fun findByEmail(email :String) : User
+    fun findByUserKeyEmail(email :String) : User
 
 }
 

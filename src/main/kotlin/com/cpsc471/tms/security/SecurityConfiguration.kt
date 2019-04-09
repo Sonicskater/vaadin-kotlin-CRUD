@@ -90,10 +90,10 @@ open class SecurityConfiguration(@Autowired
     }
 
     companion object {
-        private val LOGIN_PROCESSING_URL = "/login"
-        private val LOGIN_FAILURE_URL = "/login"
-        private val LOGIN_URL = "/login"
-        private val LOGOUT_SUCCESS_URL = "/login"
+        private const val LOGIN_PROCESSING_URL = "/login"
+        private const val LOGIN_FAILURE_URL = "/login"
+        private const val LOGIN_URL = "/login"
+        private const val LOGOUT_SUCCESS_URL = "/login"
     }
 
     @Bean

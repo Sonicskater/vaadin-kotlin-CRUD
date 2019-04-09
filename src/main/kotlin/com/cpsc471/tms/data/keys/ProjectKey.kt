@@ -5,11 +5,8 @@ import com.cpsc471.tms.data.annotations.DisplayCategory
 import com.cpsc471.tms.data.annotations.DisplayEditLevel
 import com.cpsc471.tms.data.annotations.DisplayTypeClasif
 import com.cpsc471.tms.data.types.School
-import com.cpsc471.tms.ui.components.DisplayList
 import org.springframework.data.jpa.repository.Temporal
-import java.io.Serializable
 import java.time.LocalDate
-import java.util.*
 import javax.persistence.*
 
 @Embeddable

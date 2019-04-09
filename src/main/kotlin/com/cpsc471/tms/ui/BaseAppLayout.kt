@@ -14,35 +14,24 @@ import com.github.appreciated.app.layout.notification.DefaultNotificationHolder
 import com.github.appreciated.app.layout.notification.component.AppBarNotificationButton
 import com.github.appreciated.app.layout.notification.entitiy.DefaultNotification
 import com.github.appreciated.app.layout.router.AppLayoutRouterLayout
-import com.vaadin.annotations.Viewport
 import com.vaadin.flow.component.AttachEvent
-import com.vaadin.flow.component.applayout.AbstractAppRouterLayout
-import com.vaadin.flow.component.applayout.AppLayout
-import com.vaadin.flow.component.applayout.AppLayoutMenu
-import com.vaadin.flow.component.applayout.AppLayoutMenuItem
-import com.vaadin.flow.component.html.H3
-import com.vaadin.flow.component.html.Span
 import com.vaadin.flow.component.icon.VaadinIcon
 import com.vaadin.flow.router.Route
-import com.vaadin.flow.theme.Theme
-import com.vaadin.flow.theme.lumo.Lumo
-import com.vaadin.ui.Component
 import com.vaadin.ui.Notification
-import com.vaadin.ui.VerticalLayout
+
 @Route("")
 class BaseAppLayout : AppLayoutRouterLayout() {
 
-    private var notifications : DefaultNotificationHolder
+    private var notifications : DefaultNotificationHolder = DefaultNotificationHolder{}
     private var badge : DefaultBadgeHolder
 
     init{
-        notifications =  DefaultNotificationHolder{}
         badge =  DefaultBadgeHolder(5)
         for(i in 1..5){
             notifications.addNotification(DefaultNotification("TEST NOTIFICATION $i", "asdfgasdfasdfasdfasdgaeibaivbluivufuahdu"))
         }
 
-        var menuElement = LeftNavigationItem("",VaadinIcon.MENU.create(), NewView::class.java )
+        val menuElement = LeftNavigationItem("",VaadinIcon.MENU.create(), TestingView::class.java )
         badge.bind(menuElement.badge)
         init(AppLayoutBuilder
                 .get(Behaviour.LEFT_RESPONSIVE_HYBRID)
@@ -62,29 +51,29 @@ class BaseAppLayout : AppLayoutRouterLayout() {
                         ) {},Section.HEADER)
                         .add(LeftNavigationItem("Schools", VaadinIcon.HOME.create(), TestingView::class.java))
                         .add(LeftNavigationItem("Projects", VaadinIcon.GROUP.create(), ProjectView::class.java))
-                        .add(LeftNavigationItem("Grid", VaadinIcon.TABLE.create(), NewView2::class.java))
+                        .add(LeftNavigationItem("Grid", VaadinIcon.TABLE.create(), TestingView::class.java))
                         .add(LeftSubMenuBuilder
                                 .get("My Submenu", VaadinIcon.PLUS.create())
                                 .add(LeftSubMenuBuilder
                                         .get("My Submenu", VaadinIcon.PLUS.create())
                                         .add(LeftNavigationItem("Charts",
                                                 VaadinIcon.SPLINE_CHART.create(),
-                                                NewView2::class.java
+                                                TestingView::class.java
                                                 ))
                                         .add(LeftNavigationItem("Contact",
                                                 VaadinIcon.CONNECT.create(),
-                                                NewView::class.java
+                                                TestingView::class.java
                                                 ))
                                         .add(LeftNavigationItem("More",
                                                 VaadinIcon.COG.create(),
-                                                NewView2::class.java
+                                                TestingView::class.java
                                                 ))
                                         .build())
                                 .add(LeftNavigationItem("Contact1",
                                         VaadinIcon.CONNECT.create(),
-                                        NewView::class.java
+                                        TestingView::class.java
                                         ))
-                                .add(LeftNavigationItem("More1", VaadinIcon.COG.create(), NewView2::class.java))
+                                .add(LeftNavigationItem("More1", VaadinIcon.COG.create(), TestingView::class.java))
                                 .build())
                         .add(menuElement)
                         .addToSection(LeftClickableItem("Clickable Entry",

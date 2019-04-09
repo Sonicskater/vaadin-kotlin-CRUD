@@ -3,7 +3,6 @@ import com.cpsc471.tms.data.DBAbstract
 import com.cpsc471.tms.data.annotations.Display
 import com.cpsc471.tms.data.keys.DBKey
 import com.cpsc471.tms.data.keys.UserKey
-import com.cpsc471.tms.ui.components.DisplayOld
 import org.springframework.data.repository.CrudRepository
 import java.io.Serializable
 import javax.persistence.*
@@ -14,18 +13,18 @@ import javax.persistence.*
 @DiscriminatorColumn(name="type", discriminatorType = DiscriminatorType.INTEGER)
 @DiscriminatorValue("0")
 open class User(
-        @DisplayOld
         @Display
         open var firstName: String = "",
-        @DisplayOld
+
         @Display
         open var lastName: String = "",
+
         @EmbeddedId
         var userKey: UserKey = UserKey(),
-        @DisplayOld
+
         open var country: String = "",
         open var province: String = "",
-        @DisplayOld
+
         open var city: String = "",
         open var streetAddress: String = "",
         open var postalCode: String = "",

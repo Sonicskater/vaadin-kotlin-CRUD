@@ -6,36 +6,27 @@ import com.cpsc471.tms.data.annotations.Display
 import com.cpsc471.tms.data.annotations.DisplayTypeClasif
 import com.cpsc471.tms.data.keys.ContactKey
 import com.cpsc471.tms.data.keys.DBKey
-import com.cpsc471.tms.ui.components.*
 import org.springframework.data.repository.CrudRepository
 import java.io.Serializable
-import javax.persistence.*
+import javax.persistence.EmbeddedId
+import javax.persistence.Entity
+import javax.persistence.OneToMany
+import javax.persistence.Table
 
 @Entity
 @Table(name = "contact")
 class Contact(
         @EmbeddedId
         @Display(clasif = DisplayTypeClasif.COMPOSITE)
-        @EditableComposite
-        @DisplayComposite
         var contactKey: ContactKey,
 
-        @DisplayOld
-        @Editable
         @Display
         var firstName: String,
 
-        @DisplayOld
-        @Editable
         var lastName: String,
 
-        @DisplayDetail
-        @Editable
         var description: String,
 
-
-
-        @DisplayList(ContactContactInfo::class)
         @OneToMany(targetEntity = ContactContactInfo::class, mappedBy = "contact")
         var contactInfo: List<ContactContactInfo>
 

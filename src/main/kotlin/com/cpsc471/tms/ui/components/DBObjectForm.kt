@@ -73,33 +73,37 @@ class DBObjectForm<T : DBAbstract>(
                     when (annotation.clasif) {
                         DisplayTypeClasif.PRIMITIVE -> {
 
-                            if (field.type == Int::class.java) {
-                                val textField = TextField()
-                                textField.isReadOnly = !((annotation.editLevel == DisplayEditLevel.EDITABLE && editable) || creatable)
-                                textField.valueChangeMode = ValueChangeMode.EAGER
-                                binder
-                                        .forField(textField)
-                                        .withConverter(StringToIntegerConverter("Invalid Integer"))
-                                        .bind(prefix + field.name)
+                            when {
+                                field.type == Int::class.java -> {
+                                    val textField = TextField()
+                                    textField.isReadOnly = !((annotation.editLevel == DisplayEditLevel.EDITABLE && editable) || creatable)
+                                    textField.valueChangeMode = ValueChangeMode.EAGER
+                                    binder
+                                            .forField(textField)
+                                            .withConverter(StringToIntegerConverter("Invalid Integer"))
+                                            .bind(prefix + field.name)
 
-                                formLayout.addFormItem(textField, field.name.capitalize())
-                            }else if(field.type == LocalDate::class.java){
-                                val dateField = DatePicker()
-                                dateField.isReadOnly = !((annotation.editLevel == DisplayEditLevel.EDITABLE && editable) || creatable)
+                                    formLayout.addFormItem(textField, field.name.capitalize())
+                                }
+                                field.type == LocalDate::class.java -> {
+                                    val dateField = DatePicker()
+                                    dateField.isReadOnly = !((annotation.editLevel == DisplayEditLevel.EDITABLE && editable) || creatable)
 
-                                binder.forField(dateField).bind( prefix+field.name )
+                                    binder.forField(dateField).bind( prefix+field.name )
 
-                                formLayout.addFormItem(dateField, field.name.capitalize())
+                                    formLayout.addFormItem(dateField, field.name.capitalize())
 
-                            }else {
-                                val textField = TextField()
-                                textField.isReadOnly = !((annotation.editLevel == DisplayEditLevel.EDITABLE && editable) || creatable)
-                                textField.valueChangeMode = ValueChangeMode.EAGER
-                                binder
-                                        .forField(textField)
-                                        .bind(prefix + field.name)
+                                }
+                                else -> {
+                                    val textField = TextField()
+                                    textField.isReadOnly = !((annotation.editLevel == DisplayEditLevel.EDITABLE && editable) || creatable)
+                                    textField.valueChangeMode = ValueChangeMode.EAGER
+                                    binder
+                                            .forField(textField)
+                                            .bind(prefix + field.name)
 
-                                formLayout.addFormItem(textField, field.name.capitalize())
+                                    formLayout.addFormItem(textField, field.name.capitalize())
+                                }
                             }
 
                         }

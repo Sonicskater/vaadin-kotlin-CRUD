@@ -13,7 +13,7 @@ class ObjectField<T : DBAbstract>(classT: Class<T>, initial: T?, root : Vertical
 
     init {
         val objectFieldUI = ObjectFieldUI(classT,backingField,readOnly){
-            backingField = it?: classT.newInstance()
+            backingField = it
             update()
         }
         root.add(objectFieldUI)

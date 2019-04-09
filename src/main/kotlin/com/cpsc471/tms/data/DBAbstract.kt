@@ -11,15 +11,15 @@ abstract class DBAbstract : IDBValue{
     }
 
     override fun equals(other: Any?): Boolean {
-        if(!(other is DBAbstract)){
-            return false
+        return if(other !is DBAbstract){
+            false
         }
         else{
             val vSet = other.iDforDb()
             if (this::class == other::class){
-                return vSet == this.iDforDb()
+                vSet == this.iDforDb()
             } else{
-                return false
+                false
             }
         }
     }

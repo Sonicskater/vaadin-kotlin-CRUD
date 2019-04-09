@@ -7,8 +7,6 @@ import com.cpsc471.tms.data.annotations.DisplayCategory
 import com.cpsc471.tms.data.annotations.DisplayTypeClasif
 import com.cpsc471.tms.data.keys.DBKey
 import com.cpsc471.tms.data.keys.ProjectKey
-import com.cpsc471.tms.ui.components.DisplayDetail
-import com.cpsc471.tms.ui.components.DisplayList
 import org.springframework.beans.factory.annotation.Configurable
 import org.springframework.data.repository.CrudRepository
 import java.io.Serializable
@@ -26,25 +24,18 @@ class Project(
         @EmbeddedId
         var projectKey: ProjectKey = ProjectKey(),
 
-
-        @DisplayList(Artist::class)
         @Display(clasif = DisplayTypeClasif.LIST, type = Artist::class, category = DisplayCategory.VERBOSE)
         @ManyToMany(fetch = FetchType.LAZY, targetEntity = Artist::class)
         var members: List<Artist> = listOf(),
 
-        @DisplayDetail
         @ManyToOne(targetEntity = Manager::class)
         var manager: Manager? = null,
 
-
-        @DisplayDetail
         var theme: String = "",
 
-        @DisplayDetail
         @ManyToOne(targetEntity = Vehicle::class)
         var vehicle: Vehicle? = null,
 
-        @DisplayDetail
         @OneToOne
         var invoice: Invoice? = null
 

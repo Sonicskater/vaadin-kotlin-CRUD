@@ -1,13 +1,9 @@
 package com.cpsc471.tms.data.types
 
 import com.cpsc471.tms.RepoHelper
-import com.cpsc471.tms.data.keys.DBKey
 import org.springframework.data.jpa.repository.Temporal
 import org.springframework.data.repository.CrudRepository
-import org.springframework.data.repository.Repository
 import java.time.LocalDate
-import java.util.*
-
 import javax.persistence.*
 
 @Entity

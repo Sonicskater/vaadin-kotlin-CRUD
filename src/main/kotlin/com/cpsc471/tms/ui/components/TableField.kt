@@ -9,7 +9,7 @@ class TableField<T : DBAbstract>(val classT: Class<T>,  readOnly : Boolean, name
 
     private var dbObjectList : DBObjectList<T> = DBObjectList(classT)
 
-    var dbList : MutableList<T> = mutableListOf()
+    private var dbList : MutableList<T> = mutableListOf()
 
     override fun setPresentationValue(p0: MutableList<T>?) {
         dbList = p0 ?: mutableListOf()

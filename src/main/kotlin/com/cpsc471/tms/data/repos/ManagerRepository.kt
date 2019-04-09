@@ -5,8 +5,4 @@ import org.springframework.data.repository.CrudRepository
 import org.springframework.stereotype.Repository
 
 @Repository
-interface ManagerRepository : CrudRepository<User, String> {
-
-
-
-}
+interface ManagerRepository : CrudRepository<User, String>

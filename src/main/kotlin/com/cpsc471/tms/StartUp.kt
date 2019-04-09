@@ -2,11 +2,9 @@ package com.cpsc471.tms
 
 import com.cpsc471.tms.data.repos.ManagerRepository
 import com.cpsc471.tms.data.types.Manager
-import org.slf4j.Logger
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.ApplicationListener
 import org.springframework.context.event.ContextRefreshedEvent
-import org.springframework.security.core.userdetails.User
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Component
 

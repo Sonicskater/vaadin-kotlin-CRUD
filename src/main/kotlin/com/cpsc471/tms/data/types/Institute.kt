@@ -6,7 +6,6 @@ import com.cpsc471.tms.data.annotations.DisplayCategory
 import com.cpsc471.tms.data.annotations.DisplayTypeClasif
 import com.cpsc471.tms.data.keys.DBKey
 import com.cpsc471.tms.data.keys.InstituteKey
-import com.cpsc471.tms.ui.components.*
 import org.springframework.data.repository.CrudRepository
 import java.io.Serializable
 import javax.persistence.*
@@ -20,37 +19,23 @@ open class Institute(
 
         @EmbeddedId
         @Display(clasif = DisplayTypeClasif.COMPOSITE)
-        @DisplayComposite
-        @EditableComposite
         open var instituteKey: InstituteKey = InstituteKey(),
 
-        @DisplayDetail
-        @Editable
         @Display(category = DisplayCategory.VERBOSE)
     open var country:String = "",
 
-        @DisplayDetail
-        @Editable
         @Display(category = DisplayCategory.VERBOSE)
     open var streetAddress:String = "",
 
-        @DisplayOld
-        @Editable
         @Display
     open var city:String = "",
 
-        @DisplayDetail
-        @Editable
         @Display(category = DisplayCategory.VERBOSE)
     open var province:String = "",
 
-        @DisplayDetail
-        @Editable
         @Display(category = DisplayCategory.VERBOSE)
     open var website:String = "",
 
-        @DisplayList(Contact::class)
-        @EditableList(Contact::class)
         @Display(clasif = DisplayTypeClasif.LIST, type = Contact::class)
     @OneToMany(mappedBy = "contactKey.institute",targetEntity = Contact::class)
     open var contacts: List<Contact> = listOf()

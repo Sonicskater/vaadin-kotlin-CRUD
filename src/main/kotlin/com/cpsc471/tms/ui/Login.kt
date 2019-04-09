@@ -26,7 +26,7 @@ class Login : VerticalLayout() {
         element.appendChild(login.element) //
         login.isForgotPasswordButtonVisible = false
         val i18n = LoginI18n.createDefault()
-        i18n.additionalInformation = "To close the login form submit non-empty username and password"
+        //i18n.additionalInformation = "To close the login form submit non-empty username and password"
         login.setI18n(i18n)
     }
 

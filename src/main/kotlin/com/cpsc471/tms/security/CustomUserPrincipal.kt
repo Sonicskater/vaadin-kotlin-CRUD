@@ -20,7 +20,7 @@ class CustomUserPrincipal(private val user: User) : UserDetails {
     }
 
     override fun getUsername(): String {
-        return user.email
+        return user.userKey.email
     }
 
     override fun isCredentialsNonExpired(): Boolean {

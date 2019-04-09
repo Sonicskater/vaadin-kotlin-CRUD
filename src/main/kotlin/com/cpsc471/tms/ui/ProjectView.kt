@@ -1,8 +1,10 @@
 package com.cpsc471.tms.ui
 
 import com.cpsc471.tms.data.repos.ArtistRepository
+import com.cpsc471.tms.data.repos.ProjectRepository
 import com.cpsc471.tms.data.repos.SchoolRepository
 import com.cpsc471.tms.data.types.Artist
+import com.cpsc471.tms.data.types.Project
 import com.cpsc471.tms.data.types.School
 import com.cpsc471.tms.data.types.User
 import com.cpsc471.tms.ui.components.ArtistListViewer
@@ -22,13 +24,12 @@ import com.vaadin.flow.server.PWA
 import org.jsoup.Connection
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.security.core.userdetails.UserDetails
-@Deprecated("testing class")
-@Route("testing", layout = BaseAppLayout::class)
-class TestingView(@Autowired repo: SchoolRepository) : VerticalLayout() {
+@Route("projects", layout = BaseAppLayout::class)
+class ProjectView(@Autowired repo: ProjectRepository) : VerticalLayout() {
 
 
     init {
-        add(CrudPage(School::class.java,repo))
+        add(CrudPage(Project::class.java,repo))
 
     }
 

@@ -11,4 +11,5 @@ class FundingSource(
         var selfGrants: MutableList<SelfGrant>,
         @OneToMany(targetEntity = SchoolGrantApplication::class, mappedBy = "source")
         var applicationSchools: MutableList<SchoolGrantApplication>
-) : Institute()
+) : Institute() {
+}

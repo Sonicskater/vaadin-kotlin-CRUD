@@ -5,7 +5,7 @@ import com.vaadin.flow.component.button.Button
 import com.vaadin.flow.component.dialog.Dialog
 import com.vaadin.flow.component.grid.Grid
 import com.vaadin.flow.component.icon.VaadinIcon
-
+@Deprecated("")
 class SubDataEditingModal<T : Any>(
         
         classT : Class<T>,

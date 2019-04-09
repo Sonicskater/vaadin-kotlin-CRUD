@@ -1,123 +1,64 @@
 package com.cpsc471.tms.data.types
 
+import com.cpsc471.tms.RepoHelper
 import com.cpsc471.tms.data.DBAbstract
 import com.cpsc471.tms.data.annotations.Display
-import com.cpsc471.tms.ui.components.DisplayOld
+import com.cpsc471.tms.data.annotations.DisplayCategory
+import com.cpsc471.tms.data.annotations.DisplayTypeClasif
+import com.cpsc471.tms.data.keys.DBKey
+import com.cpsc471.tms.data.keys.ProjectKey
 import com.cpsc471.tms.ui.components.DisplayDetail
 import com.cpsc471.tms.ui.components.DisplayList
+import org.springframework.beans.factory.annotation.Configurable
+import org.springframework.data.repository.CrudRepository
 import java.io.Serializable
-import java.sql.Date
 import javax.persistence.*
 
 @Entity
 @Table(name="project")
-//@Check(constraints = "")
+@Configurable(dependencyCheck = true)
 class Project(
-        /**
-        @ManyToMany(targetEntity = DateRecord::class)
-        @JoinTable(name="takes_place",
-                joinColumns = [
-                    JoinColumn(name="ProjectID"),
-                    JoinColumn(name="Sch_country"),
-                    JoinColumn(name="Sch_postal_code"),
-                    JoinColumn(name="Sch_street_address"),
-                    JoinColumn(name="Sch_city"),
-                    JoinColumn(name="Sch_province")],
-                inverseJoinColumns =
-                    [
-                        JoinColumn(name= "Month"),
-                        JoinColumn(name = "Number"),
-                        JoinColumn(name = "Year")
-                    ]
-                )
-        var takes_place: List<DateRecord>,
-        */
 
-        /*
-        @Id
-        @ManyToOne
-        @JoinColumns(
-                JoinColumn(name="Start_number", referencedColumnName="Number"),
-                JoinColumn(name="Start_month", referencedColumnName="Month"),
-                JoinColumn(name="Start_year", referencedColumnName="Year"))
-        var start: DateRecord,
-        @Id
-        @ManyToOne
-        @JoinColumns(
-                JoinColumn(name="End_number", referencedColumnName="Number"),
-                JoinColumn(name="End_month", referencedColumnName="Month"),
-                JoinColumn(name="End_year", referencedColumnName="Year"))
-        var end: DateRecord,
-        */
         @Display
-        var title: String,
-        @Display
-        @Id
-        var start: Date,
-        @Display
-        @Id
-        var end: Date,
+        var title: String = "",
 
-        @DisplayList(School::class)
-        @Id
-        @ManyToOne(fetch = FetchType.LAZY,targetEntity = School::class)
-        /**
-        @JoinColumns(
-            JoinColumn(name="Sch_country", referencedColumnName="Country"),
-            JoinColumn(name="Sch_postal_code", referencedColumnName="Postal_code"),
-                JoinColumn(name="Sch_street_address", referencedColumnName="Street_address"),
-                JoinColumn(name="Sch_city", referencedColumnName="City"),
-                JoinColumn(name="Sch_province", referencedColumnName="Province")
+        @Display(clasif = DisplayTypeClasif.COMPOSITE)
+        @EmbeddedId
+        var projectKey: ProjectKey = ProjectKey(),
 
-        )*/
-        var school : School,
+
         @DisplayList(Artist::class)
+        @Display(clasif = DisplayTypeClasif.LIST, type = Artist::class, category = DisplayCategory.VERBOSE)
         @ManyToMany(fetch = FetchType.LAZY, targetEntity = Artist::class)
-        /**
-        @JoinTable(name = "part_of",
-                joinColumns = [
-                    /*
-                    JoinColumn(name="Start_number"),
-                    JoinColumn(name="Start_month"),
-                    JoinColumn(name="Start_year"),
-                    JoinColumn(name="End_number"),
-                    JoinColumn(name="End_month"),
-                    JoinColumn(name="End_year"),
-                    */
-                    JoinColumn(name = "start"),
-                    JoinColumn(name = "end"),
-                    JoinColumn(name="Sch_country"),
-                    JoinColumn(name="Sch_postal_code"),
-                    JoinColumn(name="Sch_street_address"),
-                    JoinColumn(name="Sch_city"),
-                    JoinColumn(name="Sch_province")
-                ],
-                inverseJoinColumns = [
-                    JoinColumn(name = "Art_email")
-                ]
-        )
-        */
-        var members: List<Artist>,
+        var members: List<Artist> = listOf(),
 
         @DisplayDetail
         @ManyToOne(targetEntity = Manager::class)
-        var manager: Manager,
+        var manager: Manager? = null,
 
 
         @DisplayDetail
-        var theme: String,
+        var theme: String = "",
 
         @DisplayDetail
         @ManyToOne(targetEntity = Vehicle::class)
-        var vehicle: Vehicle?,
+        var vehicle: Vehicle? = null,
 
         @DisplayDetail
         @OneToOne
-        var invoice: Invoice
+        var invoice: Invoice? = null
 
 ) : Serializable, DBAbstract() {
-    override fun IDforDb(): List<Any> {
-        return listOf(start,end,school)
+    override fun getKeyType(): Class<out DBKey> {
+        return ProjectKey::class.java
+    }
+
+    override fun <T, ID> getRepo(classT: Class<T>, classID: Class<ID>): CrudRepository<T, ID> {
+        return RepoHelper.projectRepository as CrudRepository<T, ID>
+    }
+
+    override fun iDforDb(): List<Any> {
+        return listOf(projectKey)
     }
 
 }

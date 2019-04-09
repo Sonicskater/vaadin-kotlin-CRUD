@@ -15,7 +15,7 @@ class ArtistListViewer(private val repo : ArtistRepository,
 
     init {
         grid.setSelectionMode(selectionMode)
-        grid.addColumn(Artist::email).setHeader("Email")
+        //grid.addColumn(Artist::userKey::ema).setHeader("Email")
         grid.addColumn{
             it.firstName+" "+it.lastName
         }.setHeader("Name")

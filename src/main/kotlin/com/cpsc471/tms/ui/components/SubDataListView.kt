@@ -3,7 +3,7 @@ package com.cpsc471.tms.ui.components
 import com.vaadin.flow.component.grid.Grid
 import com.vaadin.flow.component.orderedlayout.VerticalLayout
 import java.lang.reflect.Field
-
+@Deprecated("")
 class SubDataListView<T : Any>(selectionMode: Grid.SelectionMode,
                                   private val classT: Class<T>,
                                   private var selectionListener: (it : T) -> Unit = {}) : VerticalLayout(){

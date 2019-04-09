@@ -1,6 +1,8 @@
 package com.cpsc471.tms.data.types
 
 import com.cpsc471.tms.data.DBAbstract
+import com.cpsc471.tms.data.keys.DBKey
+import org.springframework.data.repository.CrudRepository
 import javax.persistence.*
 
 @Entity
@@ -18,7 +20,15 @@ class Vehicle(
     var notes: MutableList<String>
 
 ): DBAbstract(){
-    override fun IDforDb(): List<Any> {
+    override fun getKeyType(): Class<out DBKey> {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun <T, ID> getRepo(classT: Class<T>, classID: Class<ID>): CrudRepository<T, ID> {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun iDforDb(): List<Any> {
         return listOf(license_plate)
     }
 

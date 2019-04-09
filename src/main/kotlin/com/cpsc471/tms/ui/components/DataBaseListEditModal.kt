@@ -7,7 +7,7 @@ import com.vaadin.flow.component.button.ButtonVariant
 import com.vaadin.flow.component.dialog.Dialog
 import com.vaadin.flow.component.icon.VaadinIcon
 import org.springframework.data.repository.CrudRepository
-
+@Deprecated("")
 class DataBaseListEditModal<T : Any, V>(
 
         classT: Class<T>,

@@ -4,7 +4,7 @@ import com.vaadin.flow.component.grid.Grid
 import com.vaadin.flow.component.orderedlayout.VerticalLayout
 import org.springframework.data.repository.CrudRepository
 import java.lang.reflect.Field
-
+@Deprecated("")
 class DataBaseListView<T : Any, V>(private val repo: CrudRepository<T, V>,
                                    selectionMode: Grid.SelectionMode,
                                    private val classT: Class<T>,

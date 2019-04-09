@@ -14,6 +14,7 @@ import com.vaadin.flow.data.value.ValueChangeMode
 import org.springframework.data.repository.CrudRepository
 import java.lang.reflect.Field
 
+@Deprecated("")
 class DataBaseObjectView<T : Any, V>(
         private val classT: Class<T>,
         private val mode: ObjectViewModes,

@@ -37,11 +37,12 @@ class DBObjectList< T: DBAbstract>(
                         super.addColumn(prefix + field.name)
                     }
                     DisplayTypeClasif.OBJECT -> {
-                        TODO()
+                        generateReflectedFields(field.type.superclass.declaredFields,prefix + field.name+".")
+                        generateReflectedFields(field.type.declaredFields, prefix + field.name+".")
                     }
 
                     DisplayTypeClasif.COMPOSITE -> {
-                        generateReflectedFields(field.type.declaredFields, field.name+".")
+                        generateReflectedFields(field.type.declaredFields, prefix + field.name+".")
                     }
                     DisplayTypeClasif.LIST -> {
                     }

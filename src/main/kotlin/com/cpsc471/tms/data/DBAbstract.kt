@@ -1,13 +1,10 @@
 package com.cpsc471.tms.data
 
-
-abstract class DBAbstract {
-
-    companion object {
-        private val serialVersionUID = -5554308939380869754L
+import com.cpsc471.tms.data.keys.DBKey
+import org.springframework.data.repository.CrudRepository
 
 
-    }
+abstract class DBAbstract : IDBValue{
 
     override fun hashCode(): Int {
         return 31
@@ -18,15 +15,18 @@ abstract class DBAbstract {
             return false
         }
         else{
-            val vSet = other.IDforDb()
+            val vSet = other.iDforDb()
             if (this::class == other::class){
-                return vSet == this.IDforDb()
+                return vSet == this.iDforDb()
             } else{
                 return false
             }
         }
     }
-    abstract fun IDforDb() : List<*>
+
+    abstract fun <T,ID>getRepo( classT : Class<T>, classID : Class<ID>) : CrudRepository<T, ID>
+
+    abstract fun getKeyType() : Class<out DBKey>
 
 
 }

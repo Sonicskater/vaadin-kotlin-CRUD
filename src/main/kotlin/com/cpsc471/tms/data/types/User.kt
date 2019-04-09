@@ -1,6 +1,10 @@
 package com.cpsc471.tms.data.types
 import com.cpsc471.tms.data.DBAbstract
+import com.cpsc471.tms.data.annotations.Display
+import com.cpsc471.tms.data.keys.DBKey
+import com.cpsc471.tms.data.keys.UserKey
 import com.cpsc471.tms.ui.components.DisplayOld
+import org.springframework.data.repository.CrudRepository
 import java.io.Serializable
 import javax.persistence.*
 
@@ -11,11 +15,13 @@ import javax.persistence.*
 @DiscriminatorValue("0")
 open class User(
         @DisplayOld
+        @Display
         open var firstName: String = "",
         @DisplayOld
+        @Display
         open var lastName: String = "",
-        @DisplayOld
-        @Id var email: String = "",
+        @EmbeddedId
+        var userKey: UserKey = UserKey(),
         @DisplayOld
         open var country: String = "",
         open var province: String = "",
@@ -47,8 +53,15 @@ open class User(
 
 
 ) : DBAbstract(), Serializable {
+    override fun <T, ID> getRepo(classT: Class<T>, classID: Class<ID>): CrudRepository<T, ID> {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 
-    override fun IDforDb(): List<Any> {
-        return(listOf(email))
+    override fun getKeyType(): Class<out DBKey> {
+        return userKey::class.java
+    }
+
+    override fun iDforDb(): List<Any> {
+        return(listOf(userKey))
     }
 }

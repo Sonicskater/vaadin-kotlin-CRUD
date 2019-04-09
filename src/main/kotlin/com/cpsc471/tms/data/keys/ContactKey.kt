@@ -1,6 +1,9 @@
 package com.cpsc471.tms.data.keys
 
 import com.cpsc471.tms.data.DBAbstract
+import com.cpsc471.tms.data.annotations.Display
+import com.cpsc471.tms.data.annotations.DisplayEditLevel
+import com.cpsc471.tms.data.annotations.DisplayTypeClasif
 import com.cpsc471.tms.data.types.Institute
 import com.cpsc471.tms.ui.components.DisplayOld
 import com.cpsc471.tms.ui.components.Editable
@@ -13,14 +16,16 @@ import javax.persistence.ManyToOne
 class ContactKey(
         @DisplayOld
         @Editable(true)
+        @Display(clasif = DisplayTypeClasif.OBJECT, editLevel = DisplayEditLevel.CREATABLE)
         @ManyToOne(fetch = FetchType.LAZY, targetEntity = Institute::class)
         var institute: Institute,
 
         @DisplayOld
         @Editable(true)
+        @Display(editLevel = DisplayEditLevel.CREATABLE)
         var email: String
-        ) : Serializable, DBAbstract() {
-    override fun IDforDb(): List<Any> {
+        ) : Serializable, DBKey() {
+    override fun iDforDb(): List<Any> {
         return listOf(institute, email)
     }
 }

@@ -1,6 +1,7 @@
 package com.cpsc471.tms;
 
 import com.cpsc471.tms.data.repos.ArtistRepository;
+import com.cpsc471.tms.data.repos.ProjectRepository;
 import com.cpsc471.tms.data.repos.SchoolRepository;
 import com.cpsc471.tms.data.types.Artist;
 import com.cpsc471.tms.data.types.School;
@@ -23,14 +24,17 @@ public class Application extends SpringBootServletInitializer {
     }
 
     @Bean
-    public CommandLineRunner loadData(ArtistRepository repo, SchoolRepository repo2){
+    public CommandLineRunner loadData(
+            ArtistRepository artistRepository,
+            SchoolRepository schoolRepository,
+            ProjectRepository projectRepository){
         return (args -> {
             Artist n = new Artist(Collections.emptyList(),Collections.emptySet(),Collections.emptyList());
-            n.setEmail("devon@hockley.ca");
+            n.getUserKey().setEmail("devon@hockley.ca");
             n.setFirstName("Devon");
             n.setLastName("Hockley");
             n.setPostalCode("T2K0P1");
-            repo.save(n);
+            artistRepository.save(n);
 
             School s = new School();
 
@@ -38,10 +42,15 @@ public class Application extends SpringBootServletInitializer {
             s.setGradeMin(7);
             s.getInstituteKey().setPostalCode("T3L 2E6");
             s.getInstituteKey().setName("St Jean Brebeuf");
-            repo2.save(s);
+            schoolRepository.save(s);
+
+            RepoHelper.artistRepository = artistRepository;
+            RepoHelper.schoolRepository = schoolRepository;
+            RepoHelper.projectRepository = projectRepository;
 
         });
     }
+
 
 }
 

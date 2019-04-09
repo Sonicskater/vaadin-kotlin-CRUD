@@ -6,7 +6,7 @@ import com.vaadin.flow.component.dialog.Dialog
 import com.vaadin.flow.component.grid.Grid
 import com.vaadin.flow.component.icon.VaadinIcon
 import org.springframework.data.repository.CrudRepository
-
+@Deprecated("")
 class SubDataSelectionModal<T : Any, V>(
 
         classT : Class<T>,

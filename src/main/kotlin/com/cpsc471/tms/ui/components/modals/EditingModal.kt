@@ -1,4 +1,4 @@
-package com.cpsc471.tms.ui.modals
+package com.cpsc471.tms.ui.components.modals
 
 import com.cpsc471.tms.data.DBAbstract
 import com.cpsc471.tms.ui.components.DBObjectForm

@@ -19,7 +19,7 @@ constructor(private val repo: ManagerRepository) : ApplicationListener<ContextRe
 
         val encoder = BCryptPasswordEncoder(11)
         val manager = Manager()
-        manager.email = "admin"
+        manager.userKey.email = "admin"
         manager.password = encoder.encode("password")
         manager.firstName = "ADMIN"
         manager.lastName = "ACCOUNT"

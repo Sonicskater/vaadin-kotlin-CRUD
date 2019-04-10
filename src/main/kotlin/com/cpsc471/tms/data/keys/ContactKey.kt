@@ -14,10 +14,10 @@ class ContactKey(
 
         @Display(clasif = DisplayTypeClasif.OBJECT, editLevel = DisplayEditLevel.CREATABLE)
         @ManyToOne(fetch = FetchType.LAZY, targetEntity = Institute::class)
-        var institute: Institute,
+        var institute: Institute = Institute(),
 
         @Display(editLevel = DisplayEditLevel.CREATABLE)
-        var email: String
+        var email: String = ""
         ) : Serializable, DBKey() {
     override fun iDforDb(): List<Any> {
         return listOf(institute, email)

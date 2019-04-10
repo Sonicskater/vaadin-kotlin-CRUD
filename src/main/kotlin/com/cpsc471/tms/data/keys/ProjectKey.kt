@@ -5,20 +5,19 @@ import com.cpsc471.tms.data.annotations.DisplayCategory
 import com.cpsc471.tms.data.annotations.DisplayEditLevel
 import com.cpsc471.tms.data.annotations.DisplayTypeClasif
 import com.cpsc471.tms.data.types.School
-import org.springframework.data.jpa.repository.Temporal
 import java.time.LocalDate
-import javax.persistence.*
+import javax.persistence.Embeddable
+import javax.persistence.FetchType
+import javax.persistence.ManyToOne
 
 @Embeddable
 class ProjectKey(
 
 
         @Display(editLevel = DisplayEditLevel.CREATABLE, category = DisplayCategory.NORMAL)
-        @Temporal(TemporalType.DATE)
         var start: LocalDate = LocalDate.of(1900,1,1),
 
         @Display(editLevel = DisplayEditLevel.CREATABLE)
-        @Temporal(TemporalType.DATE)
         var end: LocalDate = LocalDate.of(1900,1,1),
 
         @Display(editLevel = DisplayEditLevel.CREATABLE, type = School::class, clasif = DisplayTypeClasif.OBJECT)

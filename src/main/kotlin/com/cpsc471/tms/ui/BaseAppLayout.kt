@@ -31,7 +31,7 @@ class BaseAppLayout : AppLayoutRouterLayout() {
             notifications.addNotification(DefaultNotification("TEST NOTIFICATION $i", "asdfgasdfasdfasdfasdgaeibaivbluivufuahdu"))
         }
 
-        val menuElement = LeftNavigationItem("",VaadinIcon.MENU.create(), TestingView::class.java )
+        val menuElement = LeftNavigationItem("",VaadinIcon.MENU.create(), SchoolView::class.java )
         badge.bind(menuElement.badge)
         init(AppLayoutBuilder
                 .get(Behaviour.LEFT_RESPONSIVE_HYBRID)
@@ -49,31 +49,32 @@ class BaseAppLayout : AppLayoutRouterLayout() {
                         .addToSection(LeftClickableItem("CLICKABLE 1",
                                 VaadinIcon.CALC.create()
                         ) {},Section.HEADER)
-                        .add(LeftNavigationItem("Schools", VaadinIcon.HOME.create(), TestingView::class.java))
+                        .add(LeftNavigationItem("Schools", VaadinIcon.HOME.create(), SchoolView::class.java))
                         .add(LeftNavigationItem("Projects", VaadinIcon.GROUP.create(), ProjectView::class.java))
-                        .add(LeftNavigationItem("Grid", VaadinIcon.TABLE.create(), TestingView::class.java))
+                        .add(LeftNavigationItem("Vehicles", VaadinIcon.CAR
+                                .create(), VehicleView::class.java))
                         .add(LeftSubMenuBuilder
                                 .get("My Submenu", VaadinIcon.PLUS.create())
                                 .add(LeftSubMenuBuilder
                                         .get("My Submenu", VaadinIcon.PLUS.create())
                                         .add(LeftNavigationItem("Charts",
                                                 VaadinIcon.SPLINE_CHART.create(),
-                                                TestingView::class.java
+                                                SchoolView::class.java
                                                 ))
                                         .add(LeftNavigationItem("Contact",
                                                 VaadinIcon.CONNECT.create(),
-                                                TestingView::class.java
+                                                SchoolView::class.java
                                                 ))
                                         .add(LeftNavigationItem("More",
                                                 VaadinIcon.COG.create(),
-                                                TestingView::class.java
+                                                SchoolView::class.java
                                                 ))
                                         .build())
                                 .add(LeftNavigationItem("Contact1",
                                         VaadinIcon.CONNECT.create(),
-                                        TestingView::class.java
+                                        SchoolView::class.java
                                         ))
-                                .add(LeftNavigationItem("More1", VaadinIcon.COG.create(), TestingView::class.java))
+                                .add(LeftNavigationItem("More1", VaadinIcon.COG.create(), SchoolView::class.java))
                                 .build())
                         .add(menuElement)
                         .addToSection(LeftClickableItem("Clickable Entry",

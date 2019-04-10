@@ -8,7 +8,11 @@ import javax.persistence.OneToMany
 @DiscriminatorValue("2")
 class FundingSource(
         @OneToMany(targetEntity = SelfGrant::class,mappedBy = "source")
-        var selfGrants: MutableList<SelfGrant>,
+        var selfGrants: MutableList<SelfGrant> = mutableListOf(),
         @OneToMany(targetEntity = SchoolGrantApplication::class, mappedBy = "source")
-        var applicationSchools: MutableList<SchoolGrantApplication>
-) : Institute()
+        var applicationSchools: MutableList<SchoolGrantApplication> = mutableListOf()
+) : Institute() {
+        override fun delete() {
+                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        }
+}

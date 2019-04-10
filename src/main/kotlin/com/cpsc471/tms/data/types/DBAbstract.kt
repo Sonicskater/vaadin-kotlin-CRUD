@@ -1,10 +1,12 @@
-package com.cpsc471.tms.data
+package com.cpsc471.tms.data.types
 
+import com.cpsc471.tms.data.IDBValue
 import com.cpsc471.tms.data.keys.DBKey
+import com.vaadin.flow.data.binder.Validator
 import org.springframework.data.repository.CrudRepository
 
 
-abstract class DBAbstract : IDBValue{
+abstract class DBAbstract : IDBValue {
 
     override fun hashCode(): Int {
         return 31
@@ -17,7 +19,7 @@ abstract class DBAbstract : IDBValue{
         else{
             val vSet = other.iDforDb()
             if (this::class == other::class){
-                vSet == this.iDforDb()
+                vSet == (this.iDforDb())
             } else{
                 false
             }
@@ -27,6 +29,9 @@ abstract class DBAbstract : IDBValue{
     abstract fun <T,ID>getRepo( classT : Class<T>, classID : Class<ID>) : CrudRepository<T, ID>
 
     abstract fun getKeyType() : Class<out DBKey>
+
+    abstract fun <T>getValidator(clazz: Class<T>, creation : Boolean) : Validator<in T>?
+    abstract fun delete()
 
 
 }

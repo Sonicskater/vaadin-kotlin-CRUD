@@ -1,9 +1,8 @@
 package com.cpsc471.tms;
 
-import com.cpsc471.tms.data.repos.ArtistRepository;
-import com.cpsc471.tms.data.repos.ProjectRepository;
-import com.cpsc471.tms.data.repos.SchoolRepository;
+import com.cpsc471.tms.data.repos.*;
 import com.cpsc471.tms.data.types.Artist;
+import com.cpsc471.tms.data.types.Project;
 import com.cpsc471.tms.data.types.School;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -11,6 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 
+import java.time.LocalDate;
 import java.util.Collections;
 
 /**
@@ -27,7 +27,9 @@ public class Application extends SpringBootServletInitializer {
     public CommandLineRunner loadData(
             ArtistRepository artistRepository,
             SchoolRepository schoolRepository,
-            ProjectRepository projectRepository){
+            ProjectRepository projectRepository,
+            InstituteRepository instituteRepository,
+            VehicleRepository vehiclieRepository){
         return (args -> {
             Artist n = new Artist(Collections.emptyList(),Collections.emptySet(),Collections.emptyList());
             n.getUserKey().setEmail("devon@hockley.ca");
@@ -44,9 +46,17 @@ public class Application extends SpringBootServletInitializer {
             s.getInstituteKey().setName("St Jean Brebeuf");
             schoolRepository.save(s);
 
+            System.out.println(LocalDate.of(1900, 1, 1).equals(LocalDate.of(1900, 1, 1)));
+            System.out.println(LocalDate.of(1900, 1, 1)==(LocalDate.of(1900, 1, 1)));
+
+            System.out.println(new Project().equals(new Project()));
+            System.out.println(new Project() == (new Project()));
+
             RepoHelper.artistRepository = artistRepository;
             RepoHelper.schoolRepository = schoolRepository;
             RepoHelper.projectRepository = projectRepository;
+            RepoHelper.instituteRepository = instituteRepository;
+            RepoHelper.vehicleRepositry = vehiclieRepository;
 
         });
     }

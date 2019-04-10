@@ -1,18 +1,21 @@
 package com.cpsc471.tms.ui.components
 
-import com.cpsc471.tms.data.DBAbstract
 import com.cpsc471.tms.data.annotations.Display
 import com.cpsc471.tms.data.annotations.DisplayCategory
 import com.cpsc471.tms.data.annotations.DisplayEditLevel
 import com.cpsc471.tms.data.annotations.DisplayTypeClasif
-import com.helger.commons.exception.InitializationException
+import com.cpsc471.tms.data.types.DBAbstract
 import com.vaadin.flow.component.datepicker.DatePicker
 import com.vaadin.flow.component.formlayout.FormLayout
+import com.vaadin.flow.component.html.Label
 import com.vaadin.flow.component.orderedlayout.VerticalLayout
 import com.vaadin.flow.component.textfield.TextField
 import com.vaadin.flow.data.binder.Binder
+import com.vaadin.flow.data.binder.ValidationException
+import com.vaadin.flow.data.binder.ValidationResult
 import com.vaadin.flow.data.converter.StringToIntegerConverter
 import com.vaadin.flow.data.value.ValueChangeMode
+import org.springframework.dao.DataIntegrityViolationException
 import java.lang.reflect.Field
 import java.time.LocalDate
 
@@ -26,13 +29,19 @@ class DBObjectForm<T : DBAbstract>(
     private val formLayout : FormLayout = FormLayout()
     private var binder : Binder<T> = Binder(classT)
 
-    private lateinit var item: T
+    private var item: T = classT.newInstance()
 
     private val verticalLayout = VerticalLayout()
 
+    private var label = Label()
     init {
+
         add(formLayout)
         add(verticalLayout)
+        verticalLayout.add(label)
+        binder.withValidator(classT.newInstance().getValidator(classT,creatable))
+        binder.setStatusLabel(label)
+
     }
 
 
@@ -41,10 +50,23 @@ class DBObjectForm<T : DBAbstract>(
         return this
     }
     fun save(){
-        binder.writeBean(item)
+
+        try {
+            binder.writeBean(item)
+        }catch( e : ValidationException){
+            try {
+                item.delete()
+            }catch (e2 : DataIntegrityViolationException){
+
+            }
+            for (em: ValidationResult in e.validationErrors ){
+                println(em.errorMessage)
+            }
+        }
+
     }
 
-    fun getObject() : T{
+    fun getObject() : T?{
         return item
     }
 
@@ -54,14 +76,15 @@ class DBObjectForm<T : DBAbstract>(
 
 
     fun render() {
-        if(::item.isInitialized){
+        if(item != null){
             formLayout.removeAll()
             verticalLayout.removeAll()
             generateReflectedFields(classT.superclass.declaredFields)
             generateReflectedFields(classT.declaredFields)
             binder.readBean(item)
         }else{
-            throw InitializationException("No item to render")
+            verticalLayout.removeAll()
+            verticalLayout.add("No ${classT.simpleName} selected")
         }
     }
 

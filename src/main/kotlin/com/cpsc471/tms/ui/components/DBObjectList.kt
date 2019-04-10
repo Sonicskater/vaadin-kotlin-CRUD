@@ -1,8 +1,8 @@
 package com.cpsc471.tms.ui.components
 
-import com.cpsc471.tms.data.DBAbstract
 import com.cpsc471.tms.data.annotations.Display
 import com.cpsc471.tms.data.annotations.DisplayTypeClasif
+import com.cpsc471.tms.data.types.DBAbstract
 import com.vaadin.flow.component.grid.Grid
 import java.lang.reflect.Field
 
@@ -13,7 +13,13 @@ class DBObjectList< T: DBAbstract>(
         super.setSelectionMode(SelectionMode.SINGLE)
     }
     override fun setItems(list : Collection<T>){
-        super.setItems(list)
+        if (list is MutableList)
+        {
+            val list2 = list.filter {
+                it != classT.newInstance()
+            }
+            super.setItems(list2)
+        }
         render()
     }
 
@@ -34,7 +40,7 @@ class DBObjectList< T: DBAbstract>(
                 when(annotation.clasif){
 
                     DisplayTypeClasif.PRIMITIVE ->{
-                        super.addColumn(prefix + field.name)
+                        addColumn(prefix + field.name)
                     }
                     DisplayTypeClasif.OBJECT -> {
                         generateReflectedFields(field.type.superclass.declaredFields,prefix + field.name+".")

@@ -1,11 +1,11 @@
 package com.cpsc471.tms.ui.components
 
-import com.cpsc471.tms.data.DBAbstract
+import com.cpsc471.tms.data.types.DBAbstract
 import com.vaadin.flow.component.customfield.CustomField
 import com.vaadin.flow.component.orderedlayout.VerticalLayout
 
 
-class TableField<T : DBAbstract>(val classT: Class<T>,  readOnly : Boolean, name: String, root: VerticalLayout) : CustomField<MutableList<T>>() {
+class TableField<T : DBAbstract>(val classT: Class<T>, readOnly : Boolean, name: String, root: VerticalLayout) : CustomField<MutableList<T>>() {
 
     private var dbObjectList : DBObjectList<T> = DBObjectList(classT)
 

@@ -1,7 +1,7 @@
 package com.cpsc471.tms.data.types
 
 import com.cpsc471.tms.RepoHelper
-import org.springframework.data.jpa.repository.Temporal
+import com.vaadin.flow.data.binder.Validator
 import org.springframework.data.repository.CrudRepository
 import java.time.LocalDate
 import javax.persistence.*
@@ -14,13 +14,20 @@ class Artist(
 
         @Basic
         @ElementCollection
-        @Temporal(TemporalType.DATE)
         var availableDays: MutableSet<LocalDate> = mutableSetOf(),
 
         @Basic
         @ElementCollection
         var notes: MutableList<String> = mutableListOf()
 ) : User() {
+        override fun delete() {
+                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        }
+
+        override fun <T> getValidator(clazz: Class<T>, creation: Boolean): Validator<in T>? {
+                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        }
+
         override fun <T, ID> getRepo(classT: Class<T>, classID: Class<ID>): CrudRepository<T, ID> {
                 return RepoHelper.artistRepository as CrudRepository<T, ID>
         }

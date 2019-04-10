@@ -15,4 +15,5 @@ abstract class DBKey : Serializable, IDBValue{
     override fun hashCode(): Int {
         return 32
     }
+
 }

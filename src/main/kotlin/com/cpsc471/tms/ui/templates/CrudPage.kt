@@ -1,6 +1,6 @@
 package com.cpsc471.tms.ui.templates
 
-import com.cpsc471.tms.data.DBAbstract
+import com.cpsc471.tms.data.types.DBAbstract
 import com.cpsc471.tms.ui.components.DBObjectForm
 import com.cpsc471.tms.ui.components.DBObjectList
 import com.cpsc471.tms.ui.components.modals.EditingModal

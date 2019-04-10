@@ -1,13 +1,13 @@
 package com.cpsc471.tms.ui.components
 
-import com.cpsc471.tms.data.DBAbstract
+import com.cpsc471.tms.data.types.DBAbstract
 import com.vaadin.flow.component.customfield.CustomField
 import com.vaadin.flow.component.orderedlayout.VerticalLayout
 
 
-class ObjectField<T : DBAbstract>(classT: Class<T>, initial: T?, root : VerticalLayout,readOnly : Boolean = true) : CustomField<T>(){
+class ObjectField<T : DBAbstract>(val classT: Class<T>, initial: T?, root : VerticalLayout, readOnly : Boolean = true) : CustomField<T>(){
 
-    private var backingField : T = initial ?: classT.newInstance()
+    private var backingField : T = initial?:classT.newInstance()
 
     private var dbObjectForm : DBObjectForm<T> = DBObjectForm(classT, editable = false, creatable = false, verbose = false)
 
@@ -22,12 +22,12 @@ class ObjectField<T : DBAbstract>(classT: Class<T>, initial: T?, root : Vertical
         update()
     }
 
-    override fun generateModelValue(): T {
-        return backingField
+    override fun generateModelValue(): T? {
+        return backingField?: classT.newInstance()
     }
 
-    override fun getValue(): T {
-        return backingField
+    override fun getValue(): T? {
+        return backingField?: classT.newInstance()
     }
 
 

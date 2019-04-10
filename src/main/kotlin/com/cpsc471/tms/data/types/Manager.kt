@@ -13,6 +13,10 @@ class Manager(
         @OneToMany(targetEntity = Project::class, mappedBy = "manager")
         var manages: List<Project> = mutableListOf()
 ): User(), Serializable {
+        override fun delete() {
+                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        }
+
         override fun <T, ID> getRepo(classT: Class<T>, classID: Class<ID>): CrudRepository<T, ID> {
                 TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
         }

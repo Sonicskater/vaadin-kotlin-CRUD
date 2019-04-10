@@ -1,11 +1,13 @@
 package com.cpsc471.tms.data.types
 
-import com.cpsc471.tms.data.DBAbstract
+import com.cpsc471.tms.RepoHelper
 import com.cpsc471.tms.data.annotations.Display
 import com.cpsc471.tms.data.annotations.DisplayCategory
 import com.cpsc471.tms.data.annotations.DisplayTypeClasif
 import com.cpsc471.tms.data.keys.DBKey
 import com.cpsc471.tms.data.keys.InstituteKey
+import com.vaadin.flow.data.binder.ValidationResult
+import com.vaadin.flow.data.binder.Validator
 import org.springframework.data.repository.CrudRepository
 import java.io.Serializable
 import javax.persistence.*
@@ -41,6 +43,22 @@ open class Institute(
     open var contacts: List<Contact> = listOf()
 
 ): DBAbstract(), Serializable{
+    override fun delete() {
+        RepoHelper.instituteRepository.deleteById(instituteKey)
+    }
+
+    override fun <T> getValidator(clazz: Class<T>, creation: Boolean): Validator<in T>? {
+        return Validator { inst, context ->
+
+            if (RepoHelper.schoolRepository.existsById((inst as Institute).instituteKey) || RepoHelper.instituteRepository.existsById((inst as Institute).instituteKey)) {
+                ValidationResult.error("School already exists!")
+            }else{
+                ValidationResult.ok()
+            }
+
+        }
+    }
+
     override fun <T, ID> getRepo(classT: Class<T>, classID: Class<ID>): CrudRepository<T, ID> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }

@@ -1,6 +1,6 @@
 package com.cpsc471.tms.data.annotations
 
-import com.cpsc471.tms.data.DBAbstract
+import com.cpsc471.tms.data.types.DBAbstract
 import kotlin.reflect.KClass
 
 @Target(AnnotationTarget.FIELD,AnnotationTarget.FIELD)

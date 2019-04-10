@@ -1,9 +1,6 @@
 package com.cpsc471.tms
 
-import com.cpsc471.tms.data.repos.ArtistRepository
-import com.cpsc471.tms.data.repos.ManagerRepository
-import com.cpsc471.tms.data.repos.ProjectRepository
-import com.cpsc471.tms.data.repos.SchoolRepository
+import com.cpsc471.tms.data.repos.*
 
 object RepoHelper{
 
@@ -14,4 +11,10 @@ object RepoHelper{
     lateinit var artistRepository: ArtistRepository
 
     lateinit var managerRepository: ManagerRepository
+
+    lateinit var contactRepository: ContactRepository
+
+    lateinit var instituteRepository: InstituteRepository
+
+    lateinit var vehicleRepositry: VehicleRepository
 }

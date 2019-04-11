@@ -1,6 +1,8 @@
 package com.cpsc471.tms.data.repository.users
 
-import com.cpsc471.tms.data.repository.DBKey
+import com.cpsc471.tms.RepoHelper
+import com.cpsc471.tms.data.annotations.Display
+import com.cpsc471.tms.data.annotations.DisplayTypeClasif
 import com.cpsc471.tms.data.repository.projects.Project
 import org.springframework.data.repository.CrudRepository
 import java.io.Serializable
@@ -10,20 +12,18 @@ import javax.persistence.OneToMany
 
 @Entity
 @DiscriminatorValue("2")
-class Manager(
+class Manager: User(), Serializable {
+        @Display(DisplayTypeClasif.LIST, type = Project::class)
         @OneToMany(targetEntity = Project::class, mappedBy = "manager")
         var manages: MutableList<Project> = mutableListOf()
-): User(), Serializable {
+
         override fun delete() {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                RepoHelper.managerRepository.deleteById(this.userKey)
         }
 
         override fun <T, ID> repo(classT: Class<T>, classID: Class<ID>): CrudRepository<T, ID> {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                return RepoHelper.managerRepository as CrudRepository<T, ID>
         }
 
-        override fun keyType(): Class<out DBKey> {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-        }
 
 }

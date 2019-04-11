@@ -13,12 +13,14 @@ import javax.persistence.ManyToOne
 @Embeddable
 class ContactKey: Serializable, DBKey() {
 
-    @Display(clasif = DisplayTypeClasif.OBJECT, editLevel = DisplayEditLevel.CREATABLE)
-    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Institute::class)
-    var institute: Institute? = null
+
 
     @Display(editLevel = DisplayEditLevel.CREATABLE)
     var email: String? = null
+
+    @Display(clasif = DisplayTypeClasif.OBJECT, editLevel = DisplayEditLevel.CREATABLE, type = Institute::class)
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Institute::class)
+    var institute: Institute? = null
 
     override fun iDforDb(): List<Any?> {
         return listOf(institute, email)

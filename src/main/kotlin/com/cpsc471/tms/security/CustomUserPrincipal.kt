@@ -28,7 +28,7 @@ class CustomUserPrincipal(private val user: User) : UserDetails {
     }
 
     override fun getPassword(): String {
-        return user.password
+        return user.password?: ""
     }
 
     override fun isAccountNonExpired(): Boolean {

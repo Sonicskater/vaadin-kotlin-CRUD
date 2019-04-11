@@ -1,5 +1,6 @@
 package com.cpsc471.tms.ui
 
+import com.vaadin.flow.component.AttachEvent
 import com.vaadin.flow.component.Tag
 import com.vaadin.flow.component.login.LoginI18n
 import com.vaadin.flow.component.login.LoginOverlay
@@ -29,5 +30,15 @@ class Login : VerticalLayout() {
 
     companion object {
         const val ROUTE = "login"
+    }
+
+    override fun onAttach(attachEvent: AttachEvent) {
+        super.onAttach(attachEvent)
+        /**
+         * Using the @Theme Annotation to set the Dark Theme causes issues with shadows which will appear in
+         * the wrong color making them seemingly invisible. Instead do it the following way as long as the issue is not
+         * solved (https://github.com/vaadin/flow/issues/4765)
+         */
+        ui.get().page.executeJavaScript("document.documentElement.setAttribute(\"theme\",\"dark\")")
     }
 }

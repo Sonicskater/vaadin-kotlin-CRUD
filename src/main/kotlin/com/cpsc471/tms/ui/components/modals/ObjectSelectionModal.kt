@@ -9,8 +9,8 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout
 
 class ObjectSelectionModal<T : DBAbstract>(
         classT:  Class<T>,
-        dbObject: T,
-        callback: (T) -> Unit
+        dbObject: T?,
+        callback: (T?) -> Unit
 ) : Dialog() {
 
 
@@ -21,7 +21,7 @@ class ObjectSelectionModal<T : DBAbstract>(
         add(verticalLayout)
         verticalLayout.add(dbObjectList)
         verticalLayout.add(Button("Confirm",VaadinIcon.CHECK_CIRCLE.create()){
-            callback(dbObjectList.selected()?: dbObject)
+            callback(dbObjectList.selected())
             close()
         })
         val repository = classT.newInstance().repo(classT,classT.newInstance().keyType())

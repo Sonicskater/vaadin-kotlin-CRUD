@@ -4,11 +4,11 @@ import com.cpsc471.tms.RepoHelper
 import com.cpsc471.tms.data.annotations.Display
 import com.cpsc471.tms.data.annotations.DisplayCategory
 import com.cpsc471.tms.data.annotations.DisplayTypeClasif
+import com.cpsc471.tms.data.repository.DBAbstract
 import com.cpsc471.tms.data.repository.DBKey
 import com.cpsc471.tms.data.repository.invoices.Invoice
 import com.cpsc471.tms.data.repository.users.Artist
 import com.cpsc471.tms.data.repository.users.Manager
-import com.cpsc471.tms.data.repository.DBAbstract
 import com.cpsc471.tms.data.repository.vehicles.Vehicle
 import com.vaadin.flow.data.binder.ValidationResult
 import com.vaadin.flow.data.binder.Validator
@@ -18,7 +18,6 @@ import java.io.Serializable
 import javax.persistence.*
 
 @Entity
-@Table(name="project")
 @Configurable(dependencyCheck = true)
 open class Project: Serializable, DBAbstract() {
     @Display

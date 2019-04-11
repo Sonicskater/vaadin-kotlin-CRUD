@@ -26,8 +26,8 @@ class School: Institute() {
     var projects: MutableList<Project> = mutableListOf()
 
     @Display(type = SchoolGrantApplication::class,clasif = DisplayTypeClasif.LIST)
-    @OneToMany(targetEntity = SchoolGrantApplication::class, mappedBy = "applicant")
-    var applicationSchools: MutableList<SchoolGrantApplication> = mutableListOf()
+    @OneToMany(targetEntity = SchoolGrantApplication::class, mappedBy = "schoolGrantApplicationKey.applicant")
+    var schoolsApplications: MutableList<SchoolGrantApplication> = mutableListOf()
 
 
     override fun delete() {

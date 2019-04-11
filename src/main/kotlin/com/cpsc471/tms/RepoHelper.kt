@@ -10,12 +10,13 @@ import com.cpsc471.tms.data.repository.invoices.InvoiceRepository
 import com.cpsc471.tms.data.repository.projects.ProjectRepository
 import com.cpsc471.tms.data.repository.schoolGrantApplications.SchoolGrantApplicationsRepository
 import com.cpsc471.tms.data.repository.selfGrants.SelfGrantRepository
-import com.cpsc471.tms.data.repository.userContactInfos.UserContactInfo
 import com.cpsc471.tms.data.repository.userContactInfos.UserContactInfoRepository
 import com.cpsc471.tms.data.repository.users.ArtistRepository
 import com.cpsc471.tms.data.repository.users.ManagerRepository
 import com.cpsc471.tms.data.repository.users.UserRepository
 import com.cpsc471.tms.data.repository.vehicles.VehicleRepository
+
+
 
 object RepoHelper{
 

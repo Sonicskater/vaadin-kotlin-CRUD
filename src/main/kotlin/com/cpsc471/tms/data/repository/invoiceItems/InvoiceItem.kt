@@ -1,41 +1,48 @@
 package com.cpsc471.tms.data.repository.invoiceItems
 
+import com.cpsc471.tms.RepoHelper
 import com.cpsc471.tms.data.repository.DBAbstract
 import com.cpsc471.tms.data.repository.DBKey
-import com.cpsc471.tms.data.repository.invoices.Invoice
+import com.vaadin.flow.data.binder.ValidationResult
 import com.vaadin.flow.data.binder.Validator
 import org.springframework.data.repository.CrudRepository
 import java.io.Serializable
-import javax.persistence.*
+import javax.persistence.EmbeddedId
+import javax.persistence.Entity
 
 @Entity
-class InvoiceItem(
-        @Id
-        @ManyToOne(targetEntity = Invoice::class)
-        var invoice: Invoice,
-        @Id
-        @GeneratedValue(strategy= GenerationType.AUTO)
-        var item_number: Int,
-        var description: String,
-        var amount: Int
-) : DBAbstract(), Serializable {
+class InvoiceItem : DBAbstract(), Serializable {
+
+    @EmbeddedId
+    var invoiceItemKey : InvoiceItemKey = InvoiceItemKey()
+
+    var description: String? = null
+
+    var amount: Int = 0
+
     override fun delete() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        RepoHelper.invoiceItemRepository.deleteById(this.invoiceItemKey)
     }
 
     override fun <T> validator(clazz: Class<T>, creation: Boolean): Validator<in T>? {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return Validator { t, _ ->
+            val t2 = t as InvoiceItem
+            when {
+                RepoHelper.invoiceItemRepository.existsById(t2.invoiceItemKey) -> ValidationResult.error("")
+                else -> ValidationResult.ok()
+            }
+        }
     }
 
     override fun <T, ID> repo(classT: Class<T>, classID: Class<ID>): CrudRepository<T, ID> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return RepoHelper.invoiceItemRepository as CrudRepository<T, ID>
     }
 
     override fun keyType(): Class<out DBKey> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return InvoiceItemKey::class.java
     }
 
     override fun iDforDb(): List<Any> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return listOf(invoiceItemKey)
     }
 }

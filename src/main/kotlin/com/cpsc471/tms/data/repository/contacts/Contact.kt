@@ -4,9 +4,10 @@ package com.cpsc471.tms.data.repository.contacts
 import com.cpsc471.tms.RepoHelper
 import com.cpsc471.tms.data.annotations.Display
 import com.cpsc471.tms.data.annotations.DisplayTypeClasif
+import com.cpsc471.tms.data.repository.DBAbstract
 import com.cpsc471.tms.data.repository.DBKey
 import com.cpsc471.tms.data.repository.contactContactInfos.ContactContactInfo
-import com.cpsc471.tms.data.repository.DBAbstract
+import com.vaadin.flow.data.binder.ValidationResult
 import com.vaadin.flow.data.binder.Validator
 import org.springframework.data.repository.CrudRepository
 import java.io.Serializable
@@ -25,19 +26,29 @@ class Contact : DBAbstract(), Serializable{
     @Display
     var firstName: String? = null
 
+    @Display
     var lastName: String? = null
 
+    @Display
     var description: String? = null
 
-    @OneToMany(targetEntity = ContactContactInfo::class, mappedBy = "contact")
+    @Display(DisplayTypeClasif.LIST, type = ContactContactInfo::class)
+    @OneToMany(targetEntity = ContactContactInfo::class, mappedBy = "contactContactInfoKey.contact")
     var contactInfo: MutableList<ContactContactInfo> = mutableListOf()
 
     override fun delete() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        RepoHelper.contactRepository.deleteById(contactKey)
     }
 
     override fun <T> validator(clazz: Class<T>, creation: Boolean): Validator<in T>? {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return Validator { t, _ ->
+            val t2 = t as Contact
+            if (RepoHelper.contactRepository.existsById(t2.contactKey)){
+                ValidationResult.error("")
+            }else{
+                ValidationResult.ok()
+            }
+        }
     }
 
     override fun <T, ID> repo(classT: Class<T>, classID: Class<ID>): CrudRepository<T, ID> {

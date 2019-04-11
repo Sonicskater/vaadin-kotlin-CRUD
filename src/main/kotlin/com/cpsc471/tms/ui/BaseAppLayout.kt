@@ -1,89 +1,84 @@
 package com.cpsc471.tms.ui
 
+import com.cpsc471.tms.hasRole
 import com.github.appreciated.app.layout.behaviour.Behaviour
 import com.github.appreciated.app.layout.builder.AppLayoutBuilder
 import com.github.appreciated.app.layout.component.appbar.AppBarBuilder
 import com.github.appreciated.app.layout.component.menu.left.builder.LeftAppMenuBuilder
 import com.github.appreciated.app.layout.component.menu.left.builder.LeftSubMenuBuilder
 import com.github.appreciated.app.layout.component.menu.left.items.LeftClickableItem
-import com.github.appreciated.app.layout.component.menu.left.items.LeftHeaderItem
 import com.github.appreciated.app.layout.component.menu.left.items.LeftNavigationItem
-import com.github.appreciated.app.layout.entity.DefaultBadgeHolder
 import com.github.appreciated.app.layout.entity.Section
-import com.github.appreciated.app.layout.notification.DefaultNotificationHolder
-import com.github.appreciated.app.layout.notification.component.AppBarNotificationButton
-import com.github.appreciated.app.layout.notification.entitiy.DefaultNotification
 import com.github.appreciated.app.layout.router.AppLayoutRouterLayout
 import com.vaadin.flow.component.AttachEvent
 import com.vaadin.flow.component.icon.VaadinIcon
 import com.vaadin.flow.router.Route
-import com.vaadin.ui.Notification
+import com.vaadin.flow.server.VaadinService
+import com.vaadin.server.Page
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler
+
 
 @Route("")
 class BaseAppLayout : AppLayoutRouterLayout() {
 
-    private var notifications : DefaultNotificationHolder = DefaultNotificationHolder{}
-    private var badge : DefaultBadgeHolder
-
     init{
-        badge =  DefaultBadgeHolder(5)
-        for(i in 1..5){
-            notifications.addNotification(DefaultNotification("TEST NOTIFICATION $i", "asdfgasdfasdfasdfasdgaeibaivbluivufuahdu"))
-        }
 
-        val menuElement = LeftNavigationItem("",VaadinIcon.MENU.create(), SchoolView::class.java )
-        badge.bind(menuElement.badge)
-        init(AppLayoutBuilder
-                .get(Behaviour.LEFT_RESPONSIVE_HYBRID)
-                .withTitle("Test Layout")
-                .withAppBar(AppBarBuilder
+        val appBar = AppLayoutBuilder.get(Behaviour.LEFT_RESPONSIVE_HYBRID).withTitle("Theatre Management System").withAppBar(AppBarBuilder.get().build())
+
+        init(appBar.withAppMenu(LeftAppMenuBuilder
                         .get()
-                        .add(AppBarNotificationButton(VaadinIcon.BELL,notifications))
-                        .build())
-                .withAppMenu(LeftAppMenuBuilder
-                        .get()
-                        .addToSection(LeftHeaderItem("HEADER 1",
-                                "Version ?",
-                                ""
-                        ), Section.HEADER)
-                        .addToSection(LeftClickableItem("CLICKABLE 1",
-                                VaadinIcon.CALC.create()
-                        ) {},Section.HEADER)
-                        .add(LeftNavigationItem("Schools", VaadinIcon.HOME.create(), SchoolView::class.java))
-                        .add(LeftNavigationItem("Projects", VaadinIcon.GROUP.create(), ProjectView::class.java))
-                        .add(LeftNavigationItem("Vehicles", VaadinIcon.CAR
-                                .create(), VehicleView::class.java))
-                        .add(LeftSubMenuBuilder
-                                .get("My Submenu", VaadinIcon.PLUS.create())
-                                .add(LeftSubMenuBuilder
-                                        .get("My Submenu", VaadinIcon.PLUS.create())
-                                        .add(LeftNavigationItem("Charts",
-                                                VaadinIcon.SPLINE_CHART.create(),
-                                                SchoolView::class.java
-                                                ))
-                                        .add(LeftNavigationItem("Contact",
-                                                VaadinIcon.CONNECT.create(),
-                                                SchoolView::class.java
-                                                ))
-                                        .add(LeftNavigationItem("More",
-                                                VaadinIcon.COG.create(),
-                                                SchoolView::class.java
-                                                ))
-                                        .build())
-                                .add(LeftNavigationItem("Contact1",
-                                        VaadinIcon.CONNECT.create(),
-                                        SchoolView::class.java
-                                        ))
-                                .add(LeftNavigationItem("More1", VaadinIcon.COG.create(), SchoolView::class.java))
-                                .build())
-                        .add(menuElement)
-                        .addToSection(LeftClickableItem("Clickable Entry",
-                                VaadinIcon.COG.create()
-                        ) {Notification.show("onClick ...")}, Section.FOOTER)
+                .addToSection(LeftClickableItem("Log Out",VaadinIcon.EXIT.create()){
+                    VaadinService.getCurrentRequest().wrappedSession.invalidate()
+                    SecurityContextLogoutHandler().logout((VaadinService.getCurrentRequest() as com.vaadin.flow.server.VaadinServletRequest).httpServletRequest, null, null)
+                    Page.getCurrent().setLocation("/")
+                }, Section.FOOTER)
+                .buildMenus()
                 .build()
                 ).build())
 
         element.setAttribute("theme", "dark")
+
+    }
+    private fun LeftAppMenuBuilder.buildMenus(): LeftAppMenuBuilder {
+        return when {
+            hasRole("ROLE_ARTIST") -> this.userFunctions()
+            hasRole("ROLE_MANAGER") -> this.userFunctions().adminFunctions()
+            else -> this
+        }
+    }
+
+    private fun LeftAppMenuBuilder.adminFunctions(): LeftAppMenuBuilder {
+
+        return this
+                .add(LeftNavigationItem("Projects", VaadinIcon.GROUP.create(), ProjectView::class.java))
+                .add(LeftNavigationItem("Vehicles", VaadinIcon.CAR.create(), VehicleView::class.java))
+                .add(LeftSubMenuBuilder.get("Users", VaadinIcon.USERS.create())
+                        .add(LeftNavigationItem("All Users", VaadinIcon.USER.create(), UsersView::class.java))
+                        .add(LeftNavigationItem("Artists", VaadinIcon.PAINTBRUSH.create(), ArtistView::class.java))
+                        .add(LeftNavigationItem("Managers", VaadinIcon.CLIPBOARD_USER.create(), ManagerView::class.java))
+                        .add(LeftNavigationItem("Unassigned", VaadinIcon.QUESTION_CIRCLE.create(), UnassignedView::class.java))
+                        .build())
+                .add(LeftSubMenuBuilder.get("Institutions", VaadinIcon.WORKPLACE.create())
+                        .add(LeftNavigationItem("All Institutions", VaadinIcon.OFFICE.create(), InstituteView::class.java))
+                        .add(LeftNavigationItem("Schools", VaadinIcon.HOME.create(), SchoolView::class.java))
+                        .add(LeftNavigationItem("Funding Sources", VaadinIcon.DIPLOMA.create(), FundingSourceView::class.java))
+                        .build())
+                .add(LeftSubMenuBuilder.get("Grants", VaadinIcon.MONEY.create())
+                        .add(LeftNavigationItem("School Grant", VaadinIcon.FORM.create(), SchoolGrantsView::class.java))
+                        .add(LeftNavigationItem("Grants", VaadinIcon.MONEY_DEPOSIT.create(), SelfGrantsView::class.java))
+                        .build())
+                .add(LeftSubMenuBuilder.get("Contact Managment", VaadinIcon.LIST.create())
+                        .add(LeftNavigationItem("Contacts", VaadinIcon.USER_CARD.create(), ContactsView::class.java))
+                        .add(LeftNavigationItem("Contact Info", VaadinIcon.PLUS_CIRCLE.create(), ContactDetailsView::class.java))
+                        .build())
+
+    }
+
+    private fun LeftAppMenuBuilder.userFunctions(): LeftAppMenuBuilder{
+        return this
+                .add(LeftNavigationItem("Me", VaadinIcon.USER_CARD.create(), SelfView::class.java))
+                .add(LeftNavigationItem("My Projects", VaadinIcon.GROUP.create(), MyProjectsView::class.java))
+                .add(LeftNavigationItem("Add to Vehicle Logs", VaadinIcon.GROUP.create(), VehicleLogView::class.java))
 
     }
 

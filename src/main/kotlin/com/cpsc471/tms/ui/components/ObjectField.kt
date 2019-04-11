@@ -7,7 +7,7 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout
 
 class ObjectField<T : DBAbstract>(val classT: Class<T>, initial: T?, root : VerticalLayout, readOnly : Boolean = true) : CustomField<T>(){
 
-    private var backingField : T = initial?:classT.newInstance()
+    private var backingField : T? = initial
 
     private var dbObjectForm : DBObjectForm<T> = DBObjectForm(classT, editable = false, creatable = false, verbose = false)
 
@@ -22,11 +22,11 @@ class ObjectField<T : DBAbstract>(val classT: Class<T>, initial: T?, root : Vert
         update()
     }
 
-    override fun generateModelValue(): T {
+    override fun generateModelValue(): T? {
         return backingField
     }
 
-    override fun getValue(): T {
+    override fun getValue(): T? {
         return backingField
     }
 

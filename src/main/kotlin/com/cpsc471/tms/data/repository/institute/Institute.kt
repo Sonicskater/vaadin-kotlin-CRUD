@@ -4,9 +4,9 @@ import com.cpsc471.tms.RepoHelper
 import com.cpsc471.tms.data.annotations.Display
 import com.cpsc471.tms.data.annotations.DisplayCategory
 import com.cpsc471.tms.data.annotations.DisplayTypeClasif
+import com.cpsc471.tms.data.repository.DBAbstract
 import com.cpsc471.tms.data.repository.DBKey
 import com.cpsc471.tms.data.repository.contacts.Contact
-import com.cpsc471.tms.data.repository.DBAbstract
 import com.vaadin.flow.data.binder.ValidationResult
 import com.vaadin.flow.data.binder.Validator
 import org.springframework.data.repository.CrudRepository
@@ -17,11 +17,7 @@ import javax.persistence.*
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="type", discriminatorType = DiscriminatorType.INTEGER)
 @DiscriminatorValue("0")
-open class Institute(
-
-
-
-): DBAbstract(), Serializable{
+class Institute: DBAbstract(), Serializable{
 
     @EmbeddedId
     @Display(clasif = DisplayTypeClasif.COMPOSITE)
@@ -50,7 +46,7 @@ open class Institute(
     }
 
     override fun <T> validator(clazz: Class<T>, creation: Boolean): Validator<in T>? {
-        return Validator { inst, context ->
+        return Validator { inst, _ ->
 
             if (RepoHelper.schoolRepository.existsById((inst as Institute).instituteKey) || RepoHelper.instituteRepository.existsById((inst as Institute).instituteKey)) {
                 ValidationResult.error("School already exists!")
@@ -62,7 +58,7 @@ open class Institute(
     }
 
     override fun <T, ID> repo(classT: Class<T>, classID: Class<ID>): CrudRepository<T, ID> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return RepoHelper.instituteRepository as CrudRepository<T, ID>
     }
 
     override fun iDforDb(): List<Any> {

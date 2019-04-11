@@ -8,6 +8,7 @@ import com.cpsc471.tms.data.repository.DBAbstract
 import com.vaadin.flow.component.datepicker.DatePicker
 import com.vaadin.flow.component.formlayout.FormLayout
 import com.vaadin.flow.component.html.Label
+import com.vaadin.flow.component.notification.Notification
 import com.vaadin.flow.component.orderedlayout.VerticalLayout
 import com.vaadin.flow.component.textfield.TextField
 import com.vaadin.flow.data.binder.Binder
@@ -29,7 +30,7 @@ class DBObjectForm<T : DBAbstract>(
     private val formLayout : FormLayout = FormLayout()
     private var binder : Binder<T> = Binder(classT)
 
-    private var item: T = classT.newInstance()
+    private var item: T? = null
 
     private val verticalLayout = VerticalLayout()
 
@@ -38,23 +39,32 @@ class DBObjectForm<T : DBAbstract>(
         add(formLayout)
         add(verticalLayout)
         add(classT.simpleName)
-        binder.withValidator(classT.newInstance().validator(classT,creatable))
+        if(creatable) {
+            binder.withValidator(classT.newInstance().validator(classT, creatable))
+        }
         binder.setStatusLabel(label)
 
     }
 
 
-    fun setObject(item : T) : DBObjectForm<T> {
+    fun setObject(item : T?) : DBObjectForm<T> {
         this.item = item
         return this
     }
     fun save(){
 
         try {
-            binder.writeBeanIfValid(item)
+            if (binder.writeBeanIfValid(item)){
+                Notification("Success", 3000).open()
+                println("Saved")
+            }else{
+                Notification("Failure", 3000).open()
+                println("Failed to save")
+            }
         }catch( e : ValidationException){
+
             try {
-                item.delete()
+                item?.delete()
             }catch (e2 : DataIntegrityViolationException){
 
             }

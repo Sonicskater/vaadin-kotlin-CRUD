@@ -9,9 +9,9 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout
 
 class ObjectFieldUI<T : DBAbstract>(
         clazz: Class<T>,
-        dbObject: T,
+        dbObject: T?,
         readOnly: Boolean = true,
-        callback: (T)-> Unit
+        callback: (T?)-> Unit
 ) : VerticalLayout(){
 
     val dbObjectForm = DBObjectForm(clazz, verbose = false)

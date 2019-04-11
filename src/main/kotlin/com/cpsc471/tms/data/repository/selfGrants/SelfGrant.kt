@@ -1,46 +1,53 @@
 package com.cpsc471.tms.data.repository.selfGrants
 
+import com.cpsc471.tms.RepoHelper
 import com.cpsc471.tms.data.repository.DBAbstract
 import com.cpsc471.tms.data.repository.DBKey
-import com.cpsc471.tms.data.repository.institute.FundingSource
+import com.vaadin.flow.data.binder.ValidationResult
 import com.vaadin.flow.data.binder.Validator
 import org.springframework.data.repository.CrudRepository
 import java.io.Serializable
 import java.sql.Date
+import javax.persistence.EmbeddedId
 import javax.persistence.Entity
-import javax.persistence.Id
-import javax.persistence.ManyToOne
 @Entity
-class SelfGrant(
-        @Id
-        var name: String,
-        var status: String,
-        var amonut: Int,
-        var website: String,
-        var submissionDate: Date,
+class SelfGrant: DBAbstract(), Serializable {
 
-        @Id
-        @ManyToOne(targetEntity = FundingSource::class)
-        var source: FundingSource
-) : DBAbstract(), Serializable {
+
+    @EmbeddedId
+    var selfGrantKey : SelfGrantKey = SelfGrantKey()
+
+    var status: String? = null
+    var amonut: Int = 0
+    var website: String? = null
+    var submissionDate: Date? = null
+
+
     override fun delete() {
-
+        RepoHelper.selfGrantRepository.deleteById(this.selfGrantKey)
     }
 
     override fun <T> validator(clazz: Class<T>, creation: Boolean): Validator<in T>? {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return Validator { t, valueContext ->
+            val t2 = t as SelfGrant
+            if(RepoHelper.selfGrantRepository.existsById(t2.selfGrantKey)){
+                ValidationResult.error("")
+            }else{
+                ValidationResult.ok()
+            }
+        }
     }
 
     override fun keyType(): Class<out DBKey> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return SelfGrantKey::class.java
     }
 
     override fun <T, ID> repo(classT: Class<T>, classID: Class<ID>): CrudRepository<T, ID> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return RepoHelper.selfGrantRepository as CrudRepository<T, ID>
     }
 
     override fun iDforDb(): List<Any> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return listOf(selfGrantKey)
     }
 
 }

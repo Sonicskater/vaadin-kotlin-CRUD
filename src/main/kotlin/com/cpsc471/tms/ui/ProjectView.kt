@@ -1,7 +1,7 @@
 package com.cpsc471.tms.ui
 
-import com.cpsc471.tms.data.repos.ProjectRepository
-import com.cpsc471.tms.data.types.Project
+import com.cpsc471.tms.data.repository.projects.ProjectRepository
+import com.cpsc471.tms.data.repository.projects.Project
 import com.cpsc471.tms.ui.templates.CrudPage
 import org.springframework.beans.factory.annotation.Autowired
 

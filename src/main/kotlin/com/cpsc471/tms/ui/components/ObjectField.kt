@@ -1,6 +1,6 @@
 package com.cpsc471.tms.ui.components
 
-import com.cpsc471.tms.data.types.DBAbstract
+import com.cpsc471.tms.data.repository.DBAbstract
 import com.vaadin.flow.component.customfield.CustomField
 import com.vaadin.flow.component.orderedlayout.VerticalLayout
 

@@ -1,6 +1,6 @@
 package com.cpsc471.tms.security
 
-import com.cpsc471.tms.data.repos.UserRepository
+import com.cpsc471.tms.data.repository.users.UserRepository
 import org.springframework.beans.factory.annotation.Autowired
 
 import org.springframework.security.core.userdetails.UserDetails

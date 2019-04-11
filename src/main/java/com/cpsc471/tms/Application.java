@@ -1,9 +1,13 @@
 package com.cpsc471.tms;
 
-import com.cpsc471.tms.data.repos.*;
-import com.cpsc471.tms.data.types.Artist;
-import com.cpsc471.tms.data.types.Project;
-import com.cpsc471.tms.data.types.School;
+import com.cpsc471.tms.data.repository.institute.InstituteRepository;
+import com.cpsc471.tms.data.repository.institute.SchoolRepository;
+import com.cpsc471.tms.data.repository.projects.ProjectRepository;
+import com.cpsc471.tms.data.repository.users.ArtistRepository;
+import com.cpsc471.tms.data.repository.vehicles.VehicleRepository;
+import com.cpsc471.tms.data.repository.users.Artist;
+import com.cpsc471.tms.data.repository.projects.Project;
+import com.cpsc471.tms.data.repository.institute.School;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -31,7 +35,7 @@ public class Application extends SpringBootServletInitializer {
             InstituteRepository instituteRepository,
             VehicleRepository vehiclieRepository){
         return (args -> {
-            Artist n = new Artist(Collections.emptyList(),Collections.emptySet(),Collections.emptyList());
+            Artist n = new Artist();
             n.getUserKey().setEmail("devon@hockley.ca");
             n.setFirstName("Devon");
             n.setLastName("Hockley");
@@ -56,7 +60,7 @@ public class Application extends SpringBootServletInitializer {
             RepoHelper.schoolRepository = schoolRepository;
             RepoHelper.projectRepository = projectRepository;
             RepoHelper.instituteRepository = instituteRepository;
-            RepoHelper.vehicleRepositry = vehiclieRepository;
+            RepoHelper.vehicleRepository = vehiclieRepository;
 
         });
     }

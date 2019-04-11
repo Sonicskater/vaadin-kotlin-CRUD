@@ -2,7 +2,7 @@ package com.cpsc471.tms.ui.components
 
 import com.cpsc471.tms.data.annotations.Display
 import com.cpsc471.tms.data.annotations.DisplayTypeClasif
-import com.cpsc471.tms.data.types.DBAbstract
+import com.cpsc471.tms.data.repository.DBAbstract
 import com.vaadin.flow.component.grid.Grid
 import java.lang.reflect.Field
 
@@ -43,8 +43,8 @@ class DBObjectList< T: DBAbstract>(
                         addColumn(prefix + field.name)
                     }
                     DisplayTypeClasif.OBJECT -> {
-                        generateReflectedFields(field.type.superclass.declaredFields,prefix + field.name+".")
-                        generateReflectedFields(field.type.declaredFields, prefix + field.name+".")
+                        //generateReflectedFields(field.type.superclass.declaredFields,prefix + field.name+".")
+                        //generateReflectedFields(field.type.declaredFields, prefix + field.name+".")
                     }
 
                     DisplayTypeClasif.COMPOSITE -> {

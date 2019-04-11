@@ -1,8 +1,8 @@
 package com.cpsc471.tms.security
 
-import com.cpsc471.tms.data.types.Artist
-import com.cpsc471.tms.data.types.Manager
-import com.cpsc471.tms.data.types.User
+import com.cpsc471.tms.data.repository.users.Artist
+import com.cpsc471.tms.data.repository.users.Manager
+import com.cpsc471.tms.data.repository.users.User
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
 
@@ -20,7 +20,7 @@ class CustomUserPrincipal(private val user: User) : UserDetails {
     }
 
     override fun getUsername(): String {
-        return user.userKey.email
+        return user.userKey.email?: ""
     }
 
     override fun isCredentialsNonExpired(): Boolean {

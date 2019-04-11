@@ -1,7 +1,7 @@
 package com.cpsc471.tms
 
-import com.cpsc471.tms.data.repos.ManagerRepository
-import com.cpsc471.tms.data.types.Manager
+import com.cpsc471.tms.data.repository.users.ManagerRepository
+import com.cpsc471.tms.data.repository.users.Manager
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.ApplicationListener
 import org.springframework.context.event.ContextRefreshedEvent

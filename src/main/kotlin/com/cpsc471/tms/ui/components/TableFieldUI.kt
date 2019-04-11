@@ -1,6 +1,6 @@
 package com.cpsc471.tms.ui.components
 
-import com.cpsc471.tms.data.types.DBAbstract
+import com.cpsc471.tms.data.repository.DBAbstract
 import com.cpsc471.tms.ui.components.modals.TableSelectionModal
 import com.vaadin.flow.component.button.Button
 import com.vaadin.flow.component.icon.VaadinIcon

@@ -4,7 +4,7 @@ import com.cpsc471.tms.data.annotations.Display
 import com.cpsc471.tms.data.annotations.DisplayCategory
 import com.cpsc471.tms.data.annotations.DisplayEditLevel
 import com.cpsc471.tms.data.annotations.DisplayTypeClasif
-import com.cpsc471.tms.data.types.DBAbstract
+import com.cpsc471.tms.data.repository.DBAbstract
 import com.vaadin.flow.component.datepicker.DatePicker
 import com.vaadin.flow.component.formlayout.FormLayout
 import com.vaadin.flow.component.html.Label
@@ -91,11 +91,15 @@ class DBObjectForm<T : DBAbstract>(
 
     private fun generateReflectedFields(fields: Array<Field>, prefix: String = ""){
         for ( field: Field in fields){
+            println(field.name)
+            println(field.type
+            )
             val annotation = field.getAnnotation(Display::class.java)
             if (annotation != null) {
                 if (annotation.category != DisplayCategory.VERBOSE || verbose) {
                     when (annotation.clasif) {
                         DisplayTypeClasif.PRIMITIVE -> {
+                            println("adding primitive")
                             when {
                                 field.type == Int::class.java -> {
                                     val textField = TextField()
@@ -131,20 +135,23 @@ class DBObjectForm<T : DBAbstract>(
 
                         }
                         DisplayTypeClasif.OBJECT -> {
+                            println("adding object")
 
-                            /*
                             val objectField = ObjectField(annotation.type.java, null ,verticalLayout,!editable)
 
                             binder.forField(objectField).bind(prefix + field.name)
                             formLayout.addFormItem(objectField,"")
-                            */
+
                         }
 
                         DisplayTypeClasif.COMPOSITE -> {
+                            println("adding composite")
                             generateReflectedFields(field.type.declaredFields, field.name + ".")
+
                         }
                         DisplayTypeClasif.LIST -> {
                             if (verbose) {
+                                println("adding list")
                                 val listType = annotation.type.java
                                 val tableField = TableField(listType, !editable, field.name.capitalize(), verticalLayout)
 

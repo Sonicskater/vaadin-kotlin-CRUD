@@ -40,14 +40,14 @@ open class Institute(
 
         @Display(clasif = DisplayTypeClasif.LIST, type = Contact::class)
     @OneToMany(mappedBy = "contactKey.institute",targetEntity = Contact::class)
-    open var contacts: List<Contact> = listOf()
+    open var contacts: MutableList<Contact> = mutableListOf()
 
 ): DBAbstract(), Serializable{
     override fun delete() {
         RepoHelper.instituteRepository.deleteById(instituteKey)
     }
 
-    override fun <T> getValidator(clazz: Class<T>, creation: Boolean): Validator<in T>? {
+    override fun <T> validator(clazz: Class<T>, creation: Boolean): Validator<in T>? {
         return Validator { inst, context ->
 
             if (RepoHelper.schoolRepository.existsById((inst as Institute).instituteKey) || RepoHelper.instituteRepository.existsById((inst as Institute).instituteKey)) {
@@ -59,7 +59,7 @@ open class Institute(
         }
     }
 
-    override fun <T, ID> getRepo(classT: Class<T>, classID: Class<ID>): CrudRepository<T, ID> {
+    override fun <T, ID> repo(classT: Class<T>, classID: Class<ID>): CrudRepository<T, ID> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
@@ -71,7 +71,7 @@ open class Institute(
         return instituteKey.name
     }
 
-    override fun getKeyType(): Class<out DBKey> {
+    override fun keyType(): Class<out DBKey> {
         return InstituteKey::class.java
     }
 

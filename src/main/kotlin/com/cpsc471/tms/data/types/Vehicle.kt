@@ -31,7 +31,7 @@ class Vehicle(
         RepoHelper.vehicleRepositry
     }
 
-    override fun <T> getValidator(clazz: Class<T>, creation: Boolean): Validator<in T>? {
+    override fun <T> validator(clazz: Class<T>, creation: Boolean): Validator<in T>? {
         return Validator { value, context ->
             if (value is Vehicle){
                 when{
@@ -47,11 +47,11 @@ class Vehicle(
         }
     }
 
-    override fun getKeyType(): Class<out DBKey> {
+    override fun keyType(): Class<out DBKey> {
         return VehicleKey::class.java
     }
 
-    override fun <T, ID> getRepo(classT: Class<T>, classID: Class<ID>): CrudRepository<T, ID> {
+    override fun <T, ID> repo(classT: Class<T>, classID: Class<ID>): CrudRepository<T, ID> {
         return RepoHelper.vehicleRepositry as CrudRepository<T, ID>
     }
 

@@ -4,5 +4,5 @@ interface IDBValue {
     override fun hashCode(): Int
 
     override fun equals(other: Any?): Boolean
-    fun iDforDb() : List<*>
+    fun iDforDb() : List<Any?>
 }

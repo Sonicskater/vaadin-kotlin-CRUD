@@ -35,11 +35,10 @@ class DBObjectForm<T : DBAbstract>(
 
     private var label = Label()
     init {
-
         add(formLayout)
         add(verticalLayout)
-        verticalLayout.add(label)
-        binder.withValidator(classT.newInstance().getValidator(classT,creatable))
+        add(classT.simpleName)
+        binder.withValidator(classT.newInstance().validator(classT,creatable))
         binder.setStatusLabel(label)
 
     }
@@ -52,7 +51,7 @@ class DBObjectForm<T : DBAbstract>(
     fun save(){
 
         try {
-            binder.writeBean(item)
+            binder.writeBeanIfValid(item)
         }catch( e : ValidationException){
             try {
                 item.delete()
@@ -76,7 +75,9 @@ class DBObjectForm<T : DBAbstract>(
 
 
     fun render() {
+        println("Rendering form for ${classT.simpleName}")
         if(item != null){
+            println("object is valid")
             formLayout.removeAll()
             verticalLayout.removeAll()
             generateReflectedFields(classT.superclass.declaredFields)
@@ -95,7 +96,6 @@ class DBObjectForm<T : DBAbstract>(
                 if (annotation.category != DisplayCategory.VERBOSE || verbose) {
                     when (annotation.clasif) {
                         DisplayTypeClasif.PRIMITIVE -> {
-
                             when {
                                 field.type == Int::class.java -> {
                                     val textField = TextField()
@@ -132,10 +132,12 @@ class DBObjectForm<T : DBAbstract>(
                         }
                         DisplayTypeClasif.OBJECT -> {
 
+                            /*
                             val objectField = ObjectField(annotation.type.java, null ,verticalLayout,!editable)
 
                             binder.forField(objectField).bind(prefix + field.name)
                             formLayout.addFormItem(objectField,"")
+                            */
                         }
 
                         DisplayTypeClasif.COMPOSITE -> {

@@ -4,11 +4,14 @@ import com.cpsc471.tms.data.types.DBAbstract
 import com.cpsc471.tms.ui.components.DBObjectForm
 import com.cpsc471.tms.ui.components.DBObjectList
 import com.cpsc471.tms.ui.components.modals.EditingModal
+import com.vaadin.flow.component.UI
 import com.vaadin.flow.component.button.Button
 import com.vaadin.flow.component.button.ButtonVariant
 import com.vaadin.flow.component.icon.VaadinIcon
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout
 import com.vaadin.flow.component.orderedlayout.VerticalLayout
+import com.vaadin.flow.server.ErrorHandler
+import com.vaadin.flow.server.VaadinSession
 import org.springframework.data.repository.CrudRepository
 
 class CrudPage<T : DBAbstract, V>(
@@ -48,6 +51,9 @@ class CrudPage<T : DBAbstract, V>(
     }
 
     init {
+        VaadinSession.getCurrent().errorHandler = ErrorHandler {
+
+        }
         add(dbObjectList)
         dbObjectList.addSelectionListener {
 

@@ -23,7 +23,7 @@ class TableSelectionModal<T : DBAbstract>(
             dbObjectList.selected()?.let { dbList.add(it) }
             close()
         })
-        val repository = classT.newInstance().getRepo(classT,classT.newInstance().getKeyType())
+        val repository = classT.newInstance().repo(classT,classT.newInstance().keyType())
         val displayData = (repository.findAll() as MutableList<T>)
         displayData.removeAll(dbList)
         dbObjectList.setItems(displayData)

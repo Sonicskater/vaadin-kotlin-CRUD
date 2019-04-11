@@ -16,7 +16,7 @@ import javax.persistence.Table
 
 @Entity
 @Table(name = "contact")
-class Contact(
+open class Contact(
         @EmbeddedId
         @Display(clasif = DisplayTypeClasif.COMPOSITE)
         var contactKey: ContactKey = ContactKey(),
@@ -29,22 +29,22 @@ class Contact(
         var description: String = "",
 
         @OneToMany(targetEntity = ContactContactInfo::class, mappedBy = "contact")
-        var contactInfo: List<ContactContactInfo> = mutableListOf()
+        var contactInfo: MutableList<ContactContactInfo> = mutableListOf()
 
         ) : DBAbstract(), Serializable{
     override fun delete() {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun <T> getValidator(clazz: Class<T>, creation: Boolean): Validator<in T>? {
+    override fun <T> validator(clazz: Class<T>, creation: Boolean): Validator<in T>? {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun <T, ID> getRepo(classT: Class<T>, classID: Class<ID>): CrudRepository<T, ID> {
+    override fun <T, ID> repo(classT: Class<T>, classID: Class<ID>): CrudRepository<T, ID> {
         return RepoHelper.contactRepository as CrudRepository<T, ID>
     }
 
-    override fun getKeyType(): Class<out DBKey> {
+    override fun keyType(): Class<out DBKey> {
         return ContactKey::class.java
     }
 

@@ -16,35 +16,31 @@ import javax.persistence.*
 @Entity
 @Table(name="project")
 @Configurable(dependencyCheck = true)
-class Project(
+open class Project: Serializable, DBAbstract() {
+    @Display
+    lateinit var title: String
 
-        @Display
-        var title: String = "",
+    @Display(clasif = DisplayTypeClasif.COMPOSITE)
+    @EmbeddedId
+    var projectKey: ProjectKey = ProjectKey()
 
-        @Display(clasif = DisplayTypeClasif.COMPOSITE)
-        @EmbeddedId
-        var projectKey: ProjectKey = ProjectKey(),
+    @Display(clasif = DisplayTypeClasif.LIST, type = Artist::class, category = DisplayCategory.VERBOSE)
+    @ManyToMany(fetch = FetchType.LAZY, targetEntity = Artist::class,cascade= [CascadeType.ALL])
+    lateinit var members: MutableList<Artist>
 
-        @Display(clasif = DisplayTypeClasif.LIST, type = Artist::class, category = DisplayCategory.VERBOSE)
-        @ManyToMany(fetch = FetchType.LAZY, targetEntity = Artist::class,cascade= [CascadeType.ALL])
-        var members: List<Artist> = listOf(),
+    @ManyToOne(targetEntity = Manager::class)
+    var manager: Manager? = null
 
-        @ManyToOne(targetEntity = Manager::class)
-        var manager: Manager? = null,
+    lateinit var theme: String
 
-        var theme: String = "",
+    //@Display(DisplayTypeClasif.OBJECT, type = Vehicle::class, category = DisplayCategory.VERBOSE)
+    @ManyToOne(cascade= [CascadeType.ALL],targetEntity = Vehicle::class)
+    var vehicle: Vehicle? = null
 
-        @Display(DisplayTypeClasif.OBJECT, type = Vehicle::class, category = DisplayCategory.VERBOSE)
-        @ManyToOne(cascade= [CascadeType.ALL],targetEntity = Vehicle::class)
-        var vehicle: Vehicle = Vehicle(),
+    @OneToOne(cascade= [CascadeType.ALL],targetEntity = Invoice::class)
+    var invoice: Invoice? = null
 
-        @OneToOne(cascade= [CascadeType.ALL],targetEntity = Invoice::class)
-        var invoice: Invoice
-
-) : Serializable, DBAbstract() {
-    init {
-        invoice.project=this
-    }
+    @Transient
     override fun delete() {
         try {
             RepoHelper.projectRepository.existsById(projectKey)
@@ -54,24 +50,28 @@ class Project(
     }
 
 
-    override fun <T> getValidator(clazz: Class<T>, creation: Boolean): Validator<in T>? {
+    @Transient
+    override fun <T> validator(clazz: Class<T>, creation: Boolean): Validator<in T>? {
         return Validator { project, _ ->
             if (RepoHelper.projectRepository.existsById((project as Project).projectKey) || (project as Project) == Project()){
                 ValidationResult.error("Already exists")
             }else{
-                if (project.projectKey.start.isBefore(project.projectKey.end)) ValidationResult.ok() else ValidationResult.error("Invalid dates")
+                if (project.projectKey.start?.isBefore(project.projectKey.end) == true) ValidationResult.ok() else ValidationResult.error("Invalid dates")
             }
         }
     }
 
-    override fun getKeyType(): Class<out DBKey> {
+    @Transient
+    override fun keyType(): Class<out DBKey> {
         return ProjectKey::class.java
     }
 
-    override fun <T, ID> getRepo(classT: Class<T>, classID: Class<ID>): CrudRepository<T, ID> {
+    @Transient
+    override fun <T, ID> repo(classT: Class<T>, classID: Class<ID>): CrudRepository<T, ID> {
         return RepoHelper.projectRepository as CrudRepository<T, ID>
     }
 
+    @Transient
     override fun iDforDb(): List<Any> {
         return listOf(projectKey)
     }

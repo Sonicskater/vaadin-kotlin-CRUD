@@ -25,15 +25,15 @@ class SelfGrant(
 
     }
 
-    override fun <T> getValidator(clazz: Class<T>, creation: Boolean): Validator<in T>? {
+    override fun <T> validator(clazz: Class<T>, creation: Boolean): Validator<in T>? {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun getKeyType(): Class<out DBKey> {
+    override fun keyType(): Class<out DBKey> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun <T, ID> getRepo(classT: Class<T>, classID: Class<ID>): CrudRepository<T, ID> {
+    override fun <T, ID> repo(classT: Class<T>, classID: Class<ID>): CrudRepository<T, ID> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 

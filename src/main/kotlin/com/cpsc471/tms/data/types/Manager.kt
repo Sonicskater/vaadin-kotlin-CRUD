@@ -11,17 +11,17 @@ import javax.persistence.OneToMany
 @DiscriminatorValue("2")
 class Manager(
         @OneToMany(targetEntity = Project::class, mappedBy = "manager")
-        var manages: List<Project> = mutableListOf()
+        var manages: MutableList<Project> = mutableListOf()
 ): User(), Serializable {
         override fun delete() {
                 TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
         }
 
-        override fun <T, ID> getRepo(classT: Class<T>, classID: Class<ID>): CrudRepository<T, ID> {
+        override fun <T, ID> repo(classT: Class<T>, classID: Class<ID>): CrudRepository<T, ID> {
                 TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
         }
 
-        override fun getKeyType(): Class<out DBKey> {
+        override fun keyType(): Class<out DBKey> {
                 TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
         }
 

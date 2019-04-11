@@ -22,12 +22,12 @@ class ObjectField<T : DBAbstract>(val classT: Class<T>, initial: T?, root : Vert
         update()
     }
 
-    override fun generateModelValue(): T? {
-        return backingField?: classT.newInstance()
+    override fun generateModelValue(): T {
+        return backingField
     }
 
-    override fun getValue(): T? {
-        return backingField?: classT.newInstance()
+    override fun getValue(): T {
+        return backingField
     }
 
 

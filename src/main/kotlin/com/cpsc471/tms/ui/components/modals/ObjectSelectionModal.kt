@@ -24,7 +24,7 @@ class ObjectSelectionModal<T : DBAbstract>(
             callback(dbObjectList.selected()?: dbObject)
             close()
         })
-        val repository = classT.newInstance().getRepo(classT,classT.newInstance().getKeyType())
+        val repository = classT.newInstance().repo(classT,classT.newInstance().keyType())
         val displayData = (repository.findAll() as MutableList<T>)
         displayData.removeAll(listOf(dbObject))
         dbObjectList.setItems(displayData)

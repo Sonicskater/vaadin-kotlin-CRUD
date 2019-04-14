@@ -1,5 +1,6 @@
 package com.cpsc471.tms.security
 
+import com.cpsc471.tms.SecurityHelper
 import com.cpsc471.tms.data.repository.users.UserRepository
 import org.springframework.beans.factory.annotation.Autowired
 
@@ -19,7 +20,7 @@ class CustomUserDetailsService
             throw UsernameNotFoundException(p0)
         }
         val user = userRepository.findByUserKeyEmail(p0)
-
+        SecurityHelper.principal = CustomUserPrincipal(user)
         return CustomUserPrincipal(user)
     }
 

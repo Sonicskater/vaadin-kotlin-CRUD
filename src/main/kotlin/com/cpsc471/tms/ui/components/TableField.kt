@@ -9,7 +9,7 @@ class TableField<T : DBAbstract>(val classT: Class<T>, readOnly : Boolean, name:
 
     private var dbObjectList : DBObjectList<T> = DBObjectList(classT)
 
-    private var dbList : MutableList<T> = mutableListOf()
+    var dbList : MutableList<T> = mutableListOf()
 
     override fun setPresentationValue(p0: MutableList<T>?) {
         dbList = p0 ?: mutableListOf()
@@ -27,13 +27,13 @@ class TableField<T : DBAbstract>(val classT: Class<T>, readOnly : Boolean, name:
     private val verticalLayout = VerticalLayout()
 
     init{
-        val tableViewModal = TableFieldUI(classT, dbList, readOnly)
+        val tableViewModal = TableFieldUI(classT, this, readOnly)
         dbObjectList = tableViewModal.dbObjectList
         root.add(tableViewModal)
         update()
 
     }
-    private fun update(){
+    fun update(){
         dbObjectList.setItems(dbList)
 
     }

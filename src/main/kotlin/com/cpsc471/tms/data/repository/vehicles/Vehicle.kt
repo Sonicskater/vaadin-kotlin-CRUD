@@ -3,9 +3,11 @@ package com.cpsc471.tms.data.repository.vehicles
 import com.cpsc471.tms.RepoHelper
 import com.cpsc471.tms.data.annotations.Display
 import com.cpsc471.tms.data.annotations.DisplayTypeClasif
+import com.cpsc471.tms.data.repository.DBAbstract
 import com.cpsc471.tms.data.repository.DBKey
 import com.cpsc471.tms.data.repository.projects.Project
-import com.cpsc471.tms.data.repository.DBAbstract
+import com.cpsc471.tms.ui.crudpages.VehicleView
+import com.vaadin.flow.component.UI
 import com.vaadin.flow.data.binder.ValidationResult
 import com.vaadin.flow.data.binder.Validator
 import org.springframework.data.repository.CrudRepository
@@ -28,6 +30,10 @@ class Vehicle(
     var notes: MutableList<String> = mutableListOf()
 
 ): DBAbstract(){
+    override fun view(ui: UI) {
+        ui.navigate(VehicleView::class.java)
+    }
+
     override fun delete() {
         RepoHelper.vehicleRepository
     }

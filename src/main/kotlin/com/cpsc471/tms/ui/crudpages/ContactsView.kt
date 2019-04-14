@@ -1,7 +1,8 @@
-package com.cpsc471.tms.ui
+package com.cpsc471.tms.ui.crudpages
 
 import com.cpsc471.tms.data.repository.contacts.Contact
 import com.cpsc471.tms.data.repository.contacts.ContactRepository
+import com.cpsc471.tms.ui.BaseAppLayout
 import com.cpsc471.tms.ui.templates.CrudPage
 import com.vaadin.flow.component.orderedlayout.VerticalLayout
 import com.vaadin.flow.router.Route

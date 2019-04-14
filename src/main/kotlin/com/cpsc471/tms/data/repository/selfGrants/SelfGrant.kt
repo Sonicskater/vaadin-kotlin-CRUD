@@ -3,6 +3,8 @@ package com.cpsc471.tms.data.repository.selfGrants
 import com.cpsc471.tms.RepoHelper
 import com.cpsc471.tms.data.repository.DBAbstract
 import com.cpsc471.tms.data.repository.DBKey
+import com.cpsc471.tms.ui.crudpages.SelfGrantsView
+import com.vaadin.flow.component.UI
 import com.vaadin.flow.data.binder.ValidationResult
 import com.vaadin.flow.data.binder.Validator
 import org.springframework.data.repository.CrudRepository
@@ -12,6 +14,9 @@ import javax.persistence.EmbeddedId
 import javax.persistence.Entity
 @Entity
 class SelfGrant: DBAbstract(), Serializable {
+    override fun view(ui: UI) {
+        ui.navigate(SelfGrantsView::class.java)
+    }
 
 
     @EmbeddedId

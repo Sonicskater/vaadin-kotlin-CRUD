@@ -7,6 +7,8 @@ import com.cpsc471.tms.data.annotations.DisplayTypeClasif
 import com.cpsc471.tms.data.repository.DBAbstract
 import com.cpsc471.tms.data.repository.DBKey
 import com.cpsc471.tms.data.repository.contactContactInfos.ContactContactInfo
+import com.cpsc471.tms.ui.crudpages.ContactsView
+import com.vaadin.flow.component.UI
 import com.vaadin.flow.data.binder.ValidationResult
 import com.vaadin.flow.data.binder.Validator
 import org.springframework.data.repository.CrudRepository
@@ -19,6 +21,10 @@ import javax.persistence.Table
 @Entity
 @Table(name = "contact")
 class Contact : DBAbstract(), Serializable{
+    override fun view(ui: UI) {
+        ui.navigate(ContactsView::class.java)
+    }
+
     @EmbeddedId
     @Display(clasif = DisplayTypeClasif.COMPOSITE)
     var contactKey: ContactKey = ContactKey()

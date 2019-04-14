@@ -1,6 +1,7 @@
 package com.cpsc471.tms.ui
 
 import com.cpsc471.tms.hasRole
+import com.cpsc471.tms.ui.crudpages.*
 import com.github.appreciated.app.layout.behaviour.Behaviour
 import com.github.appreciated.app.layout.builder.AppLayoutBuilder
 import com.github.appreciated.app.layout.component.appbar.AppBarBuilder
@@ -18,7 +19,7 @@ import com.vaadin.server.Page
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler
 
 
-@Route("")
+@Route("home")
 class BaseAppLayout : AppLayoutRouterLayout() {
 
     init{
@@ -72,13 +73,13 @@ class BaseAppLayout : AppLayoutRouterLayout() {
                         .add(LeftNavigationItem("Contacts", VaadinIcon.USER_CARD.create(), ContactsView::class.java))
                         .add(LeftNavigationItem("Contact Info", VaadinIcon.PLUS_CIRCLE.create(), ContactDetailsView::class.java))
                         .build())
-                .add(LeftNavigationItem("Billing", VaadinIcon.MONEY_EXCHANGE.create(), VehicleView::class.java))
+                .add(LeftNavigationItem("Billing", VaadinIcon.MONEY_EXCHANGE.create(), BillingView::class.java))
 
     }
 
     private fun LeftAppMenuBuilder.userFunctions(): LeftAppMenuBuilder{
         return this
-                .add(LeftNavigationItem("Me", VaadinIcon.USER_CARD.create(), SelfView::class.java))
+                .add(LeftNavigationItem("Me", VaadinIcon.USER_CARD.create(), MeView::class.java))
                 .add(LeftNavigationItem("My Projects", VaadinIcon.MODAL_LIST.create(), MyProjectsView::class.java))
                 .add(LeftNavigationItem("Add to Vehicle Logs", VaadinIcon.LINES_LIST.create(), VehicleLogView::class.java))
 

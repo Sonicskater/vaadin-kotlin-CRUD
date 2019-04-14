@@ -10,12 +10,11 @@ class ObjectField<T : DBAbstract>(val classT: Class<T>, initial: T?, root : Vert
     private var backingField : T? = initial
 
     private var dbObjectForm : DBObjectForm<T> = DBObjectForm(classT, editable = false, creatable = false, verbose = false)
-
+    val objectFieldUI = ObjectFieldUI(classT,backingField,readOnly){
+        backingField = it
+        update()
+    }
     init {
-        val objectFieldUI = ObjectFieldUI(classT,backingField,readOnly){
-            backingField = it
-            update()
-        }
         root.add(objectFieldUI)
         dbObjectForm = objectFieldUI.dbObjectForm
 

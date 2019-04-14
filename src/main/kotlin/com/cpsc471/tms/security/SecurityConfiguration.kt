@@ -48,11 +48,14 @@ open class SecurityConfiguration(@Autowired
                 // Configure the login page.
                 .and().formLogin().loginPage(LOGIN_URL).permitAll().loginProcessingUrl(LOGIN_PROCESSING_URL)
                 .failureUrl(LOGIN_FAILURE_URL)
+                .successForwardUrl("/home")
+
 
                 // Configure logout
                 .and().logout()
                 .logoutRequestMatcher(AntPathRequestMatcher("/logout")).logoutSuccessUrl("/")
-                .invalidateHttpSession(true).deleteCookies("JSESSIONID");
+                .invalidateHttpSession(true).deleteCookies("JSESSIONID")
+
     }
 
     /**
@@ -63,7 +66,7 @@ open class SecurityConfiguration(@Autowired
         web!!.ignoring().antMatchers(
                 // Vaadin Flow static resources
                 "/VAADIN/**",
-
+                "/",
                 // the standard favicon URI
                 "/favicon.ico",
 

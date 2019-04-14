@@ -38,7 +38,6 @@ class DBObjectForm<T : DBAbstract>(
     init {
         add(formLayout)
         add(verticalLayout)
-        add(classT.simpleName)
         if(creatable) {
             binder.withValidator(classT.newInstance().validator(classT, creatable))
         }
@@ -94,6 +93,7 @@ class DBObjectForm<T : DBAbstract>(
             generateReflectedFields(classT.declaredFields)
             binder.readBean(item)
         }else{
+            formLayout.removeAll()
             verticalLayout.removeAll()
             verticalLayout.add("No ${classT.simpleName} selected")
         }

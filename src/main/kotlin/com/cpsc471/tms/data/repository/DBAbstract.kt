@@ -1,5 +1,6 @@
 package com.cpsc471.tms.data.repository
 
+import com.vaadin.flow.component.UI
 import com.vaadin.flow.data.binder.Validator
 import org.springframework.data.repository.CrudRepository
 import javax.persistence.Transient
@@ -38,6 +39,9 @@ abstract class DBAbstract : IDBValue {
 
     @Transient
     abstract fun delete()
+
+    @Transient
+    abstract fun view(ui : UI)
 
 
 }

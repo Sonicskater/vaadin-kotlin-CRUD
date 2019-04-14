@@ -5,5 +5,7 @@ import com.vaadin.flow.router.Route
 
 @Route("vehicle-logs", layout = BaseAppLayout::class)
 class VehicleLogView : VerticalLayout() {
+    init {
 
+    }
 }

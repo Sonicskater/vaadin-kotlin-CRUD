@@ -1,7 +1,7 @@
-package com.cpsc471.tms.ui
+package com.cpsc471.tms.ui.crudpages
 
-import com.cpsc471.tms.RepoHelper
 import com.cpsc471.tms.data.repository.users.*
+import com.cpsc471.tms.ui.BaseAppLayout
 import com.cpsc471.tms.ui.components.DBObjectList
 import com.vaadin.flow.component.button.Button
 import com.vaadin.flow.component.icon.VaadinIcon
@@ -11,9 +11,9 @@ import com.vaadin.flow.router.Route
 import org.springframework.beans.factory.annotation.Autowired
 
 @Route("unassigned", layout = BaseAppLayout::class)
-class UnassignedView(@Autowired artistRepository:  ArtistRepository ,
-                     @Autowired managerRepository: ManagerRepository,
-                     @Autowired userRepository: UserRepository) : VerticalLayout() {
+class UnassignedView(@Autowired val artistRepository:  ArtistRepository ,
+                     @Autowired val managerRepository: ManagerRepository,
+                     @Autowired val userRepository: UserRepository) : VerticalLayout() {
 
     var dbObjectList = DBObjectList(User::class.java)
     var horizontalLayout = HorizontalLayout()
@@ -23,7 +23,7 @@ class UnassignedView(@Autowired artistRepository:  ArtistRepository ,
         horizontalLayout.add(Button("Convert to Artist", VaadinIcon.PAINTBRUSH.create()){
             val user = dbObjectList.selectionModel.selectedItems.firstOrNull()
             if (user !=null) {
-                RepoHelper.artistRepository.save(Artist(user))
+                artistRepository.save(Artist(user))
             }
             update()
         })
@@ -31,7 +31,7 @@ class UnassignedView(@Autowired artistRepository:  ArtistRepository ,
         horizontalLayout.add(Button("Convert to Manager", VaadinIcon.SUITCASE.create()){
             val user = dbObjectList.selectionModel.selectedItems.firstOrNull()
             if (user !=null) {
-                RepoHelper.managerRepository.save(Manager(user))
+                managerRepository.save(Manager(user))
             }
             update()
         })
@@ -40,10 +40,10 @@ class UnassignedView(@Autowired artistRepository:  ArtistRepository ,
     }
 
     private fun update(){
-        val list : MutableList<User> = RepoHelper.userRepository.findAll() as MutableList<User>
+        val list : MutableList<User> = userRepository.findAll() as MutableList<User>
 
-        list.removeAll(RepoHelper.artistRepository.findAll())
-        list.removeAll(RepoHelper.managerRepository.findAll())
+        list.removeAll(artistRepository.findAll())
+        list.removeAll(managerRepository.findAll())
 
         dbObjectList.setItems(list)
     }

@@ -16,7 +16,9 @@ import org.springframework.data.repository.CrudRepository
 
 class CrudPage<T : DBAbstract, V>(
         private val classT : Class<T>,
-        private val repository: CrudRepository<T,V>
+        private val repository: CrudRepository<T,V>,
+        private val initial : T? = null,
+        private val editable : Boolean = true
 ) : VerticalLayout() {
 
 
@@ -25,6 +27,7 @@ class CrudPage<T : DBAbstract, V>(
     private val dbObjectForm = DBObjectForm(classT)
 
     private var selectedItem: T = classT.newInstance()
+
 
     private val create = Button("Create", VaadinIcon.PLUS_CIRCLE.create()){
         selectedItem = classT.newInstance()
@@ -54,6 +57,7 @@ class CrudPage<T : DBAbstract, V>(
         VaadinSession.getCurrent().errorHandler = ErrorHandler {
 
         }
+
         add(dbObjectList)
         dbObjectList.addSelectionListener {
 
@@ -73,11 +77,16 @@ class CrudPage<T : DBAbstract, V>(
         create.addThemeVariants(ButtonVariant.LUMO_PRIMARY)
         edit.addThemeVariants(ButtonVariant.LUMO_PRIMARY)
         delete.addThemeVariants(ButtonVariant.LUMO_PRIMARY)
-        add(HorizontalLayout(create,edit,delete))
-
+        if (editable) {
+            add(HorizontalLayout(create, edit, delete))
+        }
         add(dbObjectForm)
 
         dbObjectList.setItems(getData())
+
+        if (initial != null){
+            dbObjectList.select(initial)
+        }
     }
 
 

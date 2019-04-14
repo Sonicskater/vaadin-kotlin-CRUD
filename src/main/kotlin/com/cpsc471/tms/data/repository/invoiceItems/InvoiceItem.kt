@@ -3,6 +3,7 @@ package com.cpsc471.tms.data.repository.invoiceItems
 import com.cpsc471.tms.RepoHelper
 import com.cpsc471.tms.data.repository.DBAbstract
 import com.cpsc471.tms.data.repository.DBKey
+import com.vaadin.flow.component.UI
 import com.vaadin.flow.data.binder.ValidationResult
 import com.vaadin.flow.data.binder.Validator
 import org.springframework.data.repository.CrudRepository
@@ -12,6 +13,9 @@ import javax.persistence.Entity
 
 @Entity
 class InvoiceItem : DBAbstract(), Serializable {
+    override fun view(ui: UI) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 
     @EmbeddedId
     var invoiceItemKey : InvoiceItemKey = InvoiceItemKey()

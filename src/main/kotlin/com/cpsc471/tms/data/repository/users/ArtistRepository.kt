@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository
 @Repository
 interface ArtistRepository : CrudRepository<Artist, UserKey> {
 
-    fun findArtistByUserKeyEmail(string: String)
+    fun findArtistByUserKeyEmail(string: String) : Artist
 }

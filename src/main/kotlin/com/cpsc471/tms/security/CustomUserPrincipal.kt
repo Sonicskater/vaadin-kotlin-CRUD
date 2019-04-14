@@ -5,8 +5,9 @@ import com.cpsc471.tms.data.repository.users.Manager
 import com.cpsc471.tms.data.repository.users.User
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
+import java.io.Serializable
 
-class CustomUserPrincipal(private val user: User) : UserDetails {
+class CustomUserPrincipal(private val user: User) : UserDetails, Serializable {
     override fun getAuthorities(): MutableCollection<out GrantedAuthority> {
         return when(user){
             is Artist -> mutableListOf(GrantedAuthority { "ROLE_USER"}, GrantedAuthority {"ROLE_ARTIST"})

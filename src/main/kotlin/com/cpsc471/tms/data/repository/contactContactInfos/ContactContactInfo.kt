@@ -4,6 +4,8 @@ import com.cpsc471.tms.RepoHelper
 import com.cpsc471.tms.data.annotations.Display
 import com.cpsc471.tms.data.repository.DBAbstract
 import com.cpsc471.tms.data.repository.DBKey
+import com.cpsc471.tms.ui.crudpages.ContactDetailsView
+import com.vaadin.flow.component.UI
 import com.vaadin.flow.data.binder.ValidationResult
 import com.vaadin.flow.data.binder.Validator
 import org.springframework.data.repository.CrudRepository
@@ -15,6 +17,9 @@ import javax.persistence.Table
 @Entity
 @Table(name= "contact_contact_info")
 class ContactContactInfo: DBAbstract(),Serializable{
+    override fun view(ui: UI) {
+        ui.navigate(ContactDetailsView::class.java)
+    }
 
     @EmbeddedId
     var contactContactInfoKey : ContactContactInfoKey = ContactContactInfoKey()

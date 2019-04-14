@@ -4,6 +4,8 @@ import com.cpsc471.tms.RepoHelper
 import com.cpsc471.tms.data.annotations.Display
 import com.cpsc471.tms.data.annotations.DisplayTypeClasif
 import com.cpsc471.tms.data.repository.projects.Project
+import com.cpsc471.tms.ui.crudpages.ArtistView
+import com.vaadin.flow.component.UI
 import org.springframework.data.repository.CrudRepository
 import java.time.LocalDate
 import javax.persistence.*
@@ -11,6 +13,10 @@ import javax.persistence.*
 @Entity
 @DiscriminatorValue("1")
 class Artist(): User() {
+        override fun view(ui: UI) {
+                ui.navigate(ArtistView::class.java)
+        }
+
         @Display(DisplayTypeClasif.LIST, type = Project::class)
         @ManyToMany(targetEntity = Project::class, mappedBy = "members", cascade = [CascadeType.ALL])
         var projects: MutableList<Project> = mutableListOf()

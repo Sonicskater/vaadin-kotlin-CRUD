@@ -9,7 +9,7 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout
 
 class TableFieldUI<T : DBAbstract>(
         classT : Class<T>,
-        dbList : MutableList<T>,
+        tableField: TableField<T>,
         readOnly: Boolean = true) : VerticalLayout() {
 
     val dbObjectList : DBObjectList<T> = DBObjectList(classT)
@@ -19,18 +19,20 @@ class TableFieldUI<T : DBAbstract>(
         add(verticalLayout)
         verticalLayout.add(dbObjectList)
         verticalLayout.add(horizontalLayout)
-
+/*
         horizontalLayout.add(Button("View", VaadinIcon.EYE.create()){
 
+            dbObjectList.selected()?.view(UI.getCurrent())
         })
-
+*/
         if(!readOnly){
             horizontalLayout.add(Button("Add", VaadinIcon.PLUS_CIRCLE.create()){
-                val modal = TableSelectionModal(classT, dbList)
+                val modal = TableSelectionModal(classT, tableField)
                 modal.open()
             })
             horizontalLayout.add(Button("Remove", VaadinIcon.TRASH.create()){
-                dbList.remove(dbObjectList.selected())
+                tableField.dbList.remove(dbObjectList.selected())
+                tableField.update()
             })
         }
     }

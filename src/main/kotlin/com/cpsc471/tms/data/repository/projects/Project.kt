@@ -10,6 +10,8 @@ import com.cpsc471.tms.data.repository.invoices.Invoice
 import com.cpsc471.tms.data.repository.users.Artist
 import com.cpsc471.tms.data.repository.users.Manager
 import com.cpsc471.tms.data.repository.vehicles.Vehicle
+import com.cpsc471.tms.ui.crudpages.ProjectView
+import com.vaadin.flow.component.UI
 import com.vaadin.flow.data.binder.ValidationResult
 import com.vaadin.flow.data.binder.Validator
 import org.springframework.data.repository.CrudRepository
@@ -17,6 +19,10 @@ import javax.persistence.*
 
 @Entity
 class Project: DBAbstract() {
+    override fun view(ui: UI) {
+        ui.navigate(ProjectView::class.java)
+    }
+
     @Display
     var title: String? = null
 
@@ -28,9 +34,11 @@ class Project: DBAbstract() {
     @ManyToMany(fetch = FetchType.LAZY, targetEntity = Artist::class,cascade= [CascadeType.ALL])
     var members: MutableList<Artist> = mutableListOf()
 
+    @Display(DisplayTypeClasif.OBJECT, type = Manager::class)
     @ManyToOne(targetEntity = Manager::class)
     var manager: Manager? = null
 
+    @Display
     var theme: String? = null
 
     @Display(DisplayTypeClasif.OBJECT, type = Vehicle::class, category = DisplayCategory.VERBOSE)

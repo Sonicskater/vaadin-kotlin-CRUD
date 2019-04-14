@@ -4,6 +4,8 @@ import com.cpsc471.tms.RepoHelper
 import com.cpsc471.tms.data.annotations.Display
 import com.cpsc471.tms.data.annotations.DisplayTypeClasif
 import com.cpsc471.tms.data.repository.projects.Project
+import com.cpsc471.tms.ui.crudpages.ManagerView
+import com.vaadin.flow.component.UI
 import org.springframework.data.repository.CrudRepository
 import java.io.Serializable
 import javax.persistence.DiscriminatorValue
@@ -13,6 +15,10 @@ import javax.persistence.OneToMany
 @Entity
 @DiscriminatorValue("2")
 class Manager(): User(), Serializable {
+        override fun view(ui: UI) {
+                ui.navigate(ManagerView::class.java)
+        }
+
         @Display(DisplayTypeClasif.LIST, type = Project::class)
         @OneToMany(targetEntity = Project::class, mappedBy = "manager")
         var manages: MutableList<Project> = mutableListOf()

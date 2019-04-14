@@ -6,6 +6,8 @@ import com.cpsc471.tms.data.annotations.DisplayCategory
 import com.cpsc471.tms.data.annotations.DisplayTypeClasif
 import com.cpsc471.tms.data.repository.DBAbstract
 import com.cpsc471.tms.data.repository.DBKey
+import com.cpsc471.tms.ui.crudpages.SchoolGrantsView
+import com.vaadin.flow.component.UI
 import com.vaadin.flow.data.binder.ValidationResult
 import com.vaadin.flow.data.binder.Validator
 import org.springframework.data.repository.CrudRepository
@@ -16,6 +18,10 @@ import javax.persistence.Entity
 
 @Entity
 class SchoolGrantApplication : DBAbstract(), Serializable{
+    override fun view(ui: UI) {
+        ui.navigate(SchoolGrantsView::class.java)
+    }
+
     @Display(DisplayTypeClasif.COMPOSITE)
     @EmbeddedId
     var schoolGrantApplicationKey = SchoolGrantApplicationKey()

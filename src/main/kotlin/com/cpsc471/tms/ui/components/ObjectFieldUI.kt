@@ -36,6 +36,9 @@ class ObjectFieldUI<T : DBAbstract>(
                 modal.open()
 
             })
+            horizontalLayout.add(Button("Clear",VaadinIcon.TRASH.create()){
+                callback(null)
+            })
         }
         dbObjectForm.setObject(dbObject).render()
     }

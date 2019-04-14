@@ -5,6 +5,8 @@ import com.cpsc471.tms.data.annotations.Display
 import com.cpsc471.tms.data.annotations.DisplayTypeClasif
 import com.cpsc471.tms.data.repository.projects.Project
 import com.cpsc471.tms.data.repository.schoolGrantApplications.SchoolGrantApplication
+import com.cpsc471.tms.ui.crudpages.SchoolView
+import com.vaadin.flow.component.UI
 import org.springframework.beans.factory.annotation.Configurable
 import org.springframework.data.repository.CrudRepository
 import javax.persistence.DiscriminatorValue
@@ -15,6 +17,10 @@ import javax.persistence.OneToMany
 @DiscriminatorValue("1")
 @Configurable(dependencyCheck = true)
 class School: Institute() {
+    override fun view(ui: UI) {
+        ui.navigate(SchoolView::class.java)
+    }
+
     @Display
     var gradeMin:Int = 0
 

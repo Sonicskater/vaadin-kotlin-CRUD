@@ -1,7 +1,8 @@
-package com.cpsc471.tms.ui
+package com.cpsc471.tms.ui.crudpages
 
 import com.cpsc471.tms.data.repository.users.Manager
 import com.cpsc471.tms.data.repository.users.ManagerRepository
+import com.cpsc471.tms.ui.BaseAppLayout
 import com.cpsc471.tms.ui.templates.CrudPage
 import com.vaadin.flow.component.orderedlayout.VerticalLayout
 import com.vaadin.flow.router.Route
@@ -12,7 +13,7 @@ class ManagerView(@Autowired repo: ManagerRepository) : VerticalLayout() {
 
 
     init {
-        add(CrudPage(Manager::class.java,repo))
+        add(CrudPage(Manager::class.java,repo, editable = false))
 
     }
 

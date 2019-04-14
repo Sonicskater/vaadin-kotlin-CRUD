@@ -5,6 +5,7 @@ import com.cpsc471.tms.data.annotations.Display
 import com.cpsc471.tms.data.annotations.DisplayTypeClasif
 import com.cpsc471.tms.data.repository.DBAbstract
 import com.cpsc471.tms.data.repository.DBKey
+import com.vaadin.flow.component.UI
 import com.vaadin.flow.data.binder.ValidationResult
 import com.vaadin.flow.data.binder.Validator
 import org.springframework.data.repository.CrudRepository
@@ -13,6 +14,9 @@ import javax.persistence.Entity
 
 @Entity
 class UserContactInfo: DBAbstract(){
+        override fun view(ui: UI) {
+                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        }
 
 
         @Display

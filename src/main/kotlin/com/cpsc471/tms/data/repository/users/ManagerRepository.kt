@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository
 @Repository
 interface ManagerRepository : CrudRepository<Manager, UserKey>{
 
-    fun findByUserKeyEmail(string: String)
+    fun findByUserKeyEmail(string: String) : Manager
 }

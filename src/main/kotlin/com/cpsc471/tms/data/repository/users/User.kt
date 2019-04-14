@@ -55,6 +55,7 @@ open class User: DBAbstract(), Serializable {
 
     open var password: String? = null
 
+
     @Display(DisplayTypeClasif.LIST, type = UserContactInfo::class)
     @OneToMany(targetEntity = UserContactInfo::class, mappedBy = "userContactInfoKey.user")
     open var contactInfo: MutableList<UserContactInfo> = mutableListOf()

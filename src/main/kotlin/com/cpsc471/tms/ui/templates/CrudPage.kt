@@ -1,6 +1,7 @@
 package com.cpsc471.tms.ui.templates
 
 import com.cpsc471.tms.data.repository.DBAbstract
+import com.cpsc471.tms.data.repository.projects.Project
 import com.cpsc471.tms.ui.components.DBObjectForm
 import com.cpsc471.tms.ui.components.DBObjectList
 import com.cpsc471.tms.ui.components.modals.EditingModal
@@ -59,9 +60,13 @@ class CrudPage<T : DBAbstract, V>(
             val firstSelectedItem = it.firstSelectedItem
 
             if (firstSelectedItem.isPresent){
-
+                if (selectedItem is Project){
+                    println("#"+(selectedItem as Project).title+"#")
+                }
+                println("|$selectedItem|")
                 selectedItem = firstSelectedItem.get()
-                dbObjectForm.setObject(selectedItem).render()
+                dbObjectForm.setObject(selectedItem)
+                dbObjectForm.render()
 
             }
         }

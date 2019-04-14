@@ -13,6 +13,15 @@ import javax.persistence.Entity
 
 @Entity
 class UserContactInfo: DBAbstract(){
+
+
+        @Display
+        var userDescription: String? = null
+
+        @Display(DisplayTypeClasif.COMPOSITE)
+        @EmbeddedId
+        var userContactInfoKey: UserContactInfoKey = UserContactInfoKey()
+
         override fun <T, ID> repo(classT: Class<T>, classID: Class<ID>): CrudRepository<T, ID> {
                 return RepoHelper.userContactInfoRepository as CrudRepository<T, ID>
         }
@@ -39,12 +48,5 @@ class UserContactInfo: DBAbstract(){
         override fun iDforDb(): List<Any?> {
                 return listOf(userContactInfoKey)
         }
-
-        @Display
-        var UserDescription: String? = null
-
-        @Display(DisplayTypeClasif.COMPOSITE)
-        @EmbeddedId
-        var userContactInfoKey: UserContactInfoKey = UserContactInfoKey()
 
 }

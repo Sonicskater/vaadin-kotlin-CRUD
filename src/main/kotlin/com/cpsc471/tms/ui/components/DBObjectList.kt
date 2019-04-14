@@ -10,7 +10,7 @@ class DBObjectList< T: DBAbstract>(
         private val classT : Class<T>
 ) : Grid<T>(classT, false){
     init {
-        super.setSelectionMode(SelectionMode.SINGLE)
+        setSelectionMode(SelectionMode.SINGLE)
     }
     override fun setItems(list : Collection<T>){
         if (list is MutableList)

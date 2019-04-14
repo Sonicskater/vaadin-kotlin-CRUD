@@ -12,7 +12,7 @@ import javax.persistence.OneToMany
 
 @Entity
 @DiscriminatorValue("2")
-class Manager: User(), Serializable {
+class Manager(): User(), Serializable {
         @Display(DisplayTypeClasif.LIST, type = Project::class)
         @OneToMany(targetEntity = Project::class, mappedBy = "manager")
         var manages: MutableList<Project> = mutableListOf()
@@ -25,5 +25,18 @@ class Manager: User(), Serializable {
                 return RepoHelper.managerRepository as CrudRepository<T, ID>
         }
 
+        constructor(user : User) : this() {
+                this.city = user.city
+                this.contactInfo = user.contactInfo
+                this.country = user.country
+                this.userKey = user.userKey
+                this.firstName = user.firstName
+                this.lastName = user.lastName
+                this.password = user.password
+                this.postalCode = user.postalCode
+                this.province = user.province
+                this.streetAddress = user.streetAddress
+                RepoHelper.userRepository.deleteById(userKey)
+        }
 
 }

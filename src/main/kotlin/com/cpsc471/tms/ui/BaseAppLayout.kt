@@ -51,6 +51,7 @@ class BaseAppLayout : AppLayoutRouterLayout() {
 
         return this
                 .add(LeftNavigationItem("Projects", VaadinIcon.GROUP.create(), ProjectView::class.java))
+                .add(LeftNavigationItem("Project Matcher", VaadinIcon.SEARCH.create(), VehicleView::class.java))
                 .add(LeftNavigationItem("Vehicles", VaadinIcon.CAR.create(), VehicleView::class.java))
                 .add(LeftSubMenuBuilder.get("Users", VaadinIcon.USERS.create())
                         .add(LeftNavigationItem("All Users", VaadinIcon.USER.create(), UsersView::class.java))
@@ -71,14 +72,15 @@ class BaseAppLayout : AppLayoutRouterLayout() {
                         .add(LeftNavigationItem("Contacts", VaadinIcon.USER_CARD.create(), ContactsView::class.java))
                         .add(LeftNavigationItem("Contact Info", VaadinIcon.PLUS_CIRCLE.create(), ContactDetailsView::class.java))
                         .build())
+                .add(LeftNavigationItem("Billing", VaadinIcon.MONEY_EXCHANGE.create(), VehicleView::class.java))
 
     }
 
     private fun LeftAppMenuBuilder.userFunctions(): LeftAppMenuBuilder{
         return this
                 .add(LeftNavigationItem("Me", VaadinIcon.USER_CARD.create(), SelfView::class.java))
-                .add(LeftNavigationItem("My Projects", VaadinIcon.GROUP.create(), MyProjectsView::class.java))
-                .add(LeftNavigationItem("Add to Vehicle Logs", VaadinIcon.GROUP.create(), VehicleLogView::class.java))
+                .add(LeftNavigationItem("My Projects", VaadinIcon.MODAL_LIST.create(), MyProjectsView::class.java))
+                .add(LeftNavigationItem("Add to Vehicle Logs", VaadinIcon.LINES_LIST.create(), VehicleLogView::class.java))
 
     }
 

@@ -12,14 +12,11 @@ import com.cpsc471.tms.data.repository.users.Manager
 import com.cpsc471.tms.data.repository.vehicles.Vehicle
 import com.vaadin.flow.data.binder.ValidationResult
 import com.vaadin.flow.data.binder.Validator
-import org.springframework.beans.factory.annotation.Configurable
 import org.springframework.data.repository.CrudRepository
-import java.io.Serializable
 import javax.persistence.*
 
 @Entity
-@Configurable(dependencyCheck = true)
-open class Project: Serializable, DBAbstract() {
+class Project: DBAbstract() {
     @Display
     var title: String? = null
 

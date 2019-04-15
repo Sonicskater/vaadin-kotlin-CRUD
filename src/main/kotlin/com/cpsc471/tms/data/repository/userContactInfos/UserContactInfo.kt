@@ -20,7 +20,7 @@ class UserContactInfo: DBAbstract(){
 
 
         @Display
-        var userDescription: String? = null
+        var description: String? = null
 
         @Display(DisplayTypeClasif.COMPOSITE)
         @EmbeddedId

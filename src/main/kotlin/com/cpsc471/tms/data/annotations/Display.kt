@@ -8,5 +8,6 @@ annotation class Display(
         val clasif : DisplayTypeClasif = DisplayTypeClasif.PRIMITIVE,
         val category : DisplayCategory = DisplayCategory.NORMAL,
         val editLevel : DisplayEditLevel = DisplayEditLevel.EDITABLE,
-        val type : KClass<out DBAbstract> = DBAbstract::class
+        val type : KClass<out DBAbstract> = DBAbstract::class,
+        val type_other : KClass<out Any> = Int::class
 )

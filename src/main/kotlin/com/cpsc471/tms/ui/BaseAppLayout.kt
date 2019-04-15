@@ -19,7 +19,7 @@ import com.vaadin.server.Page
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler
 
 
-@Route("home")
+@Route("")
 class BaseAppLayout : AppLayoutRouterLayout() {
 
     init{
@@ -31,7 +31,7 @@ class BaseAppLayout : AppLayoutRouterLayout() {
                 .addToSection(LeftClickableItem("Log Out",VaadinIcon.EXIT.create()){
                     VaadinService.getCurrentRequest().wrappedSession.invalidate()
                     SecurityContextLogoutHandler().logout((VaadinService.getCurrentRequest() as com.vaadin.flow.server.VaadinServletRequest).httpServletRequest, null, null)
-                    Page.getCurrent().setLocation("/")
+                    Page.getCurrent()?.reload()
                 }, Section.FOOTER)
                 .buildMenus()
                 .build()
@@ -52,7 +52,7 @@ class BaseAppLayout : AppLayoutRouterLayout() {
 
         return this
                 .add(LeftNavigationItem("Projects", VaadinIcon.GROUP.create(), ProjectView::class.java))
-                .add(LeftNavigationItem("Project Matcher", VaadinIcon.SEARCH.create(), VehicleView::class.java))
+                //.add(LeftNavigationItem("Project Matcher", VaadinIcon.SEARCH.create(), VehicleView::class.java))
                 .add(LeftNavigationItem("Vehicles", VaadinIcon.CAR.create(), VehicleView::class.java))
                 .add(LeftSubMenuBuilder.get("Users", VaadinIcon.USERS.create())
                         .add(LeftNavigationItem("All Users", VaadinIcon.USER.create(), UsersView::class.java))

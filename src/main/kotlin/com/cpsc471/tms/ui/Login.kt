@@ -19,12 +19,12 @@ class Login : VerticalLayout() {
     init {
         login.action = "login" //
         login.isOpened = true //
-        login.setTitle("Spring Secured Vaadin")
-        login.description = "Login Overlay Example"
+        login.setTitle("Theatre Management System")
+        login.description = "Login Page"
         element.appendChild(login.element) //
         login.isForgotPasswordButtonVisible = false
         val i18n = LoginI18n.createDefault()
-        //i18n.additionalInformation = "To close the login form submit non-empty username and password"
+        i18n.additionalInformation = "go to *domain*/sign-up to register an account"
         login.setI18n(i18n)
     }
 

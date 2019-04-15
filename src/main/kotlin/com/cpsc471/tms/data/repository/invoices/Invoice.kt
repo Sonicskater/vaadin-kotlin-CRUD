@@ -1,6 +1,8 @@
 package com.cpsc471.tms.data.repository.invoices
 
 import com.cpsc471.tms.RepoHelper
+import com.cpsc471.tms.data.annotations.Display
+import com.cpsc471.tms.data.annotations.DisplayTypeClasif
 import com.cpsc471.tms.data.repository.DBAbstract
 import com.cpsc471.tms.data.repository.DBKey
 import com.cpsc471.tms.data.repository.invoiceItems.InvoiceItem
@@ -27,6 +29,7 @@ class Invoice: DBAbstract(), Serializable {
     @OneToOne(fetch = FetchType.LAZY,mappedBy = "invoice", targetEntity = Project::class)
     var project: Project? = null
 
+    @Display(DisplayTypeClasif.LIST, type = InvoiceItem::class)
     @OneToMany(targetEntity = InvoiceItem::class,mappedBy = "invoiceItemKey.invoice")
     var items: MutableList<InvoiceItem> = mutableListOf()
 

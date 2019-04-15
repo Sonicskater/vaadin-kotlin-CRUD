@@ -21,9 +21,10 @@ class Artist(): User() {
         @ManyToMany(targetEntity = Project::class, mappedBy = "members", cascade = [CascadeType.ALL])
         var projects: MutableList<Project> = mutableListOf()
 
+        @Display(DisplayTypeClasif.LIST, type_other = LocalDate::class)
         @Basic
         @ElementCollection
-        var availableDays: MutableSet<LocalDate> = mutableSetOf()
+        var availableDays: MutableList<LocalDate> = mutableListOf()
 
         @Basic
         @ElementCollection

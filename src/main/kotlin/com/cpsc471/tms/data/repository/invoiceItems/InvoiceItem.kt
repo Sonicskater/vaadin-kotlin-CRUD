@@ -1,6 +1,8 @@
 package com.cpsc471.tms.data.repository.invoiceItems
 
 import com.cpsc471.tms.RepoHelper
+import com.cpsc471.tms.data.annotations.Display
+import com.cpsc471.tms.data.annotations.DisplayEditLevel
 import com.cpsc471.tms.data.repository.DBAbstract
 import com.cpsc471.tms.data.repository.DBKey
 import com.vaadin.flow.component.UI
@@ -20,8 +22,10 @@ class InvoiceItem : DBAbstract(), Serializable {
     @EmbeddedId
     var invoiceItemKey : InvoiceItemKey = InvoiceItemKey()
 
+    @Display(editLevel = DisplayEditLevel.CREATABLE)
     var description: String? = null
 
+    @Display(editLevel = DisplayEditLevel.CREATABLE)
     var amount: Int = 0
 
     override fun delete() {

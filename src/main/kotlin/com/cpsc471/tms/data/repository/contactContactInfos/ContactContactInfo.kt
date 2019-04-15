@@ -2,6 +2,7 @@ package com.cpsc471.tms.data.repository.contactContactInfos
 
 import com.cpsc471.tms.RepoHelper
 import com.cpsc471.tms.data.annotations.Display
+import com.cpsc471.tms.data.annotations.DisplayTypeClasif
 import com.cpsc471.tms.data.repository.DBAbstract
 import com.cpsc471.tms.data.repository.DBKey
 import com.cpsc471.tms.ui.crudpages.ContactDetailsView
@@ -21,6 +22,8 @@ class ContactContactInfo: DBAbstract(),Serializable{
         ui.navigate(ContactDetailsView::class.java)
     }
 
+    @Display(DisplayTypeClasif.COMPOSITE
+    )
     @EmbeddedId
     var contactContactInfoKey : ContactContactInfoKey = ContactContactInfoKey()
 

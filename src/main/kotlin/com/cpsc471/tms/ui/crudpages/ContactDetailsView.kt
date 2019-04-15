@@ -13,7 +13,7 @@ class ContactDetailsView(@Autowired repo: ContactContactInfoRepository) : Vertic
 
 
     init {
-        add(CrudPage(ContactContactInfo::class.java,repo))
+        add(CrudPage(ContactContactInfo::class.java,repo,editable = true))
 
     }
 

@@ -1,6 +1,8 @@
 package com.cpsc471.tms.data.repository.selfGrants
 
 import com.cpsc471.tms.RepoHelper
+import com.cpsc471.tms.data.annotations.Display
+import com.cpsc471.tms.data.annotations.DisplayTypeClasif
 import com.cpsc471.tms.data.repository.DBAbstract
 import com.cpsc471.tms.data.repository.DBKey
 import com.cpsc471.tms.ui.crudpages.SelfGrantsView
@@ -19,12 +21,20 @@ class SelfGrant: DBAbstract(), Serializable {
     }
 
 
+    @Display(DisplayTypeClasif.COMPOSITE)
     @EmbeddedId
     var selfGrantKey : SelfGrantKey = SelfGrantKey()
 
+    @Display
     var status: String? = null
+
+    @Display
     var amonut: Int = 0
+
+    @Display
     var website: String? = null
+
+    @Display
     var submissionDate: Date? = null
 
 

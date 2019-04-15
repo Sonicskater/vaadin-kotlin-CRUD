@@ -5,6 +5,8 @@ import com.cpsc471.tms.data.annotations.DisplayCategory
 import com.cpsc471.tms.data.annotations.DisplayEditLevel
 import com.cpsc471.tms.data.annotations.DisplayTypeClasif
 import com.cpsc471.tms.data.repository.DBAbstract
+import com.cpsc471.tms.data.repository.invoiceItems.InvoiceItem
+import com.cpsc471.tms.data.repository.invoices.Invoice
 import com.vaadin.flow.component.datepicker.DatePicker
 import com.vaadin.flow.component.formlayout.FormLayout
 import com.vaadin.flow.component.html.Label
@@ -25,7 +27,8 @@ class DBObjectForm<T : DBAbstract>(
         private val classT: Class<T>,
         val editable: Boolean = false,
         private val creatable: Boolean = false,
-        var verbose: Boolean = true
+        var verbose: Boolean = true,
+        var lists: Boolean = true
 ) : VerticalLayout() {
     private val formLayout : FormLayout = FormLayout()
     private var binder : Binder<T> = Binder(classT)
@@ -145,29 +148,65 @@ class DBObjectForm<T : DBAbstract>(
 
                         }
                         DisplayTypeClasif.OBJECT -> {
-                            println("adding object")
+                            if (annotation.type == Invoice::class){
 
-                            val objectField = ObjectField(annotation.type.java, null ,verticalLayout,!editable)
 
-                            binder.forField(objectField).bind(prefix + field.name)
-                            formLayout.addFormItem(objectField,"")
+                            }else {
+                                println("adding object")
+
+                                val objectField = ObjectField(annotation.type.java, null, verticalLayout, !editable)
+
+                                binder.forField(objectField).bind(prefix + field.name)
+                                formLayout.addFormItem(objectField, "")
+                            }
 
                         }
 
+
                         DisplayTypeClasif.COMPOSITE -> {
+
                             println("adding composite")
                             generateReflectedFields(field.type.declaredFields, field.name + ".")
 
                         }
                         DisplayTypeClasif.LIST -> {
-                            if (verbose) {
-                                println("adding list")
-                                val listType = annotation.type.java
-                                val tableField = TableField(listType, !editable, field.name.capitalize(), verticalLayout)
+                            if ((verbose and lists) || annotation.type_other.java == LocalDate::class.java || annotation.type_other.java == String::class.java) {
+                                when {
+                                    annotation.type_other.java == LocalDate::class.java -> {
+
+                                        val dateField = DateField(verticalLayout,editable)
 
 
-                                binder.forField(tableField).bind(prefix + field.name)
-                                formLayout.addFormItem(tableField, "")
+                                        binder.forField(dateField).bind(prefix + field.name)
+                                        formLayout.addFormItem(dateField, "")
+
+                                    }
+                                    annotation.type_other.java == String::class.java -> {
+                                        val dateField = StringField(verticalLayout,editable)
+
+
+                                        binder.forField(dateField).bind(prefix + field.name)
+                                        formLayout.addFormItem(dateField, "")
+                                    }
+                                    annotation.type == InvoiceItem::class ->{
+                                        println("adding list")
+                                        val listType = annotation.type.java
+                                        val tableField = TableField(listType,true, field.name.capitalize(), verticalLayout)
+
+
+                                        binder.forField(tableField).bind(prefix + field.name)
+                                        formLayout.addFormItem(tableField, "")
+                                    }
+                                    else -> {
+                                        println("adding list")
+                                        val listType = annotation.type.java
+                                        val tableField = TableField(listType, !editable, field.name.capitalize(), verticalLayout)
+
+
+                                        binder.forField(tableField).bind(prefix + field.name)
+                                        formLayout.addFormItem(tableField, "")
+                                    }
+                                }
                             }
 
                         }

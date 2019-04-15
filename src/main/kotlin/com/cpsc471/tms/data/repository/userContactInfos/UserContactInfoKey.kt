@@ -17,7 +17,7 @@ class UserContactInfoKey : DBKey(){
 
 
     @Display(editLevel = DisplayEditLevel.CREATABLE)
-    var userPhoneNumber: String? = null
+    var phoneNumber: String? = null
 
 
     @Display(DisplayTypeClasif.OBJECT, type = User::class, editLevel = DisplayEditLevel.CREATABLE)

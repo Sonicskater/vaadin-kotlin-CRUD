@@ -18,13 +18,20 @@ class Vehicle(
         @EmbeddedId
     @Display(DisplayTypeClasif.COMPOSITE)
     var vehicleKey: VehicleKey = VehicleKey(),
+
+        @Display
         var description: String = "",
+
+        @Display
         var mileage:Int = 0,
     //var notes: List<VehicleNote>
 
+        @Display(DisplayTypeClasif.LIST, type = Project::class)
         @OneToMany(targetEntity = Project::class, mappedBy = "vehicle")
     var projects: MutableList<Project> = mutableListOf(),
 
+
+        @Display(DisplayTypeClasif.LIST, type_other = String::class)
         @Basic
     @ElementCollection
     var notes: MutableList<String> = mutableListOf()

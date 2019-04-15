@@ -45,7 +45,7 @@ class Project: DBAbstract() {
     @ManyToOne(cascade= [CascadeType.ALL],targetEntity = Vehicle::class)
     var vehicle: Vehicle? = null
 
-    @Display(DisplayTypeClasif.OBJECT, type = Invoice::class, category = DisplayCategory.VERBOSE)
+    //@Display(DisplayTypeClasif.OBJECT, type = Invoice::class, category = DisplayCategory.VERBOSE)
     @OneToOne(cascade= [CascadeType.ALL],targetEntity = Invoice::class)
     var invoice: Invoice? = null
 

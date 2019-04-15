@@ -17,10 +17,10 @@ class MeView : VerticalLayout() {
     private val dbObjectForm : DBObjectForm<out User>
     init {
         if (hasRole("ROLE_ARTIST")){
-            dbObjectForm = DBObjectForm(Artist::class.java,editable = true)
+            dbObjectForm = DBObjectForm(Artist::class.java,editable = true,lists = false)
             dbObjectForm.setObject(RepoHelper.artistRepository.findArtistByUserKeyEmail(SecurityHelper.principal.username))
         }else{
-            dbObjectForm = DBObjectForm(Manager::class.java,editable = true)
+            dbObjectForm = DBObjectForm(Manager::class.java,editable = true,lists = false)
             dbObjectForm.setObject(RepoHelper.managerRepository.findByUserKeyEmail(SecurityHelper.principal.username))
         }
 

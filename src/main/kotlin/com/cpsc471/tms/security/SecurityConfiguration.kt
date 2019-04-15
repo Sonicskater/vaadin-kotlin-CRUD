@@ -48,7 +48,7 @@ open class SecurityConfiguration(@Autowired
                 // Configure the login page.
                 .and().formLogin().loginPage(LOGIN_URL).permitAll().loginProcessingUrl(LOGIN_PROCESSING_URL)
                 .failureUrl(LOGIN_FAILURE_URL)
-                .successForwardUrl("/home")
+                .successForwardUrl("/")
 
 
                 // Configure logout
@@ -66,7 +66,7 @@ open class SecurityConfiguration(@Autowired
         web!!.ignoring().antMatchers(
                 // Vaadin Flow static resources
                 "/VAADIN/**",
-                "/",
+                "/sign-up",
                 // the standard favicon URI
                 "/favicon.ico",
 
